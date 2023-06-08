@@ -1,3 +1,8 @@
+import requests
+import json
+
+from datetime import date
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -9,7 +14,9 @@ from .forms import RegisterForm
 
 
 def main(request):
-    return render(request, 'users/index.html')
+    currency_info = currency_parse()
+    return render(request, 'users/index.html', context={'currency_info': currency_info,
+                                                        'date': '08.06.2023'})
 
 
 class RegisterView(View):
@@ -45,3 +52,20 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
 
 def user_data(request):
     return render(request, "users/user.html", context={})
+
+
+def currency_parse():
+    url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date.today().strftime('%d.%m.%Y')}"
+    response = requests.get(url)
+    currency_data = json.loads(response.text).get('exchangeRate')
+    currency_dict = {"currency_USD": currency_data[23],
+                     "currency_EUR": currency_data[8],
+                     "currency_GBR": currency_data[9],
+                     "currency_PLN": currency_data[17]}
+    return currency_dict
+
+
+def currency(request):
+    currency_info = currency_parse()
+    return render(request, "users/base.html", context={'currency_info': currency_info,
+                                                       'date': '08.06.2023'})
