@@ -34,21 +34,19 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<!--            <ul class="nav navbar-nav">-->
-<!--                {% if user.is_authenticated %}-->
-<!--                <li class="dropdown">-->
-<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Add contact <b class="caret"></b></a>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                        <li class="divider"></li>-->
-<!--                        <li><a href="#">Add 1</a></li>-->
-<!--                        <li class="divider"></li>-->
-<!--                        <li><a href="#">Add 2</a></li>-->
-<!--                        <li class="divider"></li>-->
-<!--                        <li><a href="#">Add 3</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                {% endif %}-->
-<!--            </ul>-->
+            <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> LIBRARIES <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+                        <li class="divider"></li>
+                        <li><a href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_superuser %}
                 <li><a href="/admin">Administration</a></li>
@@ -107,7 +105,7 @@
                 <img src="https://s.dou.ua/assets/img/github.svg" width="25" height="25"></a>
         </div>
         <div class="fs-5 text-center py-1">
-            <h6>TEAM PROJECT &copy; 2023</h6>
+            <h6>TEAM PROJECT <img src="{% static 'users/img/logo-no-background_2.png' %}" height="17"> &copy; 2023</h6>
         </div>
     </div>
 </footer>
