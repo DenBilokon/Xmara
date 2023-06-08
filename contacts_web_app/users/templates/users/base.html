@@ -31,6 +31,7 @@
             <div class="logo" style="margin-top: 5px;">
                 <a href="/"><img src="{% static 'users/img/logo-no-background_2.png' %}" height="40"></a>
             </div>
+
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -79,6 +80,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
+            {% if user.is_authenticated %}
             <div class="btn-group-vertical" role="group" aria-label="Button Group">
                 <a href="#" class="btn btn-default">Контакти</a>
                 <br>
@@ -89,7 +91,47 @@
                 <a href="#" class="btn btn-default">Новини</a>
                 <br>
             </div>
+
+            <div class="currency-block">
+                <h4>Курс валют на {{ date }}</h4>
+                <table class="table-1">
+                    <thead>
+                    <tr>
+                        <th>Валюта</th>
+                        <th>Купівля</th>
+                        <th>Продаж</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>USD</td>
+                        <td>{{ currency_info.currency_USD.purchaseRate }}</td>
+                        <td>{{ currency_info.currency_USD.saleRate }}</td>
+                    </tr>
+                    <tr>
+                        <td>EUR</td>
+                        <td>{{ currency_info.currency_EUR.purchaseRate }}</td>
+                        <td>{{ currency_info.currency_EUR.saleRate }}</td>
+                    </tr>
+                    <tr>
+                        <td>PLN</td>
+                        <td>{{ currency_info.currency_PLN.purchaseRate }}</td>
+                        <td>{{ currency_info.currency_PLN.saleRate }}</td>
+                    </tr>
+                    <tr>
+                        <td>GBR</td>
+                        <td>{{ currency_info.currency_GBR.purchaseRate }}</td>
+                        <td>{{ currency_info.currency_GBR.saleRate }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        {% else %}
+        <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
+        {% endif %}
+
+
         <div class="col-md-9">
             {% block content %} {% endblock %}
         </div>
