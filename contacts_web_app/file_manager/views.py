@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def main_mf(request):
+    return render(request, 'file_manager/index.html')
+
