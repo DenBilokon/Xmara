@@ -79,14 +79,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             {% if user.is_authenticated %}
             <div class="btn-group-vertical" role="group" aria-label="Button Group">
                 <a href="#" class="btn btn-default">Контакти</a>
                 <br>
                 <a href="#" class="btn btn-default">Нотатки</a>
                 <br>
-                <a href="#" class="btn btn-default">Файли</a>
+                <a href="{% url 'file_manager:main_mf' %}" class="btn btn-default">Файли</a>
                 <br>
                 <a href="#" class="btn btn-default">Новини</a>
                 <br>
@@ -127,12 +127,11 @@
                 </table>
             </div>
         </div>
+        <div class="col-md-10">
+
         {% else %}
         <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
         {% endif %}
-
-
-        <div class="col-md-9">
             {% block content %} {% endblock %}
         </div>
     </div>
