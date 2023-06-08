@@ -1,6 +1,6 @@
 GitTutorial Terminal
 
-1.	git clone "path to git"– копіює репозиторій (папку з файлами) на комп’ютер
+1.	git clone "path to git"– копіює репозиторій (папку з файлами) на комп'ютер
 2.	git branch “Name” - створює гілку з назвою “Name”
 3.	git checkout “Name” – переходить на гілку з назвою “Name”
 4.	git checkout – b “Name” – створює гілку з назвою “Name” та переходить на неї
@@ -17,7 +17,7 @@ GitTutorial Terminal
 15.	git stash apply – встановлюємо збережені зміни з буферу обміну
 16.	git merge “Name” – зливаємо гілку з назвою “Name” в поточну гілку
 17.	git merge –about – відміняємо зливання гілок
-18.	git branch -d “Name” – видаляє гілку локально з проекту (з комп’ютера)
+18.	git branch -d “Name” – видаляє гілку локально з проекту (з комп'ютера)
 19.	git push origin –delete “Name” – видаляє гілку з сайту github
 20.	git diff – показує відрізки рядків між двома версіями файлу (між двома комітами)
 21.	git log – показує історію комітів
