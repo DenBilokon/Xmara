@@ -79,6 +79,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
+            {% if user.is_authenticated %}
             <div class="btn-group-vertical" role="group" aria-label="Button Group">
                 <a href="#" class="btn btn-default">Контакти</a>
                 <br>
@@ -89,6 +90,9 @@
                 <a href="#" class="btn btn-default">Новини</a>
                 <br>
             </div>
+            {% else %}
+            <h3>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h3>
+            {% endif %}
         </div>
         <div class="col-md-9">
             {% block content %} {% endblock %}
