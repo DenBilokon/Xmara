@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Note information</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes/style.css' %}">
+</head>
+<body>
+<main class="container">
+    <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
+        <ul>
+            <li><a href="/notes" role="button"> Go back to the notes main page </a></li>
+        </ul>
+    </nav>
+    {% block content %} {% endblock %}
+</main>
+</body>
+</html>

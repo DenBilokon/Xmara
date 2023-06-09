@@ -12,11 +12,15 @@ from django.urls import reverse_lazy
 
 from .forms import RegisterForm
 
+from contacts_web_app.settings import WEATHER_API
+
 
 def main(request):
     currency_info = currency_parse()
+    weather_info = weather_parse()
     return render(request, 'users/index.html', context={'currency_info': currency_info,
-                                                        'date': '08.06.2023'})
+                                                        'date': date.today().strftime('%d.%m.%Y'),
+                                                        'weather_info': weather_info})
 
 
 class RegisterView(View):
@@ -65,7 +69,19 @@ def currency_parse():
     return currency_dict
 
 
-def currency(request):
-    currency_info = currency_parse()
-    return render(request, "users/base.html", context={'currency_info': currency_info,
-                                                       'date': '08.06.2023'})
+def weather_parse():
+    weather_data = {}
+    cities = ['London', 'Prague', 'Berlin', 'Paris', 'Stockholm', 'Warsaw']
+    for city in cities:
+        url = f'http://api.weatherapi.com/v1/current.json?key={WEATHER_API}&q={city}'
+        response = requests.get(url)
+        city_data = json.loads(response.text).get('current')
+        city_dict = {'city': city,
+                     'temp_c': city_data.get('temp_c'),
+                     'wind_kph': city_data.get('wind_kph'),
+                     'icon': city_data.get('condition').get('icon'),
+                     'text': city_data.get('condition').get('text')}
+        weather_data[city] = city_dict
+    return weather_data
+
+# {'London': {'city': 'London', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Prague': {'city': 'Prague', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Berlin': {'city': 'Berlin', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Paris': {'city': 'Paris', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Stockholm': {'city': 'Stockholm', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Warsaw': {'city': 'Warsaw', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}}

@@ -163,5 +163,4 @@ cloudinary.config(
     api_secret=env("CLOUD_API_SECRET")
 
 )
-
 WEATHER_API = env('WEATHER_API')
