@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import environ
 from pathlib import Path
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
     "news",
     "notes",
     "users",
+    "cloudinary",
 
 ]
 
@@ -149,3 +154,14 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # django_apscheduler
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+# cloudinary_django
+
+cloudinary.config(
+    cloud_name=env("CLOUD_NAME"),
+    api_key=env("CLOUD_API_KAY"),
+    api_secret=env("CLOUD_API_SECRET")
+
+)
+
+WEATHER_API = env('WEATHER_API')
