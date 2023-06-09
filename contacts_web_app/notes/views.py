@@ -1,13 +1,20 @@
+from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import NoteForm, TagForm
 from .models import Tag, Note
+from users.views import currency_parse, weather_parse
+
 
 
 def main(request):
+    currency_info = currency_parse()
+    weather_info = weather_parse()
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-    return render(request, 'notes/index.html', {'notes': notes})
+    return render(request, 'notes/index.html', context={'notes': notes, 'currency_info': currency_info,
+                                                        'date': date.today().strftime('%d.%m.%Y'),
+                                                        'weather_info': weather_info})
 
 @login_required
 def tag(request):
