@@ -1,0 +1,19 @@
+{% extends "notes/base.html" %}
+{% load extract_tags %}
+
+{% block content %}
+
+<h1>{{note.name}}</h1>
+<p>Description: <b>{{note.description}}</b></p>
+<p>Time of creation: <kbd>{{note.created}}</kbd></p>
+{% if note.done %}
+<p>Status:
+    <ins>Completed</ins>
+</p>
+{% else %}
+<p>Status: <i>Not implemented</i></p>
+{% endif %}
+<p>Tags: <small>
+    {{ note.tags|tags }}
+</small></p>
+{% endblock %}

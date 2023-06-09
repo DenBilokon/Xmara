@@ -79,25 +79,25 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             {% if user.is_authenticated %}
             <div class="btn-group-vertical" role="group" aria-label="Button Group">
                 <a href="#" class="btn btn-default">Контакти</a>
                 <br>
-                <a href="#" class="btn btn-default">Нотатки</a>
+                <a href="{% url 'notes:main' %}" class="btn btn-default">Нотатки</a>
                 <br>
-                <a href="#" class="btn btn-default">Файли</a>
+                <a href="{% url 'file_manager:main_mf' %}" class="btn btn-default">Файли</a>
                 <br>
                 <a href="#" class="btn btn-default">Новини</a>
                 <br>
             </div>
 
             <div class="currency-block">
-                <h4>Курс валют на {{ date }}</h4>
+                <h6>Курс валют на {{ date }}</h6>
                 <table class="table-1">
                     <thead>
                     <tr>
-                        <th>Валюта</th>
+                        <th><img src="{% static 'users/img/currency.png' %}" alt="city" class="weather-icon"></th>
                         <th>Купівля</th>
                         <th>Продаж</th>
                     </tr>
@@ -126,38 +126,81 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="currency-block-weather">
+                <h6>Погода на {{ date }}</h6>
+                <table class="table-1 compact-table">
+                    <thead>
+                    <tr>
+                        <th><img src="{% static 'users/img/city.png' %}" alt="city" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/weather.png' %}" alt="weather" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/temp.png' %}" alt="temp" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/wind.png' %}" alt="wind" class="weather-icon"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for city, info in weather_info.items %}
+                    <tr>
+                        <td>{{ info.city }}</td>
+                        <td><img src="{{ info.icon }}" alt="{{ info.city }}" class="weather-icon"></td>
+                        <td>{{ info.temp_c }}°C</td>
+                        <td>{{ info.wind_kph }} km/h</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <style>
+    .compact-table {
+        width: 80%;
+    }
+
+    .weather-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .currency-block h6,
+    .table-1 th,
+    .table-1 td {
+        font-size: 12px;
+    }
+</style>
         </div>
-        {% else %}
-        <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
-        {% endif %}
 
 
-        <div class="col-md-9">
+        <div class="col-md-10">
+
+            {% else %}
+            <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
+            {% endif %}
             {% block content %} {% endblock %}
         </div>
     </div>
-</div>
 
-
-<hr>
-<footer class="footer navbar-fixed-bottom">
-    <div class="container">
-        <div class="social mb-1">
-            <a href="https://github.com/DenBilokon/Command_project_WEB_Django" target="_blank" rel="noopener noreferre">
-                <img src="https://s.dou.ua/assets/img/github.svg" width="25" height="25"></a>
+    <hr>
+    <footer class="footer navbar-fixed-bottom">
+        <div class="container">
+            <div class="social mb-1">
+                <a href="https://github.com/DenBilokon/Command_project_WEB_Django" target="_blank"
+                   rel="noopener noreferre">
+                    <img src="https://s.dou.ua/assets/img/github.svg" width="25" height="25"></a>
+            </div>
+            <div class="fs-5 text-center py-1">
+                <h6>TEAM PROJECT <img src="{% static 'users/img/logo-no-background_2.png' %}" height="17"> &copy;
+                    2023
+                </h6>
+            </div>
         </div>
-        <div class="fs-5 text-center py-1">
-            <h6>TEAM PROJECT <img src="{% static 'users/img/logo-no-background_2.png' %}" height="17"> &copy; 2023</h6>
-        </div>
-    </div>
-</footer>
+    </footer>
 
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
-</script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous">
+    </script>
 </body>
 </html>
