@@ -41,7 +41,7 @@ def news_war_show_one(request, _id):
 
 
 def news_prosport(request):
-    short_news = tsn_prosrort_spider()
+    short_news = tsn_prosport_spider()
     return render(request, "news/news_prosport.html", context={'short_news': short_news,
                                                           'currency_info': currency_info,
                                                           'weather_info': weather_info,
