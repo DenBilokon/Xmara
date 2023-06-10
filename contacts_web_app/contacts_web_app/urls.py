@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('users.urls', namespace='default')),
     path('users/', include('users.urls')),
     path('file_manager/', include('file_manager.urls')),
+    path('contacts/', include('contacts.urls')),
 ]
