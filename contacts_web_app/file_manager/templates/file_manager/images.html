@@ -1,19 +1,46 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-<div class="container">
-    <br>
-    <div class="text-center">
-        <a href="/"><img src="https://i.pinimg.com/originals/76/ad/19/76ad19281d3a6a444958f98885b76ddc.gif"  height="400"></a>
+
+<br>
+<div class="text-center">
+    <a href="{% url 'file_manager:main_mf' %}"><img
+            src="https://i.pinimg.com/originals/76/ad/19/76ad19281d3a6a444958f98885b76ddc.gif" height="200"></a>
+</div>
+<hr>
+<br>
+<div class="text-center">
+    <div class="row">
+        <div class="col-9">
+            <form method="post" action="{% url 'file_manager:images' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Download picture:</label>
+                    {{form.image}}
+                </div>
+                <div class="form-group">
+                    <label>Title:</label>
+                    {{form.title}}
+                </div>
+                <div class="form-group">
+                    <label>Description:</label>
+                    {{form.description}}
+                </div>
+                <button type="submit" class="btn btn-primary">Download</button>
+            </form>
+        </div>
     </div>
     <hr>
-    <br>
-
-    {% for img in cloud_images %}
-    <h2> {{img.title}} </h2>
-    <h3> {{img.description}} </h3>
-    <img src="{{img.image.url}}">
-    <hr>
-    {% endfor %}
+    <div class="row">
+        {% for img in cloud_images %}
+        <div class="col-3 col-sm-3">
+            <h4>{{ img.title }}</h4>
+            <h5>{{ img.description }}</h5>
+            <img src="{{ img.image.url }}" height="150">
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+
 {% endblock %}
