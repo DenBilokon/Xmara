@@ -20,18 +20,40 @@
         {% endif %}
     </nav>
 
+    <form method="GET" action="{% url 'notes:search' %}" style="margin-bottom: 20px">
+        <input type="text" name="query" placeholder="Search notes..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    <form method="POST" action="{% url 'notes:sort' %}" style="margin-bottom: 20px">
+        {% csrf_token %}
+        <label> Select tags:
+            <select name="tags" multiple size="3" required>
+                {% for tag in tags.all %}
+                <option value="{{ tag.name }}">{{ tag.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <button type="submit">Filter</button>
+    </form>
+
+
     {% for note in notes %}
     <ul>
         <li>
             {% if not note.done %}
             <a href="{% url 'notes:detail' note.id %}" role="button" class="outline"> {{ note.name }} </a>
             <a href="{% url 'notes:set_done' note.id %}" role="button"> Mark Done </a>
+            <a href="{% url 'notes:edit_note' note.id %}" role="button" class="contrast">Edit note</a>
             <a href="{% url 'notes:delete' note.id %}" role="button" class="contrast"> Delete note </a>
             {% else %}
             <a href="{% url 'notes:detail' note.id %}" role="button" class="secondary"><s>{{ note.name }}</s></a>
+            <a href="{% url 'notes:delete' note.id %}" role="button" class="contrast"> Delete note </a>
             {% endif %}
         </li>
     </ul>
+    {% empty %}
+    <p>No notes found.</p>
     {% endfor %}
 </main>
 </body>
