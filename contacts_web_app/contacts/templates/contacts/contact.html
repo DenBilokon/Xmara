@@ -1,0 +1,41 @@
+{% extends "contacts/base.html" %}
+
+{% block content %}
+
+
+    <form method="POST" action="{% url 'contacts:contacts' %}">
+        {% csrf_token %}
+        <div style="padding: 10px">
+            <label>Enter the contact firstname:
+                {{form.firstname}}
+            </label>
+            <span>{{ form.errors.firstname }}</span>
+            <label>Enter the contact lastname:
+                {{form.lastname}}
+            </label>
+            <span>{{ form.errors.lastname }}</span>
+            <label>Enter the contact phonenumber:
+                {{form.phone}}
+            </label>
+            <span>{{ form.errors.phone }}</span>
+            <label>Enter the contact email:
+                {{form.email}}
+            </label>
+            <span>{{ form.errors.email }}</span>
+            <label>Enter the contact birthay:
+                {{form.birthday}}
+            </label>
+            <span>{{ form.errors.birthday }}</span>
+        </div>
+        <div class="grid">
+            <button type="submit">Submit</button>
+            <button type="reset" class="secondary">Reset</button>
+        </div>
+    </form>
+
+
+{% endblock %}
+
+
+
+

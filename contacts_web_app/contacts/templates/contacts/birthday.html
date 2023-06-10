@@ -1,0 +1,18 @@
+{% extends "contacts/base.html" %}
+
+{% block content %}
+   {% for contact in birthday_list %}
+          {{ contact.firstname }}{{ contact.lastname }}
+            <br/>
+         {{ contact.phone }}
+            <br/>
+         {{ contact.email }}
+            <br/>
+         {{ contact.birthday }}
+
+   {% endfor %}
+{% endblock %}
+
+
+
+
