@@ -1,0 +1,36 @@
+{% extends "notes/base.html" %}
+
+{% block content %}
+
+<h1>Edit Note</h1>
+
+<form method="POST" action="{% url 'notes:edit_note' note.id %}">
+    {% csrf_token %}
+    <div style="padding: 10px">
+        <label> Note name:
+            {{ form.name }}
+        </label>
+        <span>{{ form.errors.name }}</span>
+    </div>
+    <div style="padding: 10px">
+        <label> Note description:
+            {{ form.description }}
+        </label>
+        <span>{{ form.errors.description }}</span>
+    </div>
+    <div style="padding: 10px">
+        <label> Select tags:
+            <select name="tags" multiple="multiple" required>
+                {% for tag in tags %}
+                <option value="{{tag.name}}" {% if tag in note.tags.all %}selected{% endif %}>{{tag.name}}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <div class="grid">
+        <button type="submit">Update</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+</form>
+
+{% endblock %}
