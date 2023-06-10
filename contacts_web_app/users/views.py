@@ -12,11 +12,15 @@ from django.urls import reverse_lazy
 
 from .forms import RegisterForm
 
+from contacts_web_app.settings import WEATHER_API
+
 
 def main(request):
     currency_info = currency_parse()
+    weather_info = weather_parse()
     return render(request, 'users/index.html', context={'currency_info': currency_info,
-                                                        'date': '08.06.2023'})
+                                                        'date': date.today().strftime('%d.%m.%Y'),
+                                                        'weather_info': weather_info})
 
 
 class RegisterView(View):
@@ -65,7 +69,17 @@ def currency_parse():
     return 'currency_dict'
 
 
-def currency(request):
-    currency_info = currency_parse()
-    return render(request, "users/base.html", context={'currency_info': currency_info,
-                                                       'date': '08.06.2023'})
+def weather_parse():
+    weather_data = {}
+    cities = ['London', 'Prague', 'Berlin', 'Paris', 'Stockholm', 'Warsaw']
+    for city in cities:
+        url = f'http://api.weatherapi.com/v1/current.json?key={WEATHER_API}&q={city}'
+        response = requests.get(url)
+        city_data = json.loads(response.text).get('current')
+        city_dict = {'city': city,
+                     'temp_c': city_data.get('temp_c'),
+                     'wind_kph': city_data.get('wind_kph'),
+                     'icon': city_data.get('condition').get('icon'),
+                     'text': city_data.get('condition').get('text')}
+        weather_data[city] = city_dict
+    return weather_data
