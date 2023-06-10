@@ -1,0 +1,19 @@
+{% extends "notes/base.html" %}
+
+{% block content %}
+
+    <h2>Search Results</h2>
+
+    {% if notes %}
+    <ul>
+        {% for note in notes %}
+        <li>
+            <a href="{% url 'notes:detail' note.id %}" role="button">{{ note.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No notes found.</p>
+    {% endif %}
+
+{% endblock %}

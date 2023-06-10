@@ -1,0 +1,27 @@
+{% extends "contacts/base.html" %}
+
+{% block content %}
+<h1>Upload file</h1>
+<!--<form action="{% url 'contacts:edit' contact.id %}" method="post">
+    {% csrf_token %}
+    <img src="{{media}}{{pic.path}}" width="350" height="350" alt="pic">
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" value="{{name }}" name="firstname">
+        <input type="text" class="form-control" value="{{contact.lastname}}" name="lastname">
+        <input type="text" class="form-control" value="{{ phone }}" name="phone">
+        <input type="text" class="form-control" value="{{contact.email}}" name="email">
+        <input type="text" class="form-control" value="{{contact.birthday}}" name="birthday">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>-->
+<form action="{% url 'contacts:edit' contact.id %}" method="post">
+    {% csrf_token %}
+        {{ form }}
+    <div class="grid">
+            <button type="submit">Update</button>
+    </div>
+</form>
+
+
+{% endblock %}

@@ -59,14 +59,14 @@ def user_data(request):
 
 
 def currency_parse():
-    url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date.today().strftime('%d.%m.%Y')}"
-    response = requests.get(url)
-    currency_data = json.loads(response.text).get('exchangeRate')
-    currency_dict = {"currency_USD": currency_data[23],
-                     "currency_EUR": currency_data[8],
-                     "currency_GBR": currency_data[9],
-                     "currency_PLN": currency_data[17]}
-    return currency_dict
+    # url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date.today().strftime('%d.%m.%Y')}"
+    # response = requests.get(url)
+    # currency_data = json.loads(response.text).get('exchangeRate')
+    # currency_dict = {"currency_USD": currency_data[23],
+    #                  "currency_EUR": currency_data[8],
+    #                  "currency_GBR": currency_data[9],
+    #                  "currency_PLN": currency_data[17]}
+    return 'currency_dict'
 
 
 def weather_parse():
@@ -83,5 +83,3 @@ def weather_parse():
                      'text': city_data.get('condition').get('text')}
         weather_data[city] = city_dict
     return weather_data
-
-# {'London': {'city': 'London', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Prague': {'city': 'Prague', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Berlin': {'city': 'Berlin', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Paris': {'city': 'Paris', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Stockholm': {'city': 'Stockholm', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Warsaw': {'city': 'Warsaw', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}}

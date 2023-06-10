@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "news",
     "notes",
     "users",
+    "phonenumber_field",
     "cloudinary",
 
 ]
@@ -98,6 +99,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -128,6 +130,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+PHONENUMBER_DEFAULT_REGION = "UA"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
