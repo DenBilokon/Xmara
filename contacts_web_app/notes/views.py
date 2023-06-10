@@ -8,6 +8,7 @@ from users.views import currency_parse, weather_parse
 
 
 
+
 def main(request):
     currency_info = currency_parse()
     weather_info = weather_parse()
@@ -15,6 +16,7 @@ def main(request):
     return render(request, 'notes/index.html', context={'notes': notes, 'currency_info': currency_info,
                                                         'date': date.today().strftime('%d.%m.%Y'),
                                                         'weather_info': weather_info})
+
 
 @login_required
 def tag(request):
@@ -29,6 +31,7 @@ def tag(request):
             return render(request, 'notes/tag.html', {'form': form})
 
     return render(request, 'notes/tag.html', {'form': TagForm()})
+
 
 @login_required
 def note(request):
@@ -50,15 +53,18 @@ def note(request):
 
     return render(request, 'notes/note.html', {'tags': tags, 'form': NoteForm()})
 
+
 @login_required
 def detail(request, note_id):
     note = get_object_or_404(Note, pk=note_id, user=request.user)
     return render(request, 'notes/detail.html', {'note': note})
 
+
 @login_required
 def set_done(request, note_id):
     Note.objects.filter(pk=note_id, user=request.user).update(done=True)
     return redirect(to='notes:main')
+
 
 @login_required
 def delete_note(request, note_id):

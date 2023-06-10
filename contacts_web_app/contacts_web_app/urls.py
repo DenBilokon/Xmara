@@ -23,4 +23,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('notes/', include('notes.urls')),
     path('file_manager/', include('file_manager.urls')),
+    path('news/', include('news.urls'))
 ]

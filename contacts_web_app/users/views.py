@@ -83,5 +83,3 @@ def weather_parse():
                      'text': city_data.get('condition').get('text')}
         weather_data[city] = city_dict
     return weather_data
-
-# {'London': {'city': 'London', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Prague': {'city': 'Prague', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Berlin': {'city': 'Berlin', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Paris': {'city': 'Paris', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Stockholm': {'city': 'Stockholm', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}, 'Warsaw': {'city': 'Warsaw', 'temp_c': 24.0, 'wind_kph': 31.0, 'icon': '//cdn.weatherapi.com/weather/64x64/day/389.png', 'text': 'Moderate or heavy rain with thunder'}}
