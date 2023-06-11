@@ -1,66 +1,52 @@
 {% extends 'users/base.html' %}
-{% load static %}
 
-<!-- Решта вмісту вашого шаблону -->
-
-<head>
-    <!-- Посилання на статичні файли -->
-    <link rel="stylesheet" href="{% static 'users/style.css' %}">
-</head>
 
 {% block content %}
+
 <div class="text-center">
     <a href="#" class="btn btn-primary" style="width: 24%">Gallery</a>
-    <a href="{% url 'file_manager:images' %}" class="btn btn-primary" style="width: 24%">Pictures</a>
+    <a href="{% url 'file_manager:images' %}" class="btn btn-primary" style="width: 24%">Picture</a>
     <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 24%">Video</a>
     <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 24%">Documents</a>
 </div>
-<h1 class="text-center">PICTURES</h1>
-<br>
+<h1 class="text-center">VIDEO</h1>
 <div class="text-center">
-
     {% load cloudinary %}
     <div class="form-box">
         <div id="backend_upload">
-            <h4>Upload Picture</h4>
-            <form action="{% url 'file_manager:images' %}" method="post" enctype="multipart/form-data">
+            <h4>Upload Video</h4>
+
+            <form action="{% url 'file_manager:upload_video' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+
                 <div class="form-group">
                     <label>Title:</label>
-                    {{ image_form.title }}
+                    {{ video_form.title }}
                 </div>
                 <div class="form-group">
-                    <label>Description:</label>
-                    {{ image_form.description }}
+                    <label>Video:</label>
+                    {{ video_form.video }}
                 </div>
-                <div class="form-group">
-                    <label>Image:</label>
-                    {{ image_form.image }}
-                </div>
+
                 <input type="submit" class="btn btn-primary" value="Upload">
             </form>
         </div>
     </div>
-
     <hr>
     <div class="row">
-        {% for img in cloud_images %}
+        {% for video in cloud_video %}
         <div class="col-3 col-sm-3">
             <div class="image-section square-section">
-                <h4>{{ img.title }}</h4>
+                <h4>{{ video.title }}</h4>
                 <div class="image-wrapper">
-                    <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-responsive">
+                    <img src="{{ video.video.url }}" alt="{{ video.title }}" class="img-responsive">
                 </div>
-                <p>{{ img.description }}</p>
+
             </div>
         </div>
         {% empty %}
         <p>Немає доступних зображень.</p>
         {% endfor %}
     </div>
-
-
 </div>
-
-
 {% endblock %}
