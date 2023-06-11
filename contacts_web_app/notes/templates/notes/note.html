@@ -1,33 +1,33 @@
-{% extends "notes/base.html" %}
+{% extends "users/base.html" %}
 
 {% block content %}
 
+<h1>Create Note</h1>
+
 <form method="POST" action="{% url 'notes:note' %}">
     {% csrf_token %}
-    <div style="padding: 10px">
-        <label> Note name:
-            {{ form.name }}
-        </label>
-        <span>{{ form.errors.name }}</span>
+    <div class="mb-3">
+        <label for="name" class="form-label">Note name:</label>
+        {{ form.name }}
+        <span class="text-danger">{{ form.errors.name }}</span>
     </div>
-    <div style="padding: 10px">
-        <label> Note description:
-            {{ form.description }}
-        </label>
-        <span>{{ form.errors.description }}</span>
+    <div class="mb-3">
+        <label for="description" class="form-label">Note description:</label>
+        {{ form.description }}
+        <span class="text-danger">{{ form.errors.description }}</span>
     </div>
-    <div style="padding: 10px">
-        <label> Select tags:
-            <select name="tags" multiple="multiple" required>
-                {% for tag in tags %}
-                <option value="{{tag.name}}">{{tag.name}}</option>
-                {% endfor %}
-            </select>
-        </label>
+    <div class="mb-3">
+        <label for="tags" class="form-label">Select tags:</label>
+        <select name="tags" id="tags" class="form-control" multiple required>
+            {% for tag in tags %}
+            <option value="{{tag.name}}">{{tag.name}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="grid">
-        <button type="submit">Submit</button>
-        <button type="reset" class="secondary">Reset</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
     </div>
 </form>
+
 {% endblock %}

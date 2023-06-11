@@ -67,7 +67,9 @@ def currency_parse():
                      "currency_EUR": currency_data[8],
                      "currency_GBR": currency_data[9],
                      "currency_PLN": currency_data[17]}
+
     return currency_dict
+
 
 
 
