@@ -154,11 +154,27 @@ color: #888;
     font-size: 16px;
 }
 
+
 .news-date {
     margin-top: 10px;
     font-size: 12px;
     color: gray;
 }
+
+.not-found-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: red;
+    }
+
+    .not-found-heading {
+        color: white;
+        font-size: 5rem;
+        text-align: center;
+    }
+
 
 .compact-table {
     width: 80%;
@@ -174,3 +190,4 @@ color: #888;
   .table-1 td {
     font-size: 12px;
 }
+
