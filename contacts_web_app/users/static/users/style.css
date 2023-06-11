@@ -134,28 +134,43 @@ font-size: 12px;
 color: #888;
 }
 
-   .news-details {
-        margin-top: 20px;
-    }
+.news-details {
+    margin-top: 20px;
+}
 
-    .news-image {
-        display: block;
-        margin: 0 auto;
-        width: 70%;
-    }
+.news-image {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+}
 
-    .news-title {
-        font-size: 24px;
-        margin-top: 10px;
-    }
+.news-title {
+    font-size: 24px;
+    margin-top: 10px;
+}
 
-    .news-content {
-        margin-top: 10px;
-        font-size: 16px;
-    }
+.news-content {
+    margin-top: 10px;
+    font-size: 16px;
+}
 
-    .news-date {
-        margin-top: 10px;
-        font-size: 12px;
-        color: gray;
-    }
+.news-date {
+    margin-top: 10px;
+    font-size: 12px;
+    color: gray;
+}
+
+.compact-table {
+    width: 80%;
+}
+
+.weather-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.currency-block h6,
+  .table-1 th,
+  .table-1 td {
+    font-size: 12px;
+}
