@@ -1,19 +1,38 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-<div class="container">
-    <br>
-    <div class="text-center">
-        <a href="/"><img src="https://i.pinimg.com/originals/76/ad/19/76ad19281d3a6a444958f98885b76ddc.gif"  height="400"></a>
-    </div>
-    <hr>
-    <br>
 
-    {% for img in cloud_images %}
-    <h2> {{img.title}} </h2>
-    <h3> {{img.description}} </h3>
-    <img src="{{img.image.url}}">
-    <hr>
-    {% endfor %}
+<br>
+<div class="text-center">
+    <a href="{% url 'file_manager:main_mf' %}"><img
+            src="https://i.pinimg.com/originals/76/ad/19/76ad19281d3a6a444958f98885b76ddc.gif" height="200"></a>
 </div>
+<hr>
+<br>
+<div class="text-center">
+
+    {% load cloudinary %}
+
+    <div id='backend_upload'>
+        <form action="{% url 'file_manager:images' %}" method="post"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ image_form }}
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+
+    <hr>
+    <div class="row">
+        {% for img in cloud_images %}
+        <div class="col-3 col-sm-3">
+            <h4>{{ img.title }}</h4>
+
+            <img src="{{ img.image.url }}" height="150">
+            <h5>{{ img.description }}</h5>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

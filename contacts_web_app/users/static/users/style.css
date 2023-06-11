@@ -154,6 +154,7 @@ color: #888;
     font-size: 16px;
 }
 
+
 .news-date {
     margin-top: 10px;
     font-size: 12px;
@@ -173,3 +174,20 @@ color: #888;
         font-size: 5rem;
         text-align: center;
     }
+
+
+.compact-table {
+    width: 80%;
+}
+
+.weather-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.currency-block h6,
+  .table-1 th,
+  .table-1 td {
+    font-size: 12px;
+}
+
