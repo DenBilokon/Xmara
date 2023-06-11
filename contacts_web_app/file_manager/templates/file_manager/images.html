@@ -1,11 +1,16 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-
+<div class="text-center">
+    <a href="{% url 'file_manager:images' %}" class="btn btn-primary" style="width: 33%">Images</a>
+    <a href="#" class="btn btn-primary" style="width: 33%">Video</a>
+    <a href="#" class="btn btn-primary" style="width: 33%">Documents</a>
+</div>
+<h1 class="text-center">IMAGES</h1>
 <br>
 <div class="text-center">
     <a href="{% url 'file_manager:main_mf' %}"><img
-            src="https://i.pinimg.com/originals/76/ad/19/76ad19281d3a6a444958f98885b76ddc.gif" height="200"></a>
+            src="https://i.pinimg.com/originals/76/ad/19/76ad19281d3a6a444958f98885b76ddc.gif" height="100"></a>
 </div>
 <hr>
 <br>
@@ -28,7 +33,7 @@
         <div class="col-3 col-sm-3">
             <h4>{{ img.title }}</h4>
 
-            <img src="{{ img.image.url }}" height="150">
+            <img src="{{ img.image.url }}" height="100">
             <h5>{{ img.description }}</h5>
         </div>
         {% endfor %}
