@@ -82,7 +82,7 @@
         <div class="col-md-3">
             {% if user.is_authenticated %}
             <div class="btn-group-vertical" role="group" aria-label="Button Group">
-                <a href="#" class="btn btn-default">Контакти</a>
+                <a href="{% url 'contacts:main' %}" class="btn btn-default">Контакти</a>
                 <br>
                 <a href="{% url 'notes:main' %}" class="btn btn-default">Нотатки</a>
                 <br>
