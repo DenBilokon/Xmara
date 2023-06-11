@@ -1,21 +1,11 @@
 {% extends 'users/base.html' %}
 {% block content %}
-<div class="container">
-    <br>
-    <div class="text-center">
-        <a href="/"><img src="https://i.pinimg.com/originals/9f/75/80/9f7580a12044cbac82964712911eee17.gif"
-                         height="400"></a>
-    </div>
-    <br>
-    <div class="btn-group-vertical" role="group" aria-label="Button Group">
-        <a href="{% url 'file_manager:images' %}" class="btn btn-default">Images</a>
-        <br>
-        <a href="#" class="btn btn-default">Video</a>
-        <br>
-        <a href="#" class="btn btn-default">Files</a>
-        <br>
-        <a href="#" class="btn btn-default">Documents</a>
-        <br>
-    </div>
+
+<div class="text-center">
+    <a href="{% url 'file_manager:images' %}" class="btn btn-primary" style="width: 33%">Images</a>
+    <a href="#" class="btn btn-primary" style="width: 33%">Video</a>
+    <a href="#" class="btn btn-primary" style="width: 33%">Documents</a>
 </div>
+<h1 class="text-center">FILE MANAGER</h1>
+
 {% endblock %}

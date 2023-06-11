@@ -2,14 +2,17 @@
 
 {% block content %}
 
-
-
     <div class="text-center">
         <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 33%">War</a>
         <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 33%">Sport</a>
         <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 33%">War statistics</a>
     </div>
-    <h1 class="text-center">NEWS</h1>
+
+    <div class="news-details">
+        <img src="{{ news_details.src_img }}" alt="{{ news_details.title }}" class="news-image">
+        <h3 class="news-title">{{ news_details.head_content }}</h3>
+        <p class="news-content">{{ news_details.content }}</p>
+        <p class="news-date">{{ news_details.news_date }}</p>
+    </div>
 
 {% endblock %}
-

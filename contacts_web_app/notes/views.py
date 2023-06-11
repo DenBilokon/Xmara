@@ -8,8 +8,6 @@ from .models import Tag, Note
 from users.views import currency_parse, weather_parse
 
 
-
-
 def main(request):
     currency_info = currency_parse()
     weather_info = weather_parse()

@@ -1,0 +1,43 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+    <div class="text-center">
+        <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 33%">War</a>
+        <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 33%">Sport</a>
+        <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 33%">War statistics</a>
+    </div>
+<h2> Загальні бойові втрати російського окупанта </h2>
+<h4> Дані на {{ date }}  </h4>
+<br>
+<table>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.personnel_units }} (+{{ war_statistic.war_increase.personnel_units }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.tanks }} (+{{ war_statistic.war_increase.personnel_units }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.armoured_fighting_vehicles }} (+{{ war_statistic.war_increase.personnel_units }})</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.artillery_systems }} (+{{ war_statistic.war_increase.artillery_systems }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.mlrs }} (+{{ war_statistic.war_increase.mlrs }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.aa_warfare_systems }} (+{{ war_statistic.war_increase.aa_warfare_systems }})</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.planes }} (+{{ war_statistic.war_increase.planes }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.helicopters }} (+{{ war_statistic.war_increase.helicopters }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.vehicles_fuel_tanks }} (+{{ war_statistic.war_increase.vehicles_fuel_tanks }})</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.warships_cutters }} (+{{ war_statistic.war_increase.warships_cutters }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.cruise_missiles }} (+{{ war_statistic.war_increase.cruise_missiles }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.uav_systems }} (+{{ war_statistic.war_increase.uav_systems }})</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.special_military_equip }} (+{{ war_statistic.war_increase.special_military_equip }})</td>
+        <td style="border: 1px solid black;">{{ war_statistic.war_stats.atgm_srbm_systems }} (+{{ war_statistic.war_increase.atgm_srbm_systems }})</td>
+        <td style="border: 1px solid black;">Далі буде 😈</td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock %}
