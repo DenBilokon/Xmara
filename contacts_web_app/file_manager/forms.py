@@ -10,5 +10,5 @@ class LibraryForm(ModelForm):
         widgets = {
             'title': TextInput(attrs={'class': 'form-control'}),
             'description': TextInput(attrs={'class': 'form-control'}),
-            'image': ClearableFileInput(attrs={'class': 'form-control'}),
+            'image': ClearableFileInput(attrs={'class': 'form-control-file'}),
         }

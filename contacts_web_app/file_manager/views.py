@@ -20,33 +20,21 @@ def main_mf(request):
 def images(request):
     user_id = request.user.id
     cloud_images = Library.objects.filter(user_id=user_id)
-    if request.method == 'POST':
-        form = LibraryForm(request.POST)
-        if form.is_valid():
-            library = form.save(commit=False)
-            library.user = request.user
-            library.save()
-            return redirect('library_detail', library_id=library.id)
+    image_form = dict(backend_form=LibraryForm())
 
-    form = LibraryForm()
+    if request.method == 'POST':
+        form = LibraryForm(request.POST, request.FILES)
+        image_form['posted'] = form.instance
+        if form.is_valid():
+            form.save()
+
     currency_info = currency_parse()
     weather_info = weather_parse()
-    return render(request, 'file_manager/images.html', context={'currency_info': currency_info,
-                                                                'date': date.today().strftime('%d.%m.%Y'),
-                                                                'weather_info': weather_info,
-                                                                'cloud_images': cloud_images,
-                                                                'form': form})
-
-
-def create_library(request):
-    if request.method == 'POST':
-        form = LibraryForm(request.POST)
-        if form.is_valid():
-            library = form.save(commit=False)
-            library.user = request.user
-            library.save()
-            return redirect('library_detail', library_id=library.id)
-    else:
-        form = LibraryForm()
-
-    return render(request, 'create_library.html', {'form': form})
+    context = {
+        'currency_info': currency_info,
+        'date': date.today().strftime('%d.%m.%Y'),
+        'weather_info': weather_info,
+        'cloud_images': cloud_images,
+        'image_form': image_form['backend_form']
+    }
+    return render(request, 'file_manager/images.html', context=context)
