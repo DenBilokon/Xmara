@@ -1,15 +1,50 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
+{% load static %}
 
+<div class="text-center">
+    <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 33%">War</a>
+    <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 33%">Sport</a>
+    <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 33%">War statistics</a>
+</div>
+<h1 class="text-center">NEWS</h1>
 
-
-    <div class="text-center">
-        <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 33%">War</a>
-        <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 33%">Sport</a>
-        <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 33%">War statistics</a>
-    </div>
-    <h1 class="text-center">NEWS</h1>
+<div class="currency-block">
+    <h6>Currency exchange rates on {{ date }}</h6>
+    <table class="table-1">
+        <thead>
+        <tr>
+            <th><img src="{% static 'users/img/currency.png' %}" alt="city"
+                     style="width: 40px; height: 40px;"></th>
+            <th>Purchase</th>
+            <th>Sale</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>USD</td>
+            <td>{{ currency_info.currency_USD.purchaseRate }}</td>
+            <td>{{ currency_info.currency_USD.saleRate }}</td>
+        </tr>
+        <tr>
+            <td>EUR</td>
+            <td>{{ currency_info.currency_EUR.purchaseRate }}</td>
+            <td>{{ currency_info.currency_EUR.saleRate }}</td>
+        </tr>
+        <tr>
+            <td>PLN</td>
+            <td>{{ currency_info.currency_PLN.purchaseRate }}</td>
+            <td>{{ currency_info.currency_PLN.saleRate }}</td>
+        </tr>
+        <tr>
+            <td>GBP</td>
+            <td>{{ currency_info.currency_GBR.purchaseRate }}</td>
+            <td>{{ currency_info.currency_GBR.saleRate }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
 

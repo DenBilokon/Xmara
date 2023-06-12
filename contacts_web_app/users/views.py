@@ -14,12 +14,12 @@ from .forms import RegisterForm
 
 from contacts_web_app.settings import WEATHER_API
 
+date_today = date.today().strftime('%d.%m.%Y')
 
 def main(request):
-    currency_info = currency_parse()
+
     weather_info = weather_parse()
-    return render(request, 'users/index.html', context={'currency_info': currency_info,
-                                                        'date': date.today().strftime('%d.%m.%Y'),
+    return render(request, 'users/index.html', context={'date': date_today,
                                                         'weather_info': weather_info})
 
 
@@ -56,18 +56,6 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
 
 def user_data(request):
     return render(request, "users/user.html", context={})
-
-
-def currency_parse():
-    url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date.today().strftime('%d.%m.%Y')}"
-    response = requests.get(url)
-    currency_data = json.loads(response.text).get('exchangeRate')
-    currency_dict = {"currency_USD": currency_data[23],
-                     "currency_EUR": currency_data[8],
-                     "currency_GBR": currency_data[9],
-                     "currency_PLN": currency_data[17]}
-
-    return currency_dict
 
 
 def weather_parse():

@@ -4,17 +4,15 @@ from cloudinary.uploader import upload
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from users.views import currency_parse, weather_parse
+from users.views import weather_parse
 from .models import Picture, Document, Video
 from .forms import PictureForm, DocumentForm, VideoForm
 
 
 @login_required
 def main_mf(request):
-    currency_info = currency_parse()
     weather_info = weather_parse()
-    return render(request, 'file_manager/index.html', context={'currency_info': currency_info,
-                                                               'date': date.today().strftime('%d.%m.%Y'),
+    return render(request, 'file_manager/index.html', context={'date': date.today().strftime('%d.%m.%Y'),
                                                                'weather_info': weather_info})
 
 
@@ -29,10 +27,8 @@ def upload_picture(request):
         if form.is_valid():
             form.save()
 
-    currency_info = currency_parse()
     weather_info = weather_parse()
     context = {
-        'currency_info': currency_info,
         'date': date.today().strftime('%d.%m.%Y'),
         'weather_info': weather_info,
         'cloud_images': cloud_images,
