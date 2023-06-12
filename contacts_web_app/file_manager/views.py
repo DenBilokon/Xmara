@@ -18,7 +18,7 @@ def main_mf(request):
                                                                'weather_info': weather_info})
 
 
-def images(request):
+def upload_picture(request):
     user_id = request.user.id
     cloud_images = Picture.objects.filter(user_id=user_id)
     image_form = dict(backend_form=PictureForm())
@@ -38,7 +38,7 @@ def images(request):
         'cloud_images': cloud_images,
         'image_form': image_form['backend_form']
     }
-    return render(request, 'file_manager/images.html', context=context)
+    return render(request, 'file_manager/upload_picture.html', context=context)
 
 
 def upload_video(request):
@@ -92,3 +92,38 @@ def upload_document(request):
 
     }
     return render(request, 'file_manager/upload_document.html', context=context)
+
+
+def upload_audio(request):
+    # user_id = request.user.id
+    # cloud_video = Video.objects.filter(user_id=user_id)
+    # video_form = dict(backend_form=VideoForm())
+    # if request.method == 'POST':
+    #     form = VideoForm(request.POST, request.FILES)
+    #     video_form['posted'] = form.instance
+    #     if form.is_valid():
+    #         form.save()
+
+    currency_info = currency_parse()
+    weather_info = weather_parse()
+    context = {
+        'currency_info': currency_info,
+        'date': date.today().strftime('%d.%m.%Y'),
+        'weather_info': weather_info,
+        # 'cloud_video': cloud_video,
+        # 'video_form': video_form['backend_form']
+    }
+    return render(request, 'file_manager/upload_audio.html', context=context)
+
+
+def gallery(request):
+
+    currency_info = currency_parse()
+    weather_info = weather_parse()
+    context = {
+        'currency_info': currency_info,
+        'date': date.today().strftime('%d.%m.%Y'),
+        'weather_info': weather_info,
+
+    }
+    return render(request, 'file_manager/gallery.html', context=context)
