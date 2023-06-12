@@ -4,12 +4,17 @@ from .forms import ContactForm
 from .models import Contacts
 from datetime import date, datetime, timedelta
 
-
+from users.views import weather_parse, date_today
 # Create your views here.
+
+weather_info = weather_parse()
+
 
 def main(request):
     contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-    return render(request, 'contacts/index.html', context={'contacts': contacts, 'user': request.user})
+    return render(request, 'contacts/index.html', context={'contacts': contacts, 'user': request.user,
+                                                           'date': date_today,
+                                                           'weather_info': weather_info})
 
 
 @login_required
