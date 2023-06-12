@@ -1,18 +1,19 @@
-{% extends "notes/base.html" %}
+{% extends "users/base.html" %}
 
 {% block content %}
 
+<h1>Create Tag</h1>
+
 <form method="POST" action="{% url 'notes:tag' %}">
     {% csrf_token %}
-    <div style="padding: 10px">
-        <label>Enter the tag name:
-            {{form.name}}
-        </label>
-        <span>{{ form.errors.name }}</span>
+    <div class="mb-3">
+        <label for="name" class="form-label">Enter the tag name:</label>
+        {{form.name}}
+        <span class="text-danger">{{ form.errors.name }}</span>
     </div>
     <div class="grid">
-        <button type="submit">Submit</button>
-        <button type="reset" class="secondary">Reset</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
     </div>
 </form>
 

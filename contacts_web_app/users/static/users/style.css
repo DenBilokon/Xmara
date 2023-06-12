@@ -91,7 +91,6 @@ tr {
     .table-1 tbody tr:hover {
         background-color: #e9e9e9;
     }
-}
 
 .news {
 text-align: center;
@@ -175,14 +174,94 @@ color: #888;
     text-align: center;
 }
 
+.news-date {
+        margin-top: 10px;
+        font-size: 12px;
+        color: gray;
+    }
+
+/* Основні стилі для контейнера форм та нотаток */
+.container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Стилі для кнопок Add Note та Add Tag */
+.btn-group-vertical .btn {
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Стилі для форм пошуку та фільтра */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Стилі для карток нотаток */
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    margin-bottom: 10px;
+}
+
+/* Стилі для кнопок в картках нотаток */
+.btn-group .btn {
+    margin-right: 10px;
+}
+
+/* Стилі для кнопки Edit */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #495057;
+    border-color: #495057;
+    color: #fff;
+}
+
+/* Стилі для кнопки Mark Done */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+    color: #fff;
+}
+
 
 .compact-table {
     width: 80%;
 }
 
 .weather-icon {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
 }
 
 .currency-block h6,
@@ -190,6 +269,7 @@ color: #888;
   .table-1 td {
     font-size: 12px;
 }
+
 
 .form-box {
     width: 400px;
@@ -252,3 +332,4 @@ color: #888;
     max-width: 100%;
     height: auto;
 }
+
