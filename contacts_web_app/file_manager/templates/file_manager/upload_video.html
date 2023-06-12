@@ -4,10 +4,11 @@
 {% block content %}
 
 <div class="text-center">
-    <a href="#" class="btn btn-primary" style="width: 24%">Gallery</a>
-    <a href="{% url 'file_manager:images' %}" class="btn btn-primary" style="width: 24%">Picture</a>
-    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 24%">Video</a>
-    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 24%">Documents</a>
+    <a href="{% url 'file_manager:gallery' %}" class="btn btn-primary" style="width: 19%">Gallery</a>
+    <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 19%">Pictures</a>
+    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 19%">Video</a>
+    <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 19%">Audio</a>
+    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
 </div>
 <h1 class="text-center">VIDEO</h1>
 <div class="text-center">
@@ -34,19 +35,23 @@
     </div>
     <hr>
     <div class="row">
-        {% for video in cloud_video %}
-        <div class="col-3 col-sm-3">
-            <div class="image-section square-section">
-                <h4>{{ video.title }}</h4>
-                <div class="image-wrapper">
-                    <img src="{{ video.video.url }}" alt="{{ video.title }}" class="img-responsive">
-                </div>
-
+    {% for video in cloud_video %}
+    <div class="col-3 col-sm-3">
+        <div class="video-section square-section">
+            <h4>{{ video.title }}</h4>
+            <div class="video-wrapper">
+                <a href="{{ video.video.url }}">
+                    <video width="200" height="200" controls>
+                        <source src="{{ video.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </a>
             </div>
         </div>
-        {% empty %}
-        <p>Немає доступних зображень.</p>
-        {% endfor %}
     </div>
+    {% empty %}
+    <p>Немає доступних відео.</p>
+    {% endfor %}
+</div>
 </div>
 {% endblock %}

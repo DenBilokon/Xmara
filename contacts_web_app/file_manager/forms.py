@@ -14,10 +14,6 @@ class PictureForm(ModelForm):
         }
 
 
-# class DocumentForm(Form):
-#     title = TextInput()
-#     document = FileField()
-
 class DocumentForm(ModelForm):
     class Meta:
         model = Document
