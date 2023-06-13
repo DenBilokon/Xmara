@@ -10,3 +10,4 @@ class NewsConfig(AppConfig):
         views.start()
 
 
+

@@ -1,6 +1,5 @@
 {% extends 'users/base.html' %}
 
-
 {% block content %}
 
 <div class="text-center">
@@ -16,21 +15,37 @@
     <div class="form-box">
         <div id="backend_upload">
             <h4>Upload Audio</h4>
+
             <form action="{% url 'file_manager:upload_audio' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label>Name:</label>
 
+                <div class="form-group">
+                    <label>Title:</label>
+                    {{ audio_form.title }}
                 </div>
                 <div class="form-group">
                     <label>Audio:</label>
-
+                    {{ audio_form.audio }}
                 </div>
+
                 <input type="submit" class="btn btn-primary" value="Upload">
             </form>
         </div>
-
     </div>
-
+    <hr>
+    <div>
+        <h2>Cloud Audio</h2>
+        <ul>
+            {% for audio in cloud_audio %}
+            <h5>{{ audio.title }} : {{ audio.audio }}</h5>
+            <audio controls>
+                <source src="{{ audio.audio.url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            {% empty %}
+            <p>No available audio.</p>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
