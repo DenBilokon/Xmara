@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, date
 
 from users.views import weather_parse, date_today
 import requests
@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from django.shortcuts import render
 
 weather_info = weather_parse()
+
 
 def home(request):
     currency_info = read_currency_from_file()
