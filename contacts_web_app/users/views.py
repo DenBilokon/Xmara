@@ -16,6 +16,7 @@ from contacts_web_app.settings import WEATHER_API
 
 date_today = date.today().strftime('%d.%m.%Y')
 
+
 def main(request):
 
     weather_info = weather_parse()

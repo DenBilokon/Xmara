@@ -5,8 +5,7 @@ from django.utils import timezone
 
 
 class Picture(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     image = CloudinaryField(resource_type='image')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
@@ -14,7 +13,7 @@ class Picture(models.Model):
 
 class Document(models.Model):
     title = models.CharField(max_length=255)
-    document = models.FileField(upload_to='documents/')
+    document = CloudinaryField(resource_type='raw')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -24,3 +23,19 @@ class Video(models.Model):
     video = CloudinaryField(resource_type='video')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
+
+
+class Audio(models.Model):
+    title = models.CharField(max_length=255)
+    audio = CloudinaryField(resource_type='auto')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    # def delete(self, *args, **kwargs):
+    #     # Видаляємо аудіофайл з Cloudinary
+    #     self.audio.delete()
+    #
+    #     # Видаляємо запис з бази даних
+    #     super().delete(*args, **kwargs)
+
+

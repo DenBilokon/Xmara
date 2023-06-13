@@ -20,26 +20,23 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label>Name:</label>
-                    {{ document_form.backend_form.title }}
+                    {{ document_form.title }}
                 </div>
                 <div class="form-group">
                     <label>Document:</label>
-                    {{ document_form.backend_form.document }}
+                    {{ document_form.document }}
                 </div>
                 <input type="submit" class="btn btn-primary" value="Upload">
             </form>
         </div>
 
     </div>
-    <div>
-        <h2>Cloud Documents</h2>
-        <ul>
-            {% for document in cloud_document %}
-            <li>{{ document.title }} : {{ document.document }}</li>
-            <li>{{ document.document_url }}</li>
 
-            {% endfor %}
-        </ul>
-    </div>
+    <h2>Cloud Documents</h2>
+    <ul>
+        {% for document in cloud_document %}
+        <li>{{ document.document.url }} - <a href="{{ document.document.url }}">Download</a></li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

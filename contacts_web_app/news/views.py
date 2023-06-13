@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, date
 
 from users.views import weather_parse, date_today
 from contacts_web_app.settings import CRYPTO_API_KEY
