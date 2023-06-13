@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
+
     <link rel="stylesheet" href="{% static 'users/style.css' %}">
     <link rel="stylesheet" href="https://bootswatch.com/5/morph/bootstrap.min.css">
 
@@ -14,7 +15,8 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
+    <div class="container-fluid">
+        <div class="navbar-header">
         <a class="navbar-brand" href="/">
             <img src="{% static 'users/img/logo-no-background_2.png' %}" height="40" alt="Xmara Logo">
         </a>
@@ -23,32 +25,44 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        LIBRARIES
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
-                        <li><a class="dropdown-item" href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contacts:main' %}">Контакти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'notes:main' %}">Нотатки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'file_manager:main_mf' %}">Файли</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'news:home' %}">Новини</a>
-                </li>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-primary">LIBRARIES</button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Bootstrap</a>
+                            <a class="dropdown-item" href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a>
+                        </div>
+                    </div>
+                </div>
+                <!--                <li class="nav-item dropdown">-->
+                <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"-->
+                <!--                       role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+                <!--                        LIBRARIES-->
+                <!--                    </a>-->
+                <!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                <!--                        <li><a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>-->
+                <!--                        <li><a class="dropdown-item" href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a>-->
+                <!--                        </li>-->
+                <!--                    </ul>-->
+                <!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="{% url 'contacts:main' %}">Контакти</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="{% url 'notes:main' %}">Нотатки</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="{% url 'file_manager:main_mf' %}">Файли</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="{% url 'news:home' %}">Новини</a>-->
+<!--                </li>-->
                 {% endif %}
             </ul>
             <form class="d-flex ms-auto" action="#" method="get">
@@ -84,11 +98,17 @@
         </div>
     </div>
 </nav>
-
+<br>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             {% if user.is_authenticated %}
+            <div class="btn-group-vertical" role="group" aria-label="Button Group">
+                <a href="{% url 'contacts:main' %}" class="btn btn-default">Contacts</a>
+                <a href="{% url 'notes:main' %}" class="btn btn-default">Notes</a>
+                <a href="{% url 'file_manager:main_mf' %}" class="btn btn-default">Files</a>
+                <a href="{% url 'news:home' %}" class="btn btn-default">News</a>
+            </div>
             <div class="currency-block-weather mt-3">
                 <h6>Погода на {{ date }}</h6>
                 <table class="table table-striped">
