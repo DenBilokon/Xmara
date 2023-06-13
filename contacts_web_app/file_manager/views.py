@@ -47,10 +47,10 @@ def upload_video(request):
         if form.is_valid():
             form.save()
 
-    currency_info = currency_parse()
+    # currency_info = currency_parse()
     weather_info = weather_parse()
     context = {
-        'currency_info': currency_info,
+        # 'currency_info': currency_info,
         'date': date.today().strftime('%d.%m.%Y'),
         'weather_info': weather_info,
         'cloud_video': cloud_video,
@@ -77,10 +77,10 @@ def upload_document(request):
             print(document_url)
             print(result)
 
-    currency_info = currency_parse()
+    # currency_info = currency_parse()
     weather_info = weather_parse()
     context = {
-        'currency_info': currency_info,
+        # 'currency_info': currency_info,
         'date': date.today().strftime('%d.%m.%Y'),
         'weather_info': weather_info,
         'cloud_document': cloud_document,
@@ -100,10 +100,10 @@ def upload_audio(request):
     #     if form.is_valid():
     #         form.save()
 
-    currency_info = currency_parse()
+    # currency_info = currency_parse()
     weather_info = weather_parse()
     context = {
-        'currency_info': currency_info,
+        # 'currency_info': currency_info,
         'date': date.today().strftime('%d.%m.%Y'),
         'weather_info': weather_info,
         # 'cloud_video': cloud_video,
@@ -114,10 +114,10 @@ def upload_audio(request):
 
 def gallery(request):
 
-    currency_info = currency_parse()
+    # currency_info = currency_parse()
     weather_info = weather_parse()
     context = {
-        'currency_info': currency_info,
+        # 'currency_info': currency_info,
         'date': date.today().strftime('%d.%m.%Y'),
         'weather_info': weather_info,
 

@@ -4,46 +4,137 @@
 {% load static %}
 
 <div class="text-center">
-    <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 33%">War</a>
-    <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 33%">Sport</a>
-    <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 33%">War statistics</a>
+    <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
+    <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 24%">War</a>
+    <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 24%">Sport</a>
+    <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 24%">War statistics</a>
 </div>
 <h1 class="text-center">NEWS</h1>
 
-<div class="currency-block">
-    <h6>Currency exchange rates on {{ date }}</h6>
-    <table class="table-1">
-        <thead>
-        <tr>
-            <th><img src="{% static 'users/img/currency.png' %}" alt="city"
-                     style="width: 40px; height: 40px;"></th>
-            <th>Purchase</th>
-            <th>Sale</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>USD</td>
-            <td>{{ currency_info.currency_USD.purchaseRate }}</td>
-            <td>{{ currency_info.currency_USD.saleRate }}</td>
-        </tr>
-        <tr>
-            <td>EUR</td>
-            <td>{{ currency_info.currency_EUR.purchaseRate }}</td>
-            <td>{{ currency_info.currency_EUR.saleRate }}</td>
-        </tr>
-        <tr>
-            <td>PLN</td>
-            <td>{{ currency_info.currency_PLN.purchaseRate }}</td>
-            <td>{{ currency_info.currency_PLN.saleRate }}</td>
-        </tr>
-        <tr>
-            <td>GBP</td>
-            <td>{{ currency_info.currency_GBR.purchaseRate }}</td>
-            <td>{{ currency_info.currency_GBR.saleRate }}</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="row">
+    <div class="col-md-3">
+        <div class="currency-block">
+            <h4>Currency exchange rates on {{ date }}</h4>
+            <table class="table-1">
+                <thead>
+                <tr>
+                    <th><img src="{% static 'users/img/currency.png' %}" alt="city"
+                             style="width: 40px; height: 40px;"></th>
+                    <th>Purchase</th>
+                    <th>Sale</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>USD</td>
+                    <td>{{ currency_info.currency_USD.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_USD.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>EUR</td>
+                    <td>{{ currency_info.currency_EUR.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_EUR.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>PLN</td>
+                    <td>{{ currency_info.currency_PLN.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_PLN.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>GBP</td>
+                    <td>{{ currency_info.currency_GBP.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_GBP.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>CZK</td>
+                    <td>{{ currency_info.currency_CZK.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_CZK.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>JPY</td>
+                    <td>{{ currency_info.currency_JPY.purchaseRateNB }}</td>
+                    <td>{{ currency_info.currency_JPY.saleRateNB }}</td>
+                </tr>
+                <tr>
+                    <td>MDL</td>
+                    <td>{{ currency_info.currency_MDL.purchaseRateNB }}</td>
+                    <td>{{ currency_info.currency_MDL.saleRateNB }}</td>
+                </tr>
+                <tr>
+                    <td>CHF</td>
+                    <td>{{ currency_info.currency_CHF.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_CHF.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>CAD</td>
+                    <td>{{ currency_info.currency_CAD.purchaseRateNB }}</td>
+                    <td>{{ currency_info.currency_CAD.saleRateNB }}</td>
+                </tr>
+                <tr>
+                    <td>DKK</td>
+                    <td>{{ currency_info.currency_DKK.purchaseRateNB }}</td>
+                    <td>{{ currency_info.currency_DKK.saleRateNB }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="currency-block">
+            <h4>Crypto currency rates on {{ date }}</h4>
+            <table class="table-1">
+                <thead>
+                <tr>
+                    <th><img src="{% static 'users/img/crypto.png' %}" alt="city"
+                             style="width: 40px; height: 40px;"></th>
+                    <th>Rate (USD)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>BTC</td>
+                    <td>{{ crypto_currency_info.BTC }}</td>
+                </tr>
+                <tr>
+                    <td>ETH</td>
+                    <td>{{ crypto_currency_info.ETH }}</td>
+                </tr>
+                <tr>
+                    <td>BNB</td>
+                    <td>{{ crypto_currency_info.BNB }}</td>
+                </tr>
+                <tr>
+                    <td>XRP</td>
+                    <td>{{ crypto_currency_info.XRP }}</td>
+                </tr>
+                <tr>
+                    <td>ADA</td>
+                    <td>{{ crypto_currency_info.ADA }}</td>
+                </tr>
+                <tr>
+                    <td>DOGE</td>
+                    <td>{{ crypto_currency_info.DOGE }}</td>
+                </tr>
+                <tr>
+                    <td>SOL</td>
+                    <td>{{ crypto_currency_info.SOL }}</td>
+                </tr>
+                <tr>
+                    <td>MATIC</td>
+                    <td>{{ crypto_currency_info.MATIC }}</td>
+                </tr>
+                <tr>
+                    <td>TRX</td>
+                    <td>{{ crypto_currency_info.TRX }}</td>
+                </tr>
+                <tr>
+                    <td>LTC</td>
+                    <td>{{ crypto_currency_info.LTC }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
