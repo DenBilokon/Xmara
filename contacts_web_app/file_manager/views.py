@@ -51,9 +51,9 @@ def upload_video(request):
             form.save()
             return redirect('file_manager:upload_video')
 
+
     weather_info = weather_parse()
     context = {
-
         'date': date.today().strftime('%d.%m.%Y'),
         'weather_info': weather_info,
         'cloud_video': cloud_video,
@@ -112,7 +112,6 @@ def upload_audio(request):
 
 
 def gallery(request):
-
     weather_info = weather_parse()
     context = {
         'date': date.today().strftime('%d.%m.%Y'),
