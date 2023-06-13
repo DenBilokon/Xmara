@@ -45,20 +45,35 @@
 
     <hr>
     <div class="row">
-        {% for img in cloud_images %}
-        <div class="col-3 col-sm-3">
-            <div class="image-section square-section">
-                <h4>{{ img.title }}</h4>
-                <div class="image-wrapper">
+    {% for img in cloud_images %}
+    <div class="col-3 col-sm-3">
+        <div class="image-section square-section">
+            <h4>{{ img.title }}</h4>
+            <div class="image-wrapper">
+                <a href="#" data-toggle="modal" data-target="#imageModal{{ img.id }}">
                     <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-responsive">
+                </a>
+            </div>
+            <p>{{ img.description }}</p>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal{{ img.id }}" tabindex="-1" role="dialog" aria-labelledby="imageModal{{ img.id }}Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-fluid">
                 </div>
-                <p>{{ img.description }}</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                </div>
             </div>
         </div>
-        {% empty %}
-        <p>Немає доступних зображень.</p>
-        {% endfor %}
     </div>
+    {% empty %}
+    <p>Немає доступних зображень.</p>
+    {% endfor %}
+</div>
 
 
 </div>

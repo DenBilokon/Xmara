@@ -15,6 +15,7 @@ from .forms import RegisterForm
 from contacts_web_app.settings import WEATHER_API
 
 
+
 def main(request):
     currency_info = currency_parse()
     weather_info = weather_parse()
