@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_apscheduler",
     "contacts",
     "file_manager",
     "news",
@@ -129,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -172,3 +173,5 @@ cloudinary.config(
 
 )
 WEATHER_API = env('WEATHER_API')
+
+CRYPTO_API_KEY = env('CRYPTO_API_KEY')
