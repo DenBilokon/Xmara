@@ -95,55 +95,16 @@
                 <br>
             </div>
 
-            <div class="currency-block">
-                <h6>Курс валют на {{ date }}</h6>
-                <table class="table-1">
-                    <thead>
-                    <tr>
-                        <th><img src="{% static 'users/img/currency.png' %}" alt="city"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th>Купівля</th>
-                        <th>Продаж</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>USD</td>
-                        <td>{{ currency_info.currency_USD.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_USD.saleRate }}</td>
-                    </tr>
-                    <tr>
-                        <td>EUR</td>
-                        <td>{{ currency_info.currency_EUR.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_EUR.saleRate }}</td>
-                    </tr>
-                    <tr>
-                        <td>PLN</td>
-                        <td>{{ currency_info.currency_PLN.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_PLN.saleRate }}</td>
-                    </tr>
-                    <tr>
-                        <td>GBR</td>
-                        <td>{{ currency_info.currency_GBR.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_GBR.saleRate }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
 
             <div class="currency-block-weather">
-                <h6>Погода на {{ date }}</h6>
+                <h6>Weather on {{ date }}</h6>
                 <table class="table-1 compact-table">
                     <thead>
                     <tr>
-                        <th><img src="{% static 'users/img/city.png' %}" alt="city" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th><img src="{% static 'users/img/weather.png' %}" alt="weather" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th><img src="{% static 'users/img/temp.png' %}" alt="temp" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th><img src="{% static 'users/img/wind.png' %}" alt="wind" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
+                        <th><img src="{% static 'users/img/city.png' %}" alt="city" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/weather.png' %}" alt="weather" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/temp.png' %}" alt="temp" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/wind.png' %}" alt="wind" class="weather-icon"></th>
 
                     </tr>
                     </thead>

@@ -1,0 +1,34 @@
+{
+    "currency_USD": {
+        "baseCurrency": "UAH",
+        "currency": "USD",
+        "saleRateNB": 36.5686,
+        "purchaseRateNB": 36.5686,
+        "saleRate": 37.22,
+        "purchaseRate": 36.72
+    },
+    "currency_EUR": {
+        "baseCurrency": "UAH",
+        "currency": "EUR",
+        "saleRateNB": 39.4082,
+        "purchaseRateNB": 39.4082,
+        "saleRate": 40.3,
+        "purchaseRate": 39.3
+    },
+    "currency_GBR": {
+        "baseCurrency": "UAH",
+        "currency": "GBP",
+        "saleRateNB": 45.9521,
+        "purchaseRateNB": 45.9521,
+        "saleRate": 46.8,
+        "purchaseRate": 45.9521
+    },
+    "currency_PLN": {
+        "baseCurrency": "UAH",
+        "currency": "PLN",
+        "saleRateNB": 8.8326,
+        "purchaseRateNB": 8.8326,
+        "saleRate": 9.0,
+        "purchaseRate": 8.8326
+    }
+}
