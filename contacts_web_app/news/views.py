@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 from users.views import weather_parse, date_today
+from contacts_web_app.settings import CRYPTO_API_KEY
 import requests
 import re
 
@@ -11,9 +12,12 @@ from django.shortcuts import render
 
 weather_info = weather_parse()
 
+
 def home(request):
     currency_info = read_currency_from_file()
+    crypto_currency_info = read_crypto_currency_from_file()
     return render(request, "news/index.html", context={'currency_info': currency_info,
+                                                       'crypto_currency_info': crypto_currency_info,
                                                        'date': date_today,
                                                        'weather_info': weather_info})
 
@@ -37,7 +41,7 @@ def news_war_show_one(request, _id):
                                                               'news_details': news_details,
                                                               'currency_info': currency_info,
                                                               'weather_info': weather_info,
-                                                              'date': date.today().strftime('%d.%m.%Y')})
+                                                              'date': date_today})
     else:
         return render(request, 'news/not_found.html')
 
@@ -195,13 +199,20 @@ def war_stat_parse():
 
 
 def currency_parse():
-    url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date.today().strftime('%d.%m.%Y')}"
+    url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date_today}"
     response = requests.get(url)
     currency_data = json.loads(response.text).get('exchangeRate')
     currency_dict = {"currency_USD": currency_data[23],
                      "currency_EUR": currency_data[8],
-                     "currency_GBR": currency_data[9],
-                     "currency_PLN": currency_data[17]}
+                     "currency_GBP": currency_data[9],
+                     "currency_PLN": currency_data[17],
+                     "currency_CZK": currency_data[6],
+                     "currency_JPY": currency_data[13],
+                     "currency_MDL": currency_data[15],
+                     "currency_CHF": currency_data[4],
+                     "currency_CAD": currency_data[3],
+                     "currency_DKK": currency_data[7]
+                     }
 
     return currency_dict
 
@@ -215,6 +226,38 @@ def add_currency_to_file():
 
 def read_currency_from_file():
     file_path = "currency_data.json"
+    try:
+        with open(file_path, "r") as file:
+            data = json.load(file)
+            return data
+    except FileNotFoundError:
+        print("File not found")
+        return None
+
+
+def crypto_currency_parse():
+    cryptocurrencies_list = ['BTC', 'ETH', 'BNB', 'XRP', 'ADA', 'DOGE', 'SOL', 'MATIC', 'TRX', 'LTC']
+    crypto_dict = {}
+    for i in cryptocurrencies_list:
+        url = f'https://rest.coinapi.io/v1/exchangerate/{i}/USD'
+        api_key = CRYPTO_API_KEY
+        headers = {"X-CoinAPI-Key": api_key}
+        response = requests.get(url, headers=headers).json()
+        if response:
+            crypto_dict[i] = round(response.get('rate'), 4)
+
+    return crypto_dict
+
+
+def add_crypto_currency_to_file():
+    crypto_currency_dict = crypto_currency_parse()
+    file_path = "cryptocurrency_data.json"
+    with open(file_path, "w") as file:
+        json.dump(crypto_currency_dict, file, indent=4)
+
+
+def read_crypto_currency_from_file():
+    file_path = "cryptocurrency_data.json"
     try:
         with open(file_path, "r") as file:
             data = json.load(file)
