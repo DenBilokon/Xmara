@@ -2,172 +2,164 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="/static/users/img/xmara-website-favicon-color.png">
     {% load static %}
     <link rel="stylesheet" href="{% static 'users/style.css' %}">
     <title>Xmara</title>
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="logo" style="margin-top: 5px;">
-                <a href="/"><img src="{% static 'users/img/logo-no-background_2.png' %}" height="40"></a>
-            </div>
-
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'users/img/logo-no-background_2.png' %}" height="40" alt="Xmara Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar" style="background-color: #e3f2fd;">
+            <ul class="navbar-nav">
                 {% if user.is_authenticated %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> LIBRARIES <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li class="divider"></li>
-                        <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
-                        <li class="divider"></li>
-                        <li><a href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        LIBRARIES
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+                        <li><a class="dropdown-item" href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a></li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contacts:main' %}">Контакти</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'notes:main' %}">Нотатки</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'file_manager:main_mf' %}">Файли</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news:home' %}">Новини</a>
                 </li>
                 {% endif %}
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <form class="d-flex ms-auto" action="#" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav">
                 {% if user.is_superuser %}
-                <li><a href="/admin">Administration</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Administration</a>
+                </li>
                 {% endif %}
                 {% if user.is_authenticated %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.username }}
                         <img src="https://i.pinimg.com/564x/a5/82/9a/a5829ac0d2b9d70943c41c6f48e5acea.jpg" height="25">
-                        <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li class="divider"></li>
-                        <li><a href="/users/logout">Logout</a></li>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
                     </ul>
                 </li>
                 {% else %}
-                <li><a href="/users/signup">Sign up</a></li>
-                <li><a href="/users/signin">Login</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/signup">Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/signin">Login</a>
+                </li>
                 {% endif %}
             </ul>
-            <form class="navbar-form navbar-right" action="#" method="get">
-                <div class="form-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Push</button>
-            </form>
         </div>
     </div>
 </nav>
-
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             {% if user.is_authenticated %}
-            <div class="btn-group-vertical" role="group" aria-label="Button Group">
-                <a href="{% url 'contacts:main' %}" class="btn btn-default">Контакти</a>
-                <br>
-                <a href="{% url 'notes:main' %}" class="btn btn-default">Нотатки</a>
-                <br>
-                <a href="{% url 'file_manager:main_mf' %}" class="btn btn-default">Файли</a>
-                <br>
-                <a href="{% url 'news:home' %}" class="btn btn-default">Новини</a>
-                <br>
-            </div>
-
-            <div class="currency-block">
-                <h6>Курс валют на {{ date }}</h6>
-                <table class="table-1">
-                    <thead>
-                    <tr>
-                        <th><img src="{% static 'users/img/currency.png' %}" alt="city"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th>Купівля</th>
-                        <th>Продаж</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>USD</td>
-                        <td>{{ currency_info.currency_USD.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_USD.saleRate }}</td>
-                    </tr>
-                    <tr>
-                        <td>EUR</td>
-                        <td>{{ currency_info.currency_EUR.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_EUR.saleRate }}</td>
-                    </tr>
-                    <tr>
-                        <td>PLN</td>
-                        <td>{{ currency_info.currency_PLN.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_PLN.saleRate }}</td>
-                    </tr>
-                    <tr>
-                        <td>GBR</td>
-                        <td>{{ currency_info.currency_GBR.purchaseRate }}</td>
-                        <td>{{ currency_info.currency_GBR.saleRate }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="currency-block-weather">
-                <h6>Погода на {{ date }}</h6>
-                <table class="table-1 compact-table">
-                    <thead>
-                    <tr>
-                        <th><img src="{% static 'users/img/city.png' %}" alt="city" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th><img src="{% static 'users/img/weather.png' %}" alt="weather" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th><img src="{% static 'users/img/temp.png' %}" alt="temp" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
-                        <th><img src="{% static 'users/img/wind.png' %}" alt="wind" class="weather-icon"
-                                 style="width: 40px; height: 40px;"></th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for city, info in weather_info.items %}
-                    <tr>
-                        <td>{{ info.city }}</td>
-                        <td><img src="{{ info.icon }}" alt="{{ info.city }}" class="weather-icon"></td>
-                        <td>{{ info.temp_c }}°C</td>
-                        <td>{{ info.wind_kph }} km/h</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% else %}
-            <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
-            {% endif %}
+                <div class="currency-block mt-3">
+            <h6>Курс валют на {{ date }}</h6>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><img src="{% static 'users/img/currency.png' %}" alt="Currency" style="width: 40px; height: 40px;"></th>
+                    <th>Купівля</th>
+                    <th>Продаж</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>USD</td>
+                    <td>{{ currency_info.currency_USD.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_USD.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>EUR</td>
+                    <td>{{ currency_info.currency_EUR.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_EUR.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>PLN</td>
+                    <td>{{ currency_info.currency_PLN.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_PLN.saleRate }}</td>
+                </tr>
+                <tr>
+                    <td>GBP</td>
+                    <td>{{ currency_info.currency_GBR.purchaseRate }}</td>
+                    <td>{{ currency_info.currency_GBR.saleRate }}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="col-md-9">
-            {% block content %} {% endblock %}
+        <div class="currency-block-weather mt-3">
+            <h6>Погода на {{ date }}</h6>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><img src="{% static 'users/img/city.png' %}" alt="City" class="weather-icon"
+                             style="width: 40px; height: 40px;"></th>
+                    <th><img src="{% static 'users/img/weather.png' %}" alt="Weather" class="weather-icon"
+                             style="width: 40px; height: 40px;"></th>
+                    <th><img src="{% static 'users/img/temp.png' %}" alt="Temperature" class="weather-icon"
+                             style="width: 40px; height: 40px;"></th>
+                    <th><img src="{% static 'users/img/wind.png' %}" alt="Wind" class="weather-icon"
+                             style="width: 40px; height: 40px;"></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for city, info in weather_info.items %}
+                <tr>
+                    <td>{{ info.city }}</td>
+                    <td><img src="{{ info.icon }}" alt="{{ info.city }}" class="weather-icon"></td>
+                    <td>{{ info.temp_c }}°C</td>
+                    <td>{{ info.wind_kph }} km/h</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
+        {% else %}
+        <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
+        {% endif %}
+    </div>
+
+    <div class="col-md-9">
+        {% block content %} {% endblock %}
     </div>
 </div>
+</div>
 <hr>
-<footer class="footer navbar-fixed-bottom">
+<footer class="footer fixed-bottom">
     <div class="container">
         <div class="social mb-1">
             <a href="https://github.com/DenBilokon/Command_project_WEB_Django" target="_blank"
@@ -181,14 +173,9 @@
         </div>
     </div>
 </footer>
-
-
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous">
-</script>
+<!-- Bootstrap 5.3 Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p9sPEZvASqEEh0ZXz6PHzGPaRQAlu6TlH02czOZhoGZkC9ZSo/Z6IkXg6b17RXfB"
+        crossorigin="anonymous"></script>
 </body>
 </html>
