@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import environ
 from pathlib import Path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -51,7 +54,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "cloudinary",
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -141,6 +144,8 @@ PHONENUMBER_DEFAULT_REGION = "UA"
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = "/users/signin"
 

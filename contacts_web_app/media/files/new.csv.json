@@ -1,0 +1,30 @@
+[
+    {
+        "firstname": "Jacob",
+        "lastname": "Latypov",
+        "phone": "970500848",
+        "email": "latypovla@mail.enamine.com",
+        "birthday": "1994-03-28"
+    },
+    {
+        "firstname": "Olena",
+        "lastname": "Latypov",
+        "phone": "636035547",
+        "email": "lena.ovcharenko@gmail.com",
+        "birthday": "1994-06-01"
+    },
+    {
+        "firstname": "Johnatan",
+        "lastname": "Hryzun",
+        "phone": "636035547",
+        "email": "hryzun@meta.com",
+        "birthday": "1944-02-03"
+    },
+    {
+        "firstname": "Darya",
+        "lastname": "Sytnyk",
+        "phone": "670355479",
+        "email": "sytnyk.mariia@ex.com",
+        "birthday": "1984-06-14"
+    }
+]
