@@ -1,44 +1,44 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2 class="titleForm">Login:</h2>
-    <br>
-    {% if form.errors %}
-    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
-    {% endif %}
 
-    {% if messages %}
-    <div>
-        {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
-        {% endfor %}
-    </div>
-    {% endif %}
+<h2 class="titleForm">Login:</h2>
+<br>
+{% if form.errors %}
+<span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+{% endif %}
 
-    <form class="col-sm-6" method="POST">
-        {% csrf_token %}
-
-        <div>
-            <label>Username:</label>
-            {{form.username}}
-            <span>{{form.errors.username}}</span>
-        </div>
-        <br>
-        <div>
-            <label>Password:</label>
-            {{form.password}}
-            <span>{{form.errors.password}}</span>
-        </div>
-        <br>
-        <div>
-            <button type="submit" class="btn btn-primary btn">Submit</button>
-            <button type="reset" class="btn btn-secondary btn">Reset</button>
-        </div>
-        <div class="small text-center">
-            <a href="{% url 'users:password_reset' %}" class="text-center"><i>Forgot Password?</i></a>
-        </div>
-    </form>
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+    {% endfor %}
 </div>
+{% endif %}
+
+<form class="col-sm-6" method="POST">
+    {% csrf_token %}
+
+    <div>
+        <label>Username:</label>
+        {{form.username}}
+        <span>{{form.errors.username}}</span>
+    </div>
+    <br>
+    <div>
+        <label>Password:</label>
+        {{form.password}}
+        <span>{{form.errors.password}}</span>
+    </div>
+    <br>
+    <div>
+        <button type="submit" class="btn btn-primary btn">Submit</button>
+        <button type="reset" class="btn btn-secondary btn">Reset</button>
+    </div>
+    <div class="small text-center">
+        <a href="{% url 'users:password_reset' %}" class="text-center"><i>Forgot Password?</i></a>
+    </div>
+</form>
+
 
 {% endblock %}

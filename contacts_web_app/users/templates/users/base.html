@@ -97,7 +97,8 @@
                 <table class="table-1">
                     <thead>
                     <tr>
-                        <th><img src="{% static 'users/img/currency.png' %}" alt="city" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/currency.png' %}" alt="city"
+                                 style="width: 40px; height: 40px;"></th>
                         <th>Купівля</th>
                         <th>Продаж</th>
                     </tr>
@@ -132,10 +133,15 @@
                 <table class="table-1 compact-table">
                     <thead>
                     <tr>
-                        <th><img src="{% static 'users/img/city.png' %}" alt="city" class="weather-icon"></th>
-                        <th><img src="{% static 'users/img/weather.png' %}" alt="weather" class="weather-icon"></th>
-                        <th><img src="{% static 'users/img/temp.png' %}" alt="temp" class="weather-icon"></th>
-                        <th><img src="{% static 'users/img/wind.png' %}" alt="wind" class="weather-icon"></th>
+                        <th><img src="{% static 'users/img/city.png' %}" alt="city" class="weather-icon"
+                                 style="width: 40px; height: 40px;"></th>
+                        <th><img src="{% static 'users/img/weather.png' %}" alt="weather" class="weather-icon"
+                                 style="width: 40px; height: 40px;"></th>
+                        <th><img src="{% static 'users/img/temp.png' %}" alt="temp" class="weather-icon"
+                                 style="width: 40px; height: 40px;"></th>
+                        <th><img src="{% static 'users/img/wind.png' %}" alt="wind" class="weather-icon"
+                                 style="width: 40px; height: 40px;"></th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -150,57 +156,39 @@
                     </tbody>
                 </table>
             </div>
-            <style>
-    .compact-table {
-        width: 80%;
-    }
-
-    .weather-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .currency-block h6,
-    .table-1 th,
-    .table-1 td {
-        font-size: 12px;
-    }
-</style>
-        </div>
-
-
-        <div class="col-md-9">
-
             {% else %}
             <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
             {% endif %}
+        </div>
+
+        <div class="col-md-9">
             {% block content %} {% endblock %}
         </div>
     </div>
-
-    <hr>
-    <footer class="footer navbar-fixed-bottom">
-        <div class="container">
-            <div class="social mb-1">
-                <a href="https://github.com/DenBilokon/Command_project_WEB_Django" target="_blank"
-                   rel="noopener noreferre">
-                    <img src="https://s.dou.ua/assets/img/github.svg" width="25" height="25"></a>
-            </div>
-            <div class="fs-5 text-center py-1">
-                <h6>TEAM PROJECT <img src="{% static 'users/img/logo-no-background_2.png' %}" height="17"> &copy;
-                    2023
-                </h6>
-            </div>
+</div>
+<hr>
+<footer class="footer navbar-fixed-bottom">
+    <div class="container">
+        <div class="social mb-1">
+            <a href="https://github.com/DenBilokon/Command_project_WEB_Django" target="_blank"
+               rel="noopener noreferre">
+                <img src="https://s.dou.ua/assets/img/github.svg" width="25" height="25"></a>
         </div>
-    </footer>
+        <div class="fs-5 text-center py-1">
+            <h6>TEAM PROJECT <img src="{% static 'users/img/logo-no-background_2.png' %}" height="17"> &copy;
+                2023
+            </h6>
+        </div>
+    </div>
+</footer>
 
 
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous">
-    </script>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous">
+</script>
 </body>
 </html>
