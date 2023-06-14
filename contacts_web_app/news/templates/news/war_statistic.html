@@ -1,23 +1,18 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-
+<br>
 <div class="text-center">
     <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
     <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 24%">War</a>
     <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 24%">Sport</a>
     <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 24%">War statistics</a>
 </div>
+<br>
 <h3> General losses of the Russian occupant </h3>
 <h4> Data on {{ date }} </h4>
-<table style="border-collapse: collapse;">
-    <thead>
-    <tr>
-        <th style="border: 1px solid black; width: 33%;"></th>
-        <th style="border: 1px solid black; width: 33%;"></th>
-        <th style="border: 1px solid black; width: 33%;"></th>
-    </tr>
-    </thead>
+<table class="table table-striped">
+
     <tbody>
     <tr>
         <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">

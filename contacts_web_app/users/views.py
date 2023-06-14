@@ -1,5 +1,6 @@
 import requests
 import json
+import openai
 
 from datetime import date
 
@@ -9,16 +10,17 @@ from django.contrib import messages
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.http import JsonResponse
 
 from .forms import RegisterForm
 
-from contacts_web_app.settings import WEATHER_API
+from contacts_web_app.settings import WEATHER_API, OPENAI_KEY
 
 date_today = date.today().strftime('%d.%m.%Y')
 
 
-def main(request):
 
+def main(request):
     weather_info = weather_parse()
     return render(request, 'users/index.html', context={'date': date_today,
                                                         'weather_info': weather_info})
@@ -73,3 +75,35 @@ def weather_parse():
                      'text': city_data.get('condition').get('text')}
         weather_data[city] = city_dict
     return weather_data
+
+
+def question_to_ai(request):
+
+    openai.api_key = OPENAI_KEY
+
+    question = request.POST.get('question')
+    prompt = f'You are website helper. Also, you should know everything about this website from documentation, ' \
+             f'answer clearly and a little defiantly, but without exaggeration and no more than 300 symbols ' \
+             f'Only truth. Use emoticons to decorate the dialogue. So, the question is - {question}'
+
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        max_tokens=50,
+        temperature=0.7,
+        n=1,
+        stop=None,
+        echo=True
+    )
+
+    if 'choices' in response and len(response.choices) > 0:
+        answer = response.choices[0].text.strip()
+        response_html = f'Your helper-AI: {answer.replace(prompt, "")}'
+    else:
+        response_html = None
+
+    weather_info = weather_parse()
+    return render(request, 'users/index.html', context={'answer_for_user': response_html,
+                                                        'date': date_today,
+                                                        'weather_info': weather_info})
+
