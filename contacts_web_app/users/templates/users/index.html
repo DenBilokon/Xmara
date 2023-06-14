@@ -1,9 +1,9 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-
+{% load static %}
 <div class="text-center">
-
+    <a><img src="static/users/img/logo-no-background.png" height="100"></a>
     <h1 class="Title" rel="stylesheet">HELLO WORLD</h1>
     <br>
     <div class="chat-form">
@@ -23,7 +23,7 @@
         <div id="response-container"></div>
     </div>
     <div id="question-response">
-        {{ answer_for_user }}
+        {{ bored.activity }}
     </div>
 </div>
 <script>
@@ -44,7 +44,6 @@
       });
     });
   });
-
 
 </script>
 
