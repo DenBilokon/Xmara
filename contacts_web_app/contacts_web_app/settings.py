@@ -175,3 +175,5 @@ cloudinary.config(
 WEATHER_API = env('WEATHER_API')
 
 CRYPTO_API_KEY = env('CRYPTO_API_KEY')
+
+OPENAI_KEY = env('OPENAI_KEY')
