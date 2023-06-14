@@ -2,13 +2,13 @@
 {% block content %}
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-3">
-                <div class="btn-group-vertical" role="group" aria-label="Button Group">
-                    <a href="{% url 'notes:note' %}" class="btn btn-primary btn-block mb-2">Add Note</a>
+            <div class="col-md-12">
+                <div class="btn-group-horizontal" role="group" aria-label="Button Group">
+                    <a href="{% url 'notes:note' %}" class="btn btn-primary btn-block">Add Note</a>
                     <a href="{% url 'notes:tag' %}" class="btn btn-secondary btn-block">Add Tag</a>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <form method="GET" action="{% url 'notes:search' %}" class="mb-4 border p-3">
                     <div class="input-group">
                         <input type="text" name="query" class="form-control" placeholder="Search notes..." required>
@@ -20,7 +20,8 @@
                     {% csrf_token %}
                     <div class="input-group">
                         <label class="input-group-text">Select tags:</label>
-                        <select name="tags" multiple class="form-select" required>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected></option>
                             {% for tag in tags.all %}
                                 <option value="{{ tag.name }}">{{ tag.name }}</option>
                             {% endfor %}
