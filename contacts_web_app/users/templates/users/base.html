@@ -17,14 +17,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-            <img src="{% static 'users/img/logo-no-background_2.png' %}" height="40" alt="Xmara Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'users/img/logo-no-background_2.png' %}" height="40" alt="Xmara Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -37,50 +37,33 @@
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             <a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Bootstrap</a>
                             <a class="dropdown-item" href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a>
+                            <a class="dropdown-item" href="https://bootswatch.com/morph/" target="_blank">Bootswatch</a>
                         </div>
                     </div>
                 </div>
-                <!--                <li class="nav-item dropdown">-->
-                <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"-->
-                <!--                       role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-                <!--                        LIBRARIES-->
-                <!--                    </a>-->
-                <!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-                <!--                        <li><a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>-->
-                <!--                        <li><a class="dropdown-item" href="https://docs.djangoproject.com/en/4.2/" target="_blank">Django</a>-->
-                <!--                        </li>-->
-                <!--                    </ul>-->
-                <!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="{% url 'contacts:main' %}">Контакти</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="{% url 'notes:main' %}">Нотатки</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="{% url 'file_manager:main_mf' %}">Файли</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="{% url 'news:home' %}">Новини</a>-->
-<!--                </li>-->
                 {% endif %}
             </ul>
-            <form class="d-flex ms-auto" action="#" method="get">
-                <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </form>
-            <ul class="navbar-nav">
+            <div class="d-flex justify-content-center align-items-center mx-auto">
+                <form class="d-flex search-form" action="#" method="get">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+
+            <ul class="navbar-nav ms-auto">
                 {% if user.is_superuser %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Administration</a>
+                    <a class="btn btn-outline-dark" href="/admin">Administration</a>
                 </li>
                 {% endif %}
                 {% if user.is_authenticated %}
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ user.username }}
-                        <img src="https://i.pinimg.com/564x/a5/82/9a/a5829ac0d2b9d70943c41c6f48e5acea.jpg" height="25">
+                        <img src="https://i.pinimg.com/originals/9b/93/14/9b93147ca25bfe22b951e35b214ca5b7.gif"
+                             height="30">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
@@ -88,10 +71,11 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/signup">Sign up</a>
+
+                    <a class="btn btn-outline-secondary" href="/users/signup">Sign up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/signin">Login</a>
+                    <a class="btn btn-outline-secondary" href="/users/signin">Login</a>
                 </li>
                 {% endif %}
             </ul>
@@ -137,7 +121,7 @@
                 </table>
             </div>
             {% else %}
-            <h4>Увійдіть у свій обліковий запис! Для початку роботи в застосунку</h4>
+            <h2>Sign in to your account!</h2>
             {% endif %}
         </div>
 
@@ -145,6 +129,7 @@
             {% block content %} {% endblock %}
         </div>
     </div>
+
 </div>
 
 <footer class="footer fixed-bottom">
@@ -164,4 +149,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
+<style>
+    body {
+        background-image: url("/static/users/img/logo-no-background.png");
+        background-size: 50% auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position: top;
+        /* Додаткові CSS властивості, якщо необхідно */
+    }
+
+
+</style>
 </html>

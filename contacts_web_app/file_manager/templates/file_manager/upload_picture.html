@@ -9,28 +9,26 @@
     <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 19%">Audio</a>
     <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
 </div>
-<h1 class="text-center">PICTURES</h1>
 <br>
+<h1 class="text-center">PICTURES</h1>
 <div class="text-center">
-
     {% load cloudinary %}
     <div class="form-box">
-        <div id="backend_upload">
-            <h4>Upload Picture</h4>
-            <form action="{% url 'file_manager:upload_picture' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label>Title:</label>
-                    {{ image_form.title }}
-                </div>
-                <div class="form-group">
-                    <label>Image:</label>
-                    {{ image_form.image }}
-                </div>
-                <input type="submit" class="btn btn-primary" value="Upload">
-            </form>
-        </div>
+        <form action="{% url 'file_manager:upload_picture' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="formFile" class="form-label mt-4">Upload Picture:</label>
+                <input class="form-control" type="file" id="formFile" name="image">
+            </div>
+            <div class="form-group">
+                <label>Title:</label>
+                <input class="form-control" type="text" name="title">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
     </div>
+</div>
 
     <hr>
     <div class="row">
@@ -55,9 +53,11 @@
                              style="max-width: 100%; max-height: 100%;">
                     </div>
                     <div class="modal-footer">
-                        <a href="{{ img.image.url }}" download="{{ img.title }}" class="btn btn-primary">Download</a>
+                        <a href="{% url 'file_manager:download_image' img.image.url %}" class="btn btn-primary">Download</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -92,6 +92,17 @@
             }
         });
     });
+ function downloadImage(url, filename) {
+        var anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = filename;
+        anchor.style.display = 'none';
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+    }as
+
+
 </script>
 
 {% endblock %}
