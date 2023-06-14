@@ -278,3 +278,10 @@ color: #888;
     height: auto;
 }
 
+.image-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+

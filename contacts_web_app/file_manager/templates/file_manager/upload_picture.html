@@ -1,13 +1,6 @@
 {% extends 'users/base.html' %}
 {% load static %}
 
-<!-- Решта вмісту вашого шаблону -->
-
-<head>
-    <!-- Посилання на статичні файли -->
-    <link rel="stylesheet" href="{% static 'users/style.css' %}">
-</head>
-
 {% block content %}
 <div class="text-center">
     <a href="{% url 'file_manager:gallery' %}" class="btn btn-primary" style="width: 19%">Gallery</a>
@@ -46,9 +39,9 @@
             <div class="image-section square-section">
                 <h4>{{ img.title }}</h4>
                 <div class="image-wrapper">
-                    <a href="#" data-toggle="modal" data-target="#imageModal{{ img.id }}">
+                    <button class="image-btn" data-toggle="modal" data-target="#imageModal{{ img.id }}">
                         <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-responsive">
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -68,14 +61,37 @@
                 </div>
             </div>
         </div>
-
         {% empty %}
         <p>No images available</p>
         {% endfor %}
     </div>
-
-
 </div>
 
+<script>
+    // Додайте event listener для кнопок закриття
+    var closeButtons = document.querySelectorAll(".modal-footer button[data-dismiss='modal']");
+    closeButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var modal = button.closest(".modal");
+            if (modal) {
+                modal.classList.remove("show");
+                modal.style.display = "none";
+            }
+        });
+    });
+
+    // Додайте event listener для кнопок фотографій
+    var imageButtons = document.querySelectorAll(".image-btn");
+    imageButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var modalId = button.getAttribute("data-target");
+            var modal = document.querySelector(modalId);
+            if (modal) {
+                modal.classList.add("show");
+                modal.style.display = "block";
+            }
+        });
+    });
+</script>
 
 {% endblock %}

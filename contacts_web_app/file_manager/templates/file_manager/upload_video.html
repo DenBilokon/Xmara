@@ -29,29 +29,32 @@
                     {{ video_form.video }}
                 </div>
 
-                <input type="submit" class="btn btn-primary" value="Upload">
+                <button type="submit" class="btn btn-primary">Upload</button>
             </form>
         </div>
     </div>
     <hr>
     <div class="row">
-    {% for video in cloud_video %}
-    <div class="col-3 col-sm-3">
-        <div class="video-section square-section">
-            <h4>{{ video.title }}</h4>
-            <div class="video-wrapper">
-                <a href="{{ video.video.url }}">
-                    <video width="200" height="200" controls>
-                        <source src="{{ video.video.url }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </a>
+        {% for video in cloud_video %}
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">{{ video.title }}</div>
+            <div class="card-body">
+                <div class="video-section square-section">
+                <div class="video-wrapper">
+                    <a href="{{ video.video.url }}">
+                        <video width="250" height="270" controls>
+                            <source src="{{ video.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </a>
+                </div>
+            </div>
             </div>
         </div>
+
+        {% empty %}
+        <p>Немає доступних відео.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p>Немає доступних відео.</p>
-    {% endfor %}
-</div>
 </div>
 {% endblock %}
