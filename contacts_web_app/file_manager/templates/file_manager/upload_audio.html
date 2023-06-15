@@ -31,6 +31,7 @@
     <hr>
     <div>
         <h2>Cloud Audio</h2>
+        <br>
         <ul class="audio-list">
             {% for audio in cloud_audio %}
             <li>
@@ -44,7 +45,7 @@
             </li>
             {% empty %}
             <li>
-                <p>No available audio.</p>
+                <h1 class="text-center">No available audio.</h1>
             </li>
             {% endfor %}
         </ul>

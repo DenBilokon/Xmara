@@ -71,7 +71,6 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-
                     <a class="btn btn-outline-secondary" href="/users/signup">Sign up</a>
                 </li>
                 <li class="nav-item">
@@ -88,10 +87,10 @@
         <div class="col-md-3">
             {% if user.is_authenticated %}
             <div class="btn-group-vertical" role="group" aria-label="Button Group">
-                <a href="{% url 'contacts:main' %}" class="btn btn-lg btn-primary">Contacts</a>
-                <a href="{% url 'notes:main' %}" class="btn btn-lg btn-primary">Notes</a>
-                <a href="{% url 'file_manager:main_mf' %}" class="btn btn-lg btn-primary">Files</a>
-                <a href="{% url 'news:home' %}" class="btn btn-lg btn-primary">News</a>
+                <a href="{% url 'contacts:main' %}" class="btn btn-lg btn-primary">CONTACTS</a>
+                <a href="{% url 'notes:main' %}" class="btn btn-lg btn-primary">NOTES</a>
+                <a href="{% url 'file_manager:main_mf' %}" class="btn btn-lg btn-primary">FILE MANAGER</a>
+                <a href="{% url 'news:home' %}" class="btn btn-lg btn-primary">NEWS</a>
             </div>
             <br>
             <br>

@@ -1,0 +1,78 @@
+.image-section {
+    height: 200px;
+    overflow: hidden;
+}
+
+.image-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Збільшення внутрішнього розміру блоку */
+    position: relative;
+}
+
+.image-wrapper img {
+    height: 100%;
+    width: auto;
+    max-width: calc(100% + 20px); /* Додаткове збільшення ширини фотографії */
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.form-box-img {
+    position: relative;
+    padding-bottom: 100%; /* Збережіть пропорції боксу 1:1 */
+    overflow: hidden;
+    width: auto;
+    margin: 0 auto;
+    padding: 0px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+   <div class="col-3 col-sm-3">
+        <div class="form-box-img">
+            <div class="image-section square-section">
+                <div class="image-wrapper">
+                    <button class="image-btn" data-toggle="modal" data-target="#imageModal{{ img.id }}">
+                        <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-responsive" width="100px">
+
+                    </button>
+
+                </div>
+
+            </div>
+<!--            <h5 class="text-center">{{ img.title }}</h5>-->
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal{{ img.id }}" tabindex="-1" role="dialog"
+         aria-labelledby="imageModal{{ img.id }}Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-fluid"
+                         style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'file_manager:download_image' img.image.url %}" class="btn btn-primary">Download</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No images available</p>
+    {% endfor %}
+</div>
