@@ -9,12 +9,9 @@ from users.views import weather_parse
 
 
 def main(request):
-    weather_info = weather_parse()
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-    return render(request, 'notes/index.html', context={'notes': notes, 'tags': tags,
-                                                        'date': date.today().strftime('%d.%m.%Y'),
-                                                        'weather_info': weather_info})
+    return render(request, 'notes/index.html', context={'notes': notes, 'tags': tags})
 
 
 @login_required
@@ -108,8 +105,8 @@ def search(request):
 
 @login_required
 def sort(request):
-    if request.method == 'POST':
-        selected_tags = request.POST.getlist('tags')
+    if request.method == 'GET':
+        selected_tags = request.GET.getlist('selected_tags')
         notes = Note.objects.filter(tags__name__in=selected_tags, user=request.user).distinct()
         return render(request, 'notes/search_results.html', {'notes': notes, 'selected_tags': selected_tags})
     else:
