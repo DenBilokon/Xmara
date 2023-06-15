@@ -1,9 +1,5 @@
-from datetime import date
 import requests
 
-from cloudinary import uploader
-from cloudinary.uploader import upload
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
@@ -60,6 +56,9 @@ def upload_video(request):
         if form.is_valid():
             form.save()
             return redirect('file_manager:upload_video')
+        elif Exception:
+            return render(request, "file_manager/upload_video.html",
+                          context={'form': VideoForm(), "message": "Form not valid"})
 
     context = {
         'cloud_video': cloud_video,
@@ -82,8 +81,6 @@ def upload_document(request):
                           context={'form': DocumentForm(), "message": "Form not valid"})
 
     context = {
-        'date': date.today().strftime('%d.%m.%Y'),
-
         'cloud_document': cloud_document,
         'document_form': document_form,
 
@@ -107,7 +104,6 @@ def upload_audio(request):
             # Збереження аудіо в базі даних або інші дії з ним
 
     context = {
-        'date': date.today().strftime('%d.%m.%Y'),
         'cloud_audio': cloud_audio,
         'audio_form': audio_form,
     }
@@ -116,7 +112,6 @@ def upload_audio(request):
 
 def gallery(request):
     context = {
-        'date': date.today().strftime('%d.%m.%Y'),
 
     }
     return render(request, 'file_manager/gallery.html', context=context)
