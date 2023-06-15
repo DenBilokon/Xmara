@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, date
 
-from users.views import weather_parse, date_today
+from users.views import date_today
 from contacts_web_app.settings import CRYPTO_API_KEY
 import requests
 import re
@@ -10,16 +10,13 @@ from bs4 import BeautifulSoup
 
 from django.shortcuts import render
 
-weather_info = weather_parse()
-
 
 def home(request):
     currency_info = read_currency_from_file()
     crypto_currency_info = read_crypto_currency_from_file()
     return render(request, "news/index.html", context={'currency_info': currency_info,
                                                        'crypto_currency_info': crypto_currency_info,
-                                                       'date': date_today,
-                                                       'weather_info': weather_info})
+                                                       'date': date_today})
 
 
 def news_war(request):
@@ -27,7 +24,6 @@ def news_war(request):
     currency_info = read_currency_from_file()
     return render(request, "news/news_war.html", context={'short_news': short_news,
                                                           'currency_info': currency_info,
-                                                          'weather_info': weather_info,
                                                           'date': date_today})
 
 
@@ -40,7 +36,6 @@ def news_war_show_one(request, _id):
         return render(request, 'news/one_news.html', context={'news_item': news_item,
                                                               'news_details': news_details,
                                                               'currency_info': currency_info,
-                                                              'weather_info': weather_info,
                                                               'date': date_today})
     else:
         return render(request, 'news/not_found.html')
@@ -51,7 +46,6 @@ def news_prosport(request):
     short_news = tsn_prosport_spider()
     return render(request, "news/news_prosport.html", context={'short_news': short_news,
                                                                'currency_info': currency_info,
-                                                               'weather_info': weather_info,
                                                                'date': date_today})
 
 
@@ -64,7 +58,6 @@ def news_prosport_show_one(request, _id):
         return render(request, 'news/one_prosport_news.html', context={'news_item': news_item,
                                                                        'news_details': news_details,
                                                                        'currency_info': currency_info,
-                                                                       'weather_info': weather_info,
                                                                        'date': date_today})
     else:
         return render(request, 'news/not_found.html')
@@ -75,7 +68,6 @@ def war_statistic(request):
     war_stat = war_stat_parse()
     return render(request, "news/war_statistic.html", context={'war_statistic': war_stat,
                                                                'currency_info': currency_info,
-                                                               'weather_info': weather_info,
                                                                'date': date_today})
 
 
@@ -273,7 +265,6 @@ def when_bored(request):
     currency_info = read_currency_from_file()
     crypto_currency_info = read_crypto_currency_from_file()
     return render(request, 'news/index.html', context={'bored': response,
-                                                       'weather_info': weather_info,
                                                        'currency_info': currency_info,
                                                        'crypto_currency_info': crypto_currency_info,
                                                        'date': date_today
