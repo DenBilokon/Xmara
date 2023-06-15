@@ -2,16 +2,13 @@ import json
 from datetime import datetime, date
 
 from users.views import date_today
-from contacts_web_app.settings import CRYPTO_API_KEY, SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
+from contacts_web_app.settings import CRYPTO_API_KEY
 import requests
 import re
 
 from bs4 import BeautifulSoup
 
 from django.shortcuts import render
-
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
 
 
 def home(request):
@@ -272,75 +269,3 @@ def when_bored(request):
                                                        'crypto_currency_info': crypto_currency_info,
                                                        'date': date_today
                                                        })
-
-
-# def search_music(request):
-#     if request.method == 'POST':
-#         search_query = request.POST.get('search_query')
-#
-#         # Встановлення потрібних конфігурацій для Spotipy
-#         client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID,
-#                                                               client_secret=SPOTIPY_CLIENT_SECRET)
-#         sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-#
-#         # Пошук пісень за назвою автора або пісні
-#         results = sp.search(q=search_query, type='track')
-#
-#         # Отримання списку знайдених пісень
-#         tracks = results['tracks']['items']
-#         print(tracks[1].get('external_urls'))
-#
-#         return render(request, 'news/search_music.html', {'tracks': tracks})
-#
-#     return render(request, 'news/search_music.html')
-
-import os
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-from google.oauth2 import service_account
-
-
-def search_music(request):
-    if request.method == 'POST':
-        search_query = request.POST.get('search_query')
-
-        # Завантажте ваш файл службового облікового запису JSON з Google API Console
-        credentials = service_account.Credentials.from_service_account_file(
-            'news/xmara-389916-9e3656b3b363.json',
-            scopes=['https://www.googleapis.com/auth/youtube.force-ssl']
-        )
-
-        # Підключення до YouTube API
-        youtube = build('youtube', 'v3', credentials=credentials)
-
-        try:
-            # Виконання запиту пошуку музики
-            search_response = youtube.search().list(
-                q=search_query,
-                part='snippet',
-                type='video',
-                maxResults=10
-            ).execute()
-
-            # Отримання списку знайдених відео
-            videos = search_response.get('items', [])
-
-            # Формування списку результатів
-            tracks = []
-            for video in videos:
-                track = {
-                    'title': video['snippet']['title'],
-                    'thumbnail': video['snippet']['thumbnails']['default']['url'],
-                    'video_id': video['id']['videoId']
-                }
-                tracks.append(track)
-            print(tracks)
-
-            return render(request, 'news/search_music.html', {'tracks': tracks})
-
-        except HttpError as e:
-            error_message = e.content.decode('utf-8')
-            print(f'An HTTP error {e.status_code} occurred: {error_message}')
-            return render(request, 'news/search_music.html', {'error_message': error_message})
-
-    return render(request, 'news/search_music.html')

@@ -6,13 +6,13 @@
 <div class="form-box shadow-lg bg-body-tertiary rounded-5">
     <h1 class="fw-bold">{{note.name}}</h1>
     <p>Description: <b>{{note.description}}</b></p>
-    <p>Time of creation: <kbd>{{note.created}}</kbd></p>
+    <p>Time of creation: {{note.created}}</p>
     {% if note.done %}
     <p>Status:
-        <b class="text-success">Completed</b>
+        <b class="text-primary">Completed</b>
     </p>
     {% else %}
-    <p>Status: <b class="text-danger">Not implemented</b></p>
+    <p>Status: <b class="text-secondary">In progress</b></p>
     {% endif %}
     <p >Tags: <small class="badge rounded-pill bg-primary text-wrap">
         {{ note.tags|tags }}
