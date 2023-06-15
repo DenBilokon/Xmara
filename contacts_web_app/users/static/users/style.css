@@ -4,59 +4,6 @@ a {
     text-decoration: none;
 }
 
-tr {
-    text-transform: uppercase;
-    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
-    color: #ad998b;
-    text-decoration: none;
-}
-
-.authorOrTitle {
-    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
-    font-weight: bold;
-    color: #333;
-}
-
-.quoteText {
-    font-family: "Merriweather", "Georgia", serif;
-    font-size: 14px;
-    padding: 0px 5px 10px 0px;
-    line-height: 21px;
-}
-
-.quoteTitle {
-    padding: 0px 0px 2px 0px;
-    font-size: 40px;
-    font-family: "Merriweather", Georgia, "Times New Roman", serif;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 30px;
-    color: #382110;
-    line-height: 36px;
-    border-bottom: 1px solid #D8D8D8;
-}
-
-.topTagsTitle {
-    text-transform: uppercase;
-    line-height: 20px;
-    border-bottom: 1px solid #D8D8D8;
-    text-align: center;
-}
-
-.tagsTop {
-    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
-    text-transform: uppercase;
-    line-height: 26px;
-    text-align: right;
-}
-
-.endTags {
-    text-transform: uppercase;
-    line-height: 1px;
-    border-bottom: 1px solid #D8D8D8;
-    text-align: center;
-}
-
 .leftAlignedImage {
     float: left;
     margin-right: 10px;
@@ -91,7 +38,6 @@ tr {
     .table-1 tbody tr:hover {
         background-color: #e9e9e9;
     }
-}
 
 .news {
 text-align: center;
@@ -169,25 +115,91 @@ color: #888;
         background-color: red;
     }
 
-    .not-found-heading {
-        color: white;
-        font-size: 5rem;
-        text-align: center;
-    }
+.not-found-heading {
+    color: white;
+    font-size: 5rem;
+    text-align: center;
+}
 
+.news-date {
+        margin-top: 10px;
+        font-size: 12px;
+        color: gray;
+    }
 
 .compact-table {
     width: 80%;
 }
 
 .weather-icon {
-    width: 20px;
-    height: 20px;
+    width: 50px;
+    height: 50px;
 }
 
 .currency-block h6,
   .table-1 th,
   .table-1 td {
     font-size: 12px;
+}
+
+
+.form-box {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#backend_upload label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#backend_upload input[type="text"],
+#backend_upload input[type="file"] {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#backend_upload input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #337ab7;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#backend_upload input[type="submit"]:hover {
+    background-color: #286090;
+}
+
+#backend_upload .form-group:last-child input[type="submit"] {
+    margin-top: 10px;
+}
+
+.image-section {
+
+    height: 300px; /* Задайте бажану висоту секції */
+    overflow: hidden;
+}
+
+.image-wrapper {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-wrapper img {
+    max-height: 90%;
+    max-width: 90%;
+    height: auto;
 }
 

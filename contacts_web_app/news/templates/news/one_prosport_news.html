@@ -1,11 +1,12 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-
+<br>
     <div class="text-center">
-        <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 33%">War</a>
-        <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 33%">Sport</a>
-        <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 33%">War statistics</a>
+    <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
+    <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 24%">War</a>
+    <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 24%">Sport</a>
+    <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 24%">War statistics</a>
     </div>
 
     <div class="news-details">

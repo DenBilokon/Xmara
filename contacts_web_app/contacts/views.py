@@ -1,21 +1,24 @@
 import csv
 import json
-import os
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from .models import Contacts, File
 from datetime import date, datetime, timedelta
 
+from users.views import weather_parse, date_today
+
 # Create your views here.
 from news.views import currency_info, weather_info
 
 
+
+
 def main(request):
     contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+
     return render(request, 'contacts/index.html',
                   context={'contacts': contacts, 'user': request.user, 'currency_info': currency_info,
                            'date': date.today().strftime('%d.%m.%Y'),
@@ -98,22 +101,12 @@ def save_csv_to_model(file_path):
         next(csv_reader)  # Skip the header row
 
         for row in csv_reader:
-            # Create an instance of the model and assign values from each row of the CSV
-            # model_instance = Contacts()
-            # model_instance.firstname = row[0].strip()
-            # model_instance.lastname = row[1].strip()
-            # model_instance.phone = row[2].strip()
-            # model_instance.email = row[3].strip()
-            # model_instance.birthday = datetime.strptime(row[4].strip(), '%Y-%m-%d').date()
-            # # ... Assign other fields accordingly
-            # model_instance.save()
             model_instance = Contacts()
             model_instance.firstname = row[0]
             model_instance.lastname = row[1]
             model_instance.phone = row[2]
             model_instance.email = row[3]
             model_instance.birthday = datetime.strptime(row[4].strip(), '%Y-%m-%d').date()
-            # ... Assign other fields accordingly
             model_instance.save()
 
 
@@ -121,12 +114,7 @@ def save_csv_to_model(file_path):
 def file_uploader(request):
     if request.method == 'POST':
         file = request.FILES['file']
-        # a = os.path.splitext(file.file.split('.'))[-1]
-        #
-        # b = str(file).endswith('.jpg')
-        # print(file)
         File.objects.create(file=file, user=request.user)
-        # files = File.objects.filter(user=request.user).all()
         file_path = f'media/files/{file}'
         with open(file_path, 'rb+') as destination:
             for chunk in file.chunks():
@@ -136,23 +124,15 @@ def file_uploader(request):
         with open(file_path, 'r', encoding='utf-8') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
-                # for k, v in row.items():
                 data.append({k.strip(): v.strip() for k, v in row.items()})
-        # pprint(data)
-
         with open(f'media/files/{file}.json', 'w') as outfile:
             json.dump(data, outfile, indent=4)
         return redirect(to='contacts:main')
-        # return render(request, 'contacts/index.html',{})
-
-    # return redirect(to='contacts:main', context={'file': file})
-
     return render(request, 'contacts/index.html',
                   context={})
 
 
 @login_required
 def show_files(request):
-    files = File.objects.all()
-    print(files)
+    files = File.objects.filter(user=request.user).all()
     return render(request, 'contacts/files.html', context={'files': files, "media": settings.MEDIA_URL})

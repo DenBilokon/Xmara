@@ -1,60 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Organizer</title>
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
-</head>
-<body>
-<main class="container">
-    <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
-        {% if user.is_authenticated %}
-        <ul>
-            <li><a href="{% url 'notes:note' %}" role="button">Add note</a></li>
-            <li><a href="{% url 'notes:tag' %}" role="button">Add Tag</a></li>
-        </ul>
-        <ul>
-            <li>Welcome <b>{{ user.username }}!</b></li>
-            <li><a href="{% url 'users:main' %}" role="button">Home</a></li>
-        </ul>
-        {% endif %}
-    </nav>
+{% extends 'users/base.html' %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-group-horizontal" role="group" aria-label="Button Group">
+                    <a href="{% url 'notes:note' %}" class="btn btn-primary btn-block">Add Note</a>
+                    <a href="{% url 'notes:tag' %}" class="btn btn-secondary btn-block">Add Tag</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <form method="GET" action="{% url 'notes:search' %}" class="mb-4 border p-3">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Search notes..." required>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
 
-    <form method="GET" action="{% url 'notes:search' %}" style="margin-bottom: 20px">
-        <input type="text" name="query" placeholder="Search notes..." required>
-        <button type="submit">Search</button>
-    </form>
+                <form method="POST" action="{% url 'notes:sort' %}" class="mb-4 border p-3">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <label class="input-group-text">Select tags:</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected></option>
+                            {% for tag in tags.all %}
+                                <option value="{{ tag.name }}">{{ tag.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
 
-    <form method="POST" action="{% url 'notes:sort' %}" style="margin-bottom: 20px">
-        {% csrf_token %}
-        <label> Select tags:
-            <select name="tags" multiple size="3" required>
-                {% for tag in tags.all %}
-                <option value="{{ tag.name }}">{{ tag.name }}</option>
+                {% for note in notes %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            {% if not note.done %}
+                                <h5 class="card-title">{{ note.name }}</h5>
+                                <a href="{% url 'notes:set_done' note.id %}" class="btn btn-outline-secondary btn-sm">Mark Done</a>
+                            {% else %}
+                                <h5 class="card-title"><s>{{ note.name }}</s></h5>
+                            {% endif %}
+                            <div class="btn-group" role="group" aria-label="Note Actions">
+                                <a href="{% url 'notes:detail' note.id %}" class="btn btn-primary btn-sm">Details</a>
+                                <a href="{% url 'notes:edit_note' note.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                <a href="{% url 'notes:delete' note.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No notes found.</p>
                 {% endfor %}
-            </select>
-        </label>
-        <button type="submit">Filter</button>
-    </form>
-
-
-    {% for note in notes %}
-    <ul>
-        <li>
-            {% if not note.done %}
-            <a href="{% url 'notes:detail' note.id %}" role="button" class="outline"> {{ note.name }} </a>
-            <a href="{% url 'notes:set_done' note.id %}" role="button"> Mark Done </a>
-            <a href="{% url 'notes:edit_note' note.id %}" role="button" class="contrast">Edit note</a>
-            <a href="{% url 'notes:delete' note.id %}" role="button" class="contrast"> Delete note </a>
-            {% else %}
-            <a href="{% url 'notes:detail' note.id %}" role="button" class="secondary"><s>{{ note.name }}</s></a>
-            <a href="{% url 'notes:delete' note.id %}" role="button" class="contrast"> Delete note </a>
-            {% endif %}
-        </li>
-    </ul>
-    {% empty %}
-    <p>No notes found.</p>
-    {% endfor %}
-</main>
-</body>
-</html>
+            </div>
+        </div>
+    </div>
+{% endblock %}
