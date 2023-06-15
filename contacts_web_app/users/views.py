@@ -10,20 +10,17 @@ from django.contrib import messages
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.http import JsonResponse
+
 
 from .forms import RegisterForm
 
-from contacts_web_app.settings import WEATHER_API, OPENAI_KEY
+from contacts_web_app.settings import OPENAI_KEY
 
 date_today = date.today().strftime('%d.%m.%Y')
 
 
-
 def main(request):
-    weather_info = weather_parse()
-    return render(request, 'users/index.html', context={'date': date_today,
-                                                        'weather_info': weather_info})
+    return render(request, 'users/index.html')
 
 
 class RegisterView(View):
@@ -61,20 +58,20 @@ def user_data(request):
     return render(request, "users/user.html", context={})
 
 
-def weather_parse():
-    weather_data = {}
-    cities = ['London', 'Prague', 'Berlin', 'Paris', 'Stockholm', 'Warsaw']
-    for city in cities:
-        url = f'http://api.weatherapi.com/v1/current.json?key={WEATHER_API}&q={city}'
-        response = requests.get(url)
-        city_data = json.loads(response.text).get('current')
-        city_dict = {'city': city,
-                     'temp_c': city_data.get('temp_c'),
-                     'wind_kph': city_data.get('wind_kph'),
-                     'icon': city_data.get('condition').get('icon'),
-                     'text': city_data.get('condition').get('text')}
-        weather_data[city] = city_dict
-    return weather_data
+# def weather_parse():
+#     weather_data = {}
+#     cities = ['London', 'Prague', 'Berlin', 'Paris', 'Stockholm', 'Warsaw']
+#     for city in cities:
+#         url = f'http://api.weatherapi.com/v1/current.json?key={WEATHER_API}&q={city}'
+#         response = requests.get(url)
+#         city_data = json.loads(response.text).get('current')
+#         city_dict = {'city': city,
+#                      'temp_c': city_data.get('temp_c'),
+#                      'wind_kph': city_data.get('wind_kph'),
+#                      'icon': city_data.get('condition').get('icon'),
+#                      'text': city_data.get('condition').get('text')}
+#         weather_data[city] = city_dict
+#     return weather_data
 
 
 def question_to_ai(request):
@@ -102,8 +99,5 @@ def question_to_ai(request):
     else:
         response_html = None
 
-    weather_info = weather_parse()
-    return render(request, 'users/index.html', context={'answer_for_user': response_html,
-                                                        'date': date_today,
-                                                        'weather_info': weather_info})
+    return render(request, 'users/index.html', context={'answer_for_user': response_html})
 

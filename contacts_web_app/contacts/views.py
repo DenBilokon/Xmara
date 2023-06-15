@@ -8,21 +8,12 @@ from .forms import ContactForm
 from .models import Contacts, File
 from datetime import date, datetime, timedelta
 
-from users.views import weather_parse, date_today
-
-# Create your views here.
-from news.views import currency_info, weather_info
-
-
-
 
 def main(request):
     contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
 
     return render(request, 'contacts/index.html',
-                  context={'contacts': contacts, 'user': request.user, 'currency_info': currency_info,
-                           'date': date.today().strftime('%d.%m.%Y'),
-                           'weather_info': weather_info})
+                  context={'contacts': contacts, 'user': request.user})
 
 
 @login_required
@@ -35,9 +26,7 @@ def search_contact(request):
                 lastname__contains=searched, user=request.user).all() | Contacts.objects.filter(
                 email__contains=searched, user=request.user).all()
             return render(request, 'contacts/search_contact.html',
-                          context={'searched': searched, 'contacts': contacts, 'currency_info': currency_info,
-                                   'date': date.today().strftime('%d.%m.%Y'),
-                                   'weather_info': weather_info})
+                          context={'searched': searched, 'contacts': contacts})
         return redirect(to='contacts:main')
     else:
         return render(request, 'contacts/search_contact.html')

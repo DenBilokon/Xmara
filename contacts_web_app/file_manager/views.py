@@ -8,16 +8,13 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from users.views import weather_parse
 from .models import Picture, Document, Video, Audio
 from .forms import PictureForm, DocumentForm, VideoForm, AudioForm
 
 
 @login_required
 def main_mf(request):
-    weather_info = weather_parse()
-    return render(request, 'file_manager/index.html', context={'date': date.today().strftime('%d.%m.%Y'),
-                                                               'weather_info': weather_info})
+    return render(request, 'file_manager/index.html', context={})
 
 
 def upload_picture(request):
@@ -33,10 +30,7 @@ def upload_picture(request):
             form.save()
             return redirect('file_manager:upload_picture')
 
-    weather_info = weather_parse()
     context = {
-        'date': date.today().strftime('%d.%m.%Y'),
-        'weather_info': weather_info,
         'cloud_images': cloud_images,
         'image_form': image_form
     }
@@ -68,10 +62,7 @@ def upload_video(request):
             form.save()
             return redirect('file_manager:upload_video')
 
-    weather_info = weather_parse()
     context = {
-        'date': date.today().strftime('%d.%m.%Y'),
-        'weather_info': weather_info,
         'cloud_video': cloud_video,
         'video_form': video_form,
     }
@@ -116,10 +107,8 @@ def upload_audio(request):
 
             # Збереження аудіо в базі даних або інші дії з ним
 
-    weather_info = weather_parse()
     context = {
         'date': date.today().strftime('%d.%m.%Y'),
-        'weather_info': weather_info,
         'cloud_audio': cloud_audio,
         'audio_form': audio_form,
     }
@@ -127,10 +116,8 @@ def upload_audio(request):
 
 
 def gallery(request):
-    weather_info = weather_parse()
     context = {
         'date': date.today().strftime('%d.%m.%Y'),
-        'weather_info': weather_info,
 
     }
     return render(request, 'file_manager/gallery.html', context=context)
