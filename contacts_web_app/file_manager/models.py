@@ -9,6 +9,7 @@ class Picture(models.Model):
     image = CloudinaryField(resource_type='image')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
 
 class Document(models.Model):
@@ -37,5 +38,6 @@ class Audio(models.Model):
     #
     #     # Видаляємо запис з бази даних
     #     super().delete(*args, **kwargs)
+
 
 

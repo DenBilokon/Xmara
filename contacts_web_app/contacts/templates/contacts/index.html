@@ -1,25 +1,93 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-    <h1>Список ваших контактів</h1>
-    <h1>Вітаю, {{ user }}!</h1>
-    <nav style="margin-bottom: 50px; border-bottom: 2px solid; padding-left: 30px">
-        <ul>
-            <li><a href="{% url 'contacts:contacts' %}">Add Contact</a></li>
-            <li><a href="{% url 'contacts:sort' %}"> Sort </a></li>
-            <li><a href="{% url 'contacts:birthday' %}"> Birthday </a></li>
-        </ul>
-    </nav>
-    <ul>{% for contact in contacts %}
-        <h4><strong>{{ contact.firstname }} {{ contact.lastname }}</strong></h4>
-            <a href="{% url 'contacts:edit' contact.id %}" role="button" >Update</a>
-            <a href="{% url 'contacts:delete_contact' contact.id %}" role="button" class="contrast"> Delete note </a>
 
-        <!--<li><strong>{{ contact.lastname }}</strong></li>-->
-        <li>{{ contact.phone }}</li>
-        <li>{{ contact.email }}</li>
-        <li>{{ contact.birthday }}</li>
+<style>
+    table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-color: #96D4D4;
+  padding: 10px;
+  text-align: center;
+  color: #2E4053;
+  text-transform: capitalize;
+
+}
+
+tr:hover {background-color: #D6EEEE;}
+
+</style>
+
+
+<h1>Список ваших контактів</h1>
+<!--<h1>Вітаю, {{ user }}!</h1>-->
+<nav style="margin-bottom: 50px; border-bottom: 2px solid; padding-left: 30px">
+    <div class="text-center">
+        <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 33%">Додати контакт</a>
+        <a href="{% url 'contacts:sort' %}" class="btn btn-primary" style="width: 33%">Сортувати по імені</a>
+        <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 33%">День народження на цьому
+            тижні</a>
+        <a href="{% url 'contacts:show_files' %}" class="btn btn-primary" style="width: 33%">Files</a>
+    </div>
+    <br/>
+
+    <center>
+        <form action="{% url 'contacts:file_uploader' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <br/>
+            <button type="submit"><input type="file" name="file">Upload</button>
+        </form>
+    </center>
+    <br/><br/>
+
+
+    <form class="example" method="POST" action="{% url 'contacts:search_contact'%}" style="margin:auto;max-width:300px">
+        {% csrf_token %}
+        <input type="text" placeholder="Search Contact" name="searched">
+        <button type="submit">Search</button>
+    </form>
+    <br/>
+    <br>
+</nav>
+<br/>
+
+
+{% if files %}
+        <ul>
+        {% for file in files %}
+            {{media}}{{file.file}}
         {% endfor %}
-    </ul>
+        </ul>
+    {% else %}
+        <p>No documents.</p>
+    {% endif %}
+<table style="width:100%">
+    <thead>
+    <tr>
+        <th>Ім'я</th>
+        <th>Прізвище</th>
+        <th>Телефон</th>
+        <th>Email</th>
+        <th>День народження</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contact in contacts %}
+    <tr>
+        <td>{{ contact.firstname }}</td>
+        <td>{{ contact.lastname }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.birthday }}</td>
+        <td><a href="{% url 'contacts:edit' contact.id %}" role="button">Оновити контакт</a></td>
+        <td><a href="{% url 'contacts:delete_contact' contact.id %}" role="button" class="contrast">Видалити контакт</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
 
 {% endblock %}
