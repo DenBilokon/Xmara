@@ -5,13 +5,13 @@ from django.db.models import Q
 
 from .forms import NoteForm, TagForm
 from .models import Tag, Note
-from users.views import weather_parse
 
 
 def main(request):
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     return render(request, 'notes/index.html', context={'notes': notes, 'tags': tags})
+
 
 
 @login_required

@@ -30,25 +30,29 @@
     </div>
 </div>
 
-<hr>
-<div class="row">
+<br>
+<h2 class="text-center">Cloud Pictures</h2>
+<br>
+<div class="d-flex justify-content-center align-items-center mx-auto">
+    <form class="d-flex search-form" action="#" method="get">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>
+<div class="masonry">
     {% for img in cloud_images %}
-
-    <div class="col-3 col-sm-3">
+    <div class="item-img">
         <div class="form-box-img">
             <div class="image-section square-section">
                 <div class="image-wrapper">
-                    <button class="image-btn" data-toggle="modal" data-target="#imageModal{{ img.id }}">
-                        <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-responsive">
-
-                    </button>
-
+                    <a class="image-btn" data-toggle="modal" data-target="#imageModal{{ img.id }}">
+                        <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-responsive" width="178px">
+                    </a>
                 </div>
-
             </div>
-            <h5 class="text-center">{{ img.title }}</h5>
         </div>
     </div>
+    <h6>{{ img.title }}</h6>
     <!-- Modal -->
     <div class="modal fade" id="imageModal{{ img.id }}" tabindex="-1" role="dialog"
          aria-labelledby="imageModal{{ img.id }}Label" aria-hidden="true">
@@ -66,7 +70,8 @@
         </div>
     </div>
     {% empty %}
-    <p>No images available</p>
+    <br>
+    <h1 class="text-center">No images available.</h1>
     {% endfor %}
 </div>
 
@@ -105,6 +110,7 @@
         anchor.click();
         document.body.removeChild(anchor);
     }as
+
 
 
 
