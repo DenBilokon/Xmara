@@ -34,7 +34,7 @@ def upload_picture(request):
         'cloud_images': cloud_images,
         'image_form': image_form
     }
-    return render(request, 'file_manager/images.html', context=context)
+    return render(request, 'file_manager/upload_picture.html', context=context)
 
 
 def download_image(request, image_url):
