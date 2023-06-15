@@ -1,0 +1,18 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+
+{% if files %}
+        <ul>
+        {% for file in files %}
+            <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents.</p>
+    {% endif %}
+{% endblock %}
+
+
+
+
