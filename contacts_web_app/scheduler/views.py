@@ -18,3 +18,5 @@ def start():
                       id="add_crypto_currency_to_file", name='add_crypto_currency_to_file', jobstore='default')
     scheduler.start()
     print("Scheduler started...", file=sys.stdout)
+
+

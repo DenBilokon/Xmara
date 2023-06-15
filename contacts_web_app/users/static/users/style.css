@@ -149,7 +149,12 @@ color: #888;
     padding: 20px;
     background-color: #f7f7f7;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 50px;
+    background-image: url("https://i.pinimg.com/originals/da/30/27/da30273ba3899b90c91e063afde08242.gif");
+    background-size: 120% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: top;
 }
 
 #backend_upload label {
@@ -164,7 +169,7 @@ color: #888;
     padding: 8px 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 
 #backend_upload input[type="submit"] {
@@ -172,7 +177,7 @@ color: #888;
     background-color: #337ab7;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -184,22 +189,64 @@ color: #888;
     margin-top: 10px;
 }
 
-.image-section {
+    .image-section {
+        height: 200px;
+        overflow: hidden;
+    }
 
-    height: 300px; /* Задайте бажану висоту секції */
-    overflow: hidden;
+    .image-wrapper {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px; /* Збільшення внутрішнього розміру блоку */
+        position: relative;
+    }
+
+    .image-wrapper img {
+        height: 100%;
+        width: auto;
+        max-width: calc(100% + 20px); /* Додаткове збільшення ширини фотографії */
+        object-fit: cover;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .image-btn {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .form-box-img {
+        position: relative;
+        padding-bottom: 100%; /* Збережіть пропорції боксу 1:1 */
+        overflow: hidden;
+        width: auto;
+        margin: 0 auto;
+        padding: 0px;
+        background-color: #f7f7f7;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+
+
+
+
+
+.audio-list li {
+    display: inline-block;
+    margin-right: 20px;
 }
 
-.image-wrapper {
-    height: 80%;
+.audio-item {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
-.image-wrapper img {
-    max-height: 90%;
-    max-width: 90%;
-    height: auto;
+.audio-player {
+    margin-right: 10px;
 }
-
