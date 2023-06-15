@@ -37,7 +37,6 @@ def upload_picture(request):
     return render(request, 'file_manager/images.html', context=context)
 
 
-
 def download_image(request, image_url):
     response = requests.get(image_url)
     content_type = response.headers.get('content-type')
