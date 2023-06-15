@@ -22,10 +22,13 @@
         <br>
         <div id="response-container"></div>
     </div>
-    <div id="question-response">
-        {{ bored.activity }}
-    </div>
+
+    <h1 id="question-response">
+        {{ answer_for_user }}
+    </h1>
+
 </div>
+
 <script>
   $(document).ready(function() {
     $('#question-form').submit(function(event) {

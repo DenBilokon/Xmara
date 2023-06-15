@@ -1,7 +1,48 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-<h1>You searched for ... </h1>
+
+<h1>Контакти які ви можливо шукаєте...</h1>
+
+<style>
+    table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-color: #96D4D4;
+  padding: 10px;
+  text-align: center;
+  color: #2E4053;
+
+}
+
+tr:hover {background-color: #D6EEEE;}
+</style>
+
+
+
+
+<table style="width:100%">
+        <thead>
+            <tr>
+                <th>Ім'я</th>
+                <th>Прізвище</th>
+                <th>Телефон</th>
+                <th>Email</th>
+                <th>День народження</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.firstname }}</td>
+                <td>{{ contact.lastname }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.birthday }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}
 

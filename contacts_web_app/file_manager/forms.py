@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, ClearableFileInput, Form, FileField, CharField
+from django.forms import ModelForm, TextInput, ClearableFileInput
 
 from .models import Picture, Document, Video, Audio
 
@@ -9,8 +9,7 @@ class PictureForm(ModelForm):
         fields = ['title', 'image']
         widgets = {
             'title': TextInput(attrs={'class': 'form-control'}),
-            'image': ClearableFileInput(attrs={'class': 'form-control-file'}),
-        }
+            'image': ClearableFileInput(attrs={'class': 'form-control-file'})}
 
 
 class DocumentForm(ModelForm):
