@@ -34,8 +34,7 @@ def upload_picture(request):
         'cloud_images': cloud_images,
         'image_form': image_form
     }
-    return render(request, 'file_manager/images.html', context=context)
-
+    return render(request, 'file_manager/upload_picture.html', context=context)
 
 
 def download_image(request, image_url):
@@ -82,10 +81,9 @@ def upload_document(request):
             return render(request, "file_manager/upload_document.html",
                           context={'form': DocumentForm(), "message": "Form not valid"})
 
-    weather_info = weather_parse()
     context = {
         'date': date.today().strftime('%d.%m.%Y'),
-        'weather_info': weather_info,
+
         'cloud_document': cloud_document,
         'document_form': document_form,
 
@@ -122,4 +120,3 @@ def gallery(request):
 
     }
     return render(request, 'file_manager/gallery.html', context=context)
-
