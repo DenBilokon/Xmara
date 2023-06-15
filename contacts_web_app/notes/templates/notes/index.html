@@ -16,19 +16,21 @@
                     </div>
                 </form>
 
-                <form method="POST" action="{% url 'notes:sort' %}" class="mb-4 border p-3">
-                    {% csrf_token %}
+                <form method="GET" action="{% url 'notes:sort' %}" class="mb-4 border p-3">
+                {% csrf_token %}
                     <div class="input-group">
                         <label class="input-group-text">Select tags:</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="selected_tags">
                             <option selected></option>
                             {% for tag in tags.all %}
                                 <option value="{{ tag.name }}">{{ tag.name }}</option>
                             {% endfor %}
                         </select>
+
                         <button type="submit" class="btn btn-outline-primary">Filter</button>
                     </div>
                 </form>
+
 
                 {% for note in notes %}
                     <div class="card mb-3">
