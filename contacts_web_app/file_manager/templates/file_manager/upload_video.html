@@ -13,7 +13,7 @@
 <br>
 <h1 class="text-center">VIDEO</h1>
 <div class="text-center">
-     {% load cloudinary %}
+    {% load cloudinary %}
     <div class="form-box">
         <form action="{% url 'file_manager:upload_video' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -29,13 +29,16 @@
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
     </div>
-    <hr>
-    <div class="row">
-        {% for video in cloud_video %}
-        <div class="card border-secondary mb-3" style="max-width: 20rem;">
-            <div class="card-header">{{ video.title }}</div>
-            <div class="card-body">
-                <div class="video-section square-section">
+</div>
+<br>
+<h2 class="text-center">Cloud Video</h2>
+<br>
+<div class="row">
+    {% for video in cloud_video %}
+    <div class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">{{ video.title }}</div>
+        <div class="card-body">
+            <div class="video-section square-section">
                 <div class="video-wrapper">
                     <a href="{{ video.video.url }}">
                         <video width="250" height="270" controls>
@@ -45,12 +48,11 @@
                     </a>
                 </div>
             </div>
-            </div>
         </div>
-
-        {% empty %}
-        <p>Немає доступних відео.</p>
-        {% endfor %}
     </div>
+
+    {% empty %}
+    <p>Немає доступних відео.</p>
+    {% endfor %}
 </div>
 {% endblock %}

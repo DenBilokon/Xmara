@@ -189,53 +189,6 @@ color: #888;
     margin-top: 10px;
 }
 
-    .image-section {
-        height: 200px;
-        overflow: hidden;
-    }
-
-    .image-wrapper {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px; /* Збільшення внутрішнього розміру блоку */
-        position: relative;
-    }
-
-    .image-wrapper img {
-        height: 100%;
-        width: auto;
-        max-width: calc(100% + 20px); /* Додаткове збільшення ширини фотографії */
-        object-fit: cover;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .image-btn {
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-    }
-
-    .form-box-img {
-        position: relative;
-        padding-bottom: 100%; /* Збережіть пропорції боксу 1:1 */
-        overflow: hidden;
-        width: auto;
-        margin: 0 auto;
-        padding: 0px;
-        background-color: #f7f7f7;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-    }
-
-
-
-
 
 .audio-list li {
     display: inline-block;
@@ -249,4 +202,72 @@ color: #888;
 
 .audio-player {
     margin-right: 10px;
+}
+
+
+
+
+/* ------------- Контейнер с адаптивными блоками------------- */
+.masonry {
+    margin: 1.5em 0;
+    padding: 0;
+    column-gap: 1.5em; /* Общее расстояние между колонками */
+    font-size: .85em;
+    -moz-column-gap: 1.5em; /* Расстояние между колонками для Firefox */
+    -webkit-column-gap: 1.5em; /* Расстояние между колонками  для Safari, Chrome и iOS */
+}
+
+/* Элементы в виде плиток с содержанием */
+.item-img {
+    display: inline-block;
+    background: #fff;
+    padding: 0em;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box; /* Изменения алгоритма расчета ширины и высоты элемента.*/
+    -moz-box-sizing: border-box; /* Для Firefox */
+    -webkit-box-sizing: border-box; /* Для Safari, Chrome, iOS иAndroid */
+    box-shadow: 2px 2px 4px 0 #ccc; /* Внешняя тень плиток */
+    border-radius: 10px; /* Закруглені кути рамки */
+    overflow: hidden; /* Приховуємо зайвий вміст, якщо вміст занадто великий для рамки */
+}
+
+
+/* Медиа-запросы для различных размеров адаптивного макета */
+@media only screen and (min-width: 400px) {
+    .masonry {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .masonry {
+        -moz-column-count: 3;
+        -webkit-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .masonry {
+        -moz-column-count: 4;
+        -webkit-column-count: 4;
+        column-count: 4;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .masonry {
+        -moz-column-count: 5;
+        -webkit-column-count: 5;
+        column-count: 5;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .wrapper {
+        width: 1260px;
+    }
 }

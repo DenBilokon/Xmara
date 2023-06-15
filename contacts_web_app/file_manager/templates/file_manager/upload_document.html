@@ -28,12 +28,20 @@
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
     </div>
-
-    <h2>Cloud Documents</h2>
+</div>
+<br>
+<h2 class="text-center">Cloud Documents</h2>
+<br>
+<div>
+    {% for document in cloud_document %}
     <ul>
-        {% for document in cloud_document %}
         <li>{{ document.document.url }} - <a href="{{ document.document.url }}">Download</a></li>
-        {% endfor %}
     </ul>
+    {% empty %}
+    <h1 class="text-center">
+        <a>No available documents.</a>
+    </h1>
+    {% endfor %}
+
 </div>
 {% endblock %}
