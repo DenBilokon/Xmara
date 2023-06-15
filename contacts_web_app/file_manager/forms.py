@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, ClearableFileInput, Form, FileField, CharField
+from django.forms import ModelForm, TextInput, ClearableFileInput
 
 from .models import Picture, Document, Video, Audio
 

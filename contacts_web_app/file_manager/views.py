@@ -1,9 +1,12 @@
 from datetime import date
+import requests
 
 from cloudinary import uploader
 from cloudinary.uploader import upload
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from users.views import weather_parse
 from .models import Picture, Document, Video, Audio
@@ -41,6 +44,19 @@ def upload_picture(request):
 
 
 
+def download_image(request, image_url):
+    response = requests.get(image_url)
+    content_type = response.headers.get('content-type')
+    filename = image_url.split('/')[-1]  # Отримати назву файлу з URL
+    print(filename)
+
+    # Налаштувати заголовки відповіді для завантаження файлу
+    response = HttpResponse(response.content, content_type=content_type)
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+    return response
+
+
 def upload_video(request):
     user_id = request.user.id
     cloud_video = Video.objects.filter(user_id=user_id)
@@ -51,7 +67,6 @@ def upload_video(request):
         if form.is_valid():
             form.save()
             return redirect('file_manager:upload_video')
-
 
     weather_info = weather_parse()
     context = {
