@@ -136,7 +136,52 @@
             </table>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="text-center">
+            <div class="chat-form">
+                <form id="question-form" action="{% url 'news:when_bored' %}" method="post">
+                    {% csrf_token %}
+                    <br>
+                    <br>
+                    <div class="mb-2">
+                        <label for="question" style="font-weight: bold;">Шо зробить коли скучно?</label>
+                    </div>
+                    <div class="d-flex">
+                        <!--                <input type="text" id="question" name="question" class="form-control me-2">-->
+                        <input type="submit" class="btn btn-dark" value="Ану здивуй">
+                    </div>
+                </form>
+                <br>
+                <div id="response-container"></div>
+            </div>
+            <div id="question-response">
+                {{ bored.activity }}
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $('#question-form').submit(function(event) {
+      event.preventDefault();
+      var form = $(this);
+      var url = form.attr('action');
+      var formData = form.serialize();
+
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: formData,
+        success: function(response) {
+          $('#response-container').html(response);
+        }
+      });
+    });
+  });
+
+
+
+</script>
 
 {% endblock %}
 

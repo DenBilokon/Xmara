@@ -2,6 +2,9 @@
 import environ
 from pathlib import Path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -42,7 +45,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "cloudinary",
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -96,6 +99,17 @@ DATABASES = {
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'contacts_web_app',
+#         'USER': 'postgres',
+#         'PASSWORD': '567234',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -132,6 +146,8 @@ PHONENUMBER_DEFAULT_REGION = "UA"
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = "/users/signin"
 

@@ -3,17 +3,19 @@
 
 {% block content %}
 
-<h1>{{note.name}}</h1>
-<p>Description: <b>{{note.description}}</b></p>
-<p>Time of creation: <kbd>{{note.created}}</kbd></p>
-{% if note.done %}
-<p>Status:
-    <ins>Completed</ins>
-</p>
-{% else %}
-<p>Status: <i>Not implemented</i></p>
-{% endif %}
-<p>Tags: <small>
-    {{ note.tags|tags }}
-</small></p>
+<div class="form-box shadow-lg bg-body-tertiary rounded-5">
+    <h1 class="fw-bold">{{note.name}}</h1>
+    <p>Description: <b>{{note.description}}</b></p>
+    <p>Time of creation: <kbd>{{note.created}}</kbd></p>
+    {% if note.done %}
+    <p>Status:
+        <b class="text-success">Completed</b>
+    </p>
+    {% else %}
+    <p>Status: <b class="text-danger">Not implemented</b></p>
+    {% endif %}
+    <p >Tags: <small class="badge rounded-pill bg-primary text-wrap">
+        {{ note.tags|tags }}
+    </small></p>
+</div>
 {% endblock %}

@@ -265,3 +265,16 @@ def read_crypto_currency_from_file():
     except FileNotFoundError:
         print("File not found")
         return None
+
+
+def when_bored(request):
+    url = "https://www.boredapi.com/api/activity/"
+    response = requests.get(url).json()
+    currency_info = read_currency_from_file()
+    crypto_currency_info = read_crypto_currency_from_file()
+    return render(request, 'news/index.html', context={'bored': response,
+                                                       'weather_info': weather_info,
+                                                       'currency_info': currency_info,
+                                                       'crypto_currency_info': crypto_currency_info,
+                                                       'date': date_today
+                                                       })

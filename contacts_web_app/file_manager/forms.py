@@ -9,8 +9,7 @@ class PictureForm(ModelForm):
         fields = ['title', 'image']
         widgets = {
             'title': TextInput(attrs={'class': 'form-control'}),
-            'image': ClearableFileInput(attrs={'class': 'form-control-file'}),
-        }
+            'image': ClearableFileInput(attrs={'class': 'form-control-file'})}
 
 
 class DocumentForm(ModelForm):
