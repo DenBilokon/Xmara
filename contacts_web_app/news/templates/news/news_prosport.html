@@ -1,7 +1,6 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-
 <br>
 <div class="text-center">
     <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
@@ -15,19 +14,18 @@
     <div class="news-row">
         {% for new in short_news %}
         <div class="news-item">
-            <a href="{% url 'news:news_prosport_show_one' new.id %}">
-                <div class="image-container">
-                    <img src="{{ new.data_src }}" alt="{{ new.title }}"/>
-                </div>
-                <div class="news-info">
-                    <h3>{{ new.title }}</h3>
+            <div class="card" style="width: 20rem;">
+                <br>
+                <img src="{{ new.data_src }}" class="card-img-top" alt="{{ new.title }}" style="width: 18rem; display: block; margin-left: auto; margin-right: auto;">
+                <div class="card-body">
+                    <a href="{% url 'news:news_prosport_show_one' new.id %}">
+                        <p class="card-text">{{ new.title }}</p>
+                    </a>
                     <p class="datetime">{{ new.datetime }}</p>
                 </div>
-            </a>
+            </div>
         </div>
         {% endfor %}
     </div>
 </div>
-
-
 {% endblock %}
