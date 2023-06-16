@@ -3,28 +3,33 @@
 {% block content %}
 {% load static %}
 <div class="text-center">
-    <h1 class="Title" rel="stylesheet">HELLO WORLD</h1>
     <br>
-    <div class="chat-form">
+    <br>
+    <div class="Title" rel="stylesheet" style="text-align: left; margin-left: 190px; font-size: 40px;">HELLO WORLD</div>
+    <br>
+    <div class="chat-form" style="max-width: 630px; margin: 15px;">
         <form id="question-form" action="{% url 'users:question_to_ai' %}" method="post">
             {% csrf_token %}
             <br>
             <br>
             <div class="mb-2">
-                <label for="question" style="font-weight: bold;">Питай шо хочеш</label>
+                <label for="question" style="font-weight: bold;">I am the assistant of this website. You can ask me
+                    about the information on this site and what you can do here. I will gladly assist you with that!
+                    Enter your question and press the button. I will provide the answer! </label>
             </div>
             <div class="d-flex">
                 <input type="text" id="question" name="question" class="form-control me-2">
-                <input type="submit" class="btn btn-dark" value="Запитати">
+                <input type="submit" class="btn btn-dark" value="Ask">
             </div>
         </form>
         <br>
         <div id="response-container"></div>
     </div>
+</div>
 
-    <h1 id="question-response">
-        {{ answer_for_user }}
-    </h1>
+<h1 id="question-response">
+    {{ answer_for_user }}
+</h1>
 
 </div>
 
@@ -46,6 +51,7 @@
       });
     });
   });
+
 
 </script>
 
