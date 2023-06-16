@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import home, news_war, news_war_show_one, news_prosport, news_prosport_show_one, war_statistic, when_bored, search_music
+from .views import home, news_war, news_war_show_one, news_prosport, news_prosport_show_one, war_statistic, when_bored
 
 
 app_name = "news"
@@ -13,5 +13,4 @@ urlpatterns = [
     path('news_prosport/<int:_id>', news_prosport_show_one, name='news_prosport_show_one'),
     path('war_statistic/', war_statistic, name='war_statistic'),
     path('bored/', when_bored, name='when_bored'),
-    path('music/', search_music, name='search_music')
 ]
