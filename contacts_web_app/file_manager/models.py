@@ -7,8 +7,7 @@ from django.utils import timezone
 class Picture(models.Model):
     title = models.CharField(max_length=255)
     image = CloudinaryField(resource_type='image')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
-    created_at = models.DateTimeField(default=timezone.now)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
 

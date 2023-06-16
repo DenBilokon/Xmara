@@ -1,17 +1,14 @@
 import json
-from datetime import datetime, date
+from datetime import datetime
 
 from users.views import date_today
-from contacts_web_app.settings import CRYPTO_API_KEY, SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
+from contacts_web_app.settings import CRYPTO_API_KEY
 import requests
 import re
 
 from bs4 import BeautifulSoup
 
 from django.shortcuts import render
-
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
 
 
 def home(request):
@@ -272,4 +269,5 @@ def when_bored(request):
                                                        'crypto_currency_info': crypto_currency_info,
                                                        'date': date_today
                                                        })
+
 

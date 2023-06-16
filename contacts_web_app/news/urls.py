@@ -14,3 +14,4 @@ urlpatterns = [
     path('war_statistic/', war_statistic, name='war_statistic'),
     path('bored/', when_bored, name='when_bored'),
 ]
+
