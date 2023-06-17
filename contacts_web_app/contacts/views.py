@@ -4,6 +4,7 @@ import json
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from .models import Contacts, File
@@ -100,43 +101,70 @@ def save_csv_to_model(file_path):
     with open(file_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)  # Skip the header row
-
-        for row in csv_reader:
-            model_instance = Contacts()
-            model_instance.firstname = row[0]
-            model_instance.lastname = row[1]
-            model_instance.phone = row[2]
-            model_instance.email = row[3]
-            model_instance.birthday = datetime.strptime(row[4].strip(), '%Y-%m-%d').date()
-            model_instance.save()
+        try:
+            for row in csv_reader:
+                model_instance = Contacts()
+                model_instance.firstname = row[0].strip()
+                model_instance.lastname = row[1].strip()
+                model_instance.phone = row[2].strip()
+                model_instance.email = row[3].strip()
+                model_instance.birthday = datetime.strptime(row[4].strip('\t'), '%Y-%m-%d').date()
+                model_instance.save()
+        except:
+            #messages.warning(request, 'Your format of CSV file unfitisfied !')
+            return redirect(to='contacts:main')
 
 
 @login_required
 def file_uploader(request):
     if request.method == 'POST':
-        file = request.FILES['file']
-        File.objects.create(file=file, user=request.user)
-        file_path = f'media/files/{file}'
-        try:
+        file = request.FILES.get('file', False)
+        if not file.name.endswith('.csv'):
+            messages.warning(request, 'Invalid file format. Please upload a CSV file.')
+            return redirect(to='contacts:main')
+            #return HttpResponse('Invalid file format. Please upload a CSV file.')
+        else:
+            try:
+                File.objects.create(file=file, user=request.user)
+            except:
+                messages.warning(request, 'Your format of CSV file unfitisfied !')
+                return redirect(to='contacts:main')
+            file_path = f'media/files/{file}'
             with open(file_path, 'rb+') as destination:
                 for chunk in file.chunks():
                     destination.write(chunk)
-            save_csv_to_model(file_path)
+            try:
+                file.user = request.user
+                save_csv_to_model(file_path)
+            except:
+                messages.warning(request, 'Your format of CSV file unfitisfied !')
+
             contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
             contacts_per_page = 10
             paginator = Paginator(contacts, contacts_per_page)
             page_number = request.GET.get('page')
             page = paginator.get_page(page_number)
-        except IntegrityError as e:
-            messages.success(request, "Contact with this email already exist")
-        return redirect(to='contacts:main')
-        data = []
-        # with open(file_path, 'r', encoding='utf-8') as csv_file:
-        #     csv_reader = csv.DictReader(csv_file)
-        #     for row in csv_reader:
-        #         data.append({k.strip(): v.strip() for k, v in row.items()})
-        # with open(f'media/files/{file}.json', 'w') as outfile:
-        #     json.dump(data, outfile, indent=4)
-
+            messages.success(request, "File was uploaded successfully")
+            return render(request, 'contacts/index.html', context={'page': page})
+    contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+    contacts_per_page = 10
+    paginator = Paginator(contacts, contacts_per_page)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
                   context={'page': page})
+
+
+# try:
+#     with open(file_path, 'rb+') as destination:
+#         for chunk in file.chunks():
+#             destination.write(chunk)
+#     save_csv_to_model(file_path)
+#     contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+#     contacts_per_page = 10
+#     paginator = Paginator(contacts, contacts_per_page)
+#     page_number = request.GET.get('page')
+#     page = paginator.get_page(page_number)
+# except IntegrityError as e:
+#     messages.success(request, "Contact with this email already exist")
+# return redirect(to='contacts:main')

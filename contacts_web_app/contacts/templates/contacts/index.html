@@ -28,14 +28,14 @@ td{
     {% if messages %}
 
     {% for message in messages %}
-    <div class="alert alert-dismissible alert-success">
+    <div class="alert alert-dismissible alert-{{ message.tags }}">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>{% if message.tags %}{% endif %}{{ message }}</strong>.
+        <strong {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>.
     </div>
     {% endfor %}
     {% endif %}
 </center>
-
+<!--{% if message.tags %}{% endif %}-->
 <br/><br/>
 <div class="form-box">
     <form action="{% url 'contacts:file_uploader' %}" method="post" enctype="multipart/form-data">
@@ -107,7 +107,7 @@ td{
         <li class="page-item">
             {% if page.has_previous %}
             <a class="page-link" href="?page=1">&laquo;</a>
-            <a class="page-link" href="?page={{ page.previous_page_number }}">&laquo;</a>
+            <a class="page-link" href="?page={{ page.previous_page_number }}">&raquo;</a>
             {% endif %}
         </li>
         {% for i in page.paginator.page_range %}
