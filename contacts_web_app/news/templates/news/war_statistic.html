@@ -9,122 +9,246 @@
     <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 24%">War statistics</a>
 </div>
 <br>
-<h3> General losses of the Russian occupant </h3>
-<h4> Data on {{ date }} </h4>
-<table class="table table-striped">
+<h3 style="text-align: center;">General losses of the Russian occupant</h3>
+<h5 style="text-align: center;">Data on {{ date }}</h5>
 
-    <tbody>
-    <tr>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-people.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.tanks }} (+{{ war_statistic.war_increase.tanks }})</span>
-            <br>
-            <span>Personnel units</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-tank.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.tanks }} (+{{ war_statistic.war_increase.tanks }})</span>
-            <br>
-            <span>Tanks</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-bbm.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.armoured_fighting_vehicles }} (+{{ war_statistic.war_increase.armoured_fighting_vehicles }})</span>
-            <br>
-            <span>Armoured fighting vehicles</span>
-        </td>
-    </tr>
-    <tr>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-art.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.artillery_systems }} (+{{ war_statistic.war_increase.artillery_systems }})</span>
-            <br>
-            <span>Artillery systems</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-rszv.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.mlrs }} (+{{ war_statistic.war_increase.mlrs }})</span>
-            <br>
-            <span>Multiple Launch Rocket System</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-ppo.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.aa_warfare_systems }} (+{{ war_statistic.war_increase.aa_warfare_systems }})</span>
-            <br>
-            <span>Anti-aircraft warfare systems</span>
-        </td>
-    </tr>
-    <tr>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-plane.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.planes }} (+{{ war_statistic.war_increase.planes }})</span>
-            <br>
-            <span>Planes</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-helicopter.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.helicopters }} (+{{ war_statistic.war_increase.helicopters }})</span>
-            <br>
-            <span>Helicopters</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-auto.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.vehicles_fuel_tanks }} (+{{ war_statistic.war_increase.vehicles_fuel_tanks }})</span>
-            <br>
-            <span>Vehicles and fuel tanks</span>
-        </td>
-    </tr>
-    <tr>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src=https://russianwarship.rip/images/icons/icon-ship.svg width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.warships_cutters }} (+{{ war_statistic.war_increase.warships_cutters }})</span>
-            <br>
-            <span>Warships and cutters</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-rocket.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.cruise_missiles }} (+{{ war_statistic.war_increase.cruise_missiles }})</span>
-            <br>
-            <span>Cruise missiles</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-bpla.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.uav_systems }} (+{{ war_statistic.war_increase.uav_systems }})</span>
-            <br>
-            <span>Unmanned aerial vehicle systems</span>
-        </td>
-    </tr>
-    <tr>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-special.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.special_military_equip }} (+{{ war_statistic.war_increase.special_military_equip }})</span>
-            <br>
-            <span>Special military equipment</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;">
-            <img src="https://russianwarship.rip/images/icons/icon-trk.svg" width="40px" height="40px">
-            <br>
-            <span>{{ war_statistic.war_stats.special_military_equip }} (+{{ war_statistic.war_increase.special_military_equip }})</span>
-            <br>
-            <span>Anti-tank guided missile and short-range ballistic missile systems</span>
-        </td>
-        <td style="border: 1px solid black; text-align: center; vertical-align: middle; width: 33%;"></td>
-    </tr>
-    </tbody>
-</table>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-people.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.personnel_units }} (+{{ war_statistic.war_increase.personnel_units }})</h5>
+            <p class="card-text">Personnel units</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-tank.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.tanks }} (+{{ war_statistic.war_increase.tanks }})</h5>
+            <p class="card-text">Tanks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-bbm.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.armoured_fighting_vehicles }} (+{{ war_statistic.war_increase.armoured_fighting_vehicles }})</h5>
+            <p class="card-text">Armoured fighting</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-art.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.artillery_systems }} (+{{ war_statistic.war_increase.artillery_systems }})</h5>
+            <p class="card-text">Artillery systems</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-rszv.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.mlrs }} (+{{ war_statistic.war_increase.mlrs }})</h5>
+            <p class="card-text">MLRS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-ppo.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.aa_warfare_systems }} (+{{ war_statistic.war_increase.aa_warfare_systems }})</h5>
+            <p class="card-text">Anti-aircraft</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-plane.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.planes }} (+{{ war_statistic.war_increase.planes }})</h5>
+            <p class="card-text">Planes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-helicopter.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.helicopters }} (+{{ war_statistic.war_increase.helicopters }})</h5>
+            <p class="card-text">Helicopters</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-auto.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.vehicles_fuel_tanks }} (+{{ war_statistic.war_increase.vehicles_fuel_tanks }})</h5>
+            <p class="card-text">Vehicles/fuel tanks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-ship.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.warships_cutters }} (+{{ war_statistic.war_increase.warships_cutters }})</h5>
+            <p class="card-text">Warships/cutters</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-rocket.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.cruise_missiles }} (+{{ war_statistic.war_increase.cruise_missiles }})</h5>
+            <p class="card-text">Cruise missiles</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-bpla.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.uav_systems }} (+{{ war_statistic.war_increase.uav_systems }})</h5>
+            <p class="card-text">Drones</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-special.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.special_military_equip }} (+{{ war_statistic.war_increase.special_military_equip }})</h5>
+            <p class="card-text">Military equipment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-4">
+    <div class="card mb-3" style="max-width:300px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <br>
+          <img src="https://russianwarship.rip/images/icons/icon-trk.svg" class="img-fluid rounded-start" style="display: block; margin-left: 15px; margin-right: auto;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ war_statistic.war_stats.atgm_srbm_systems }} (+{{ war_statistic.war_increase.atgm_srbm_systems }})</h5>
+            <p class="card-text">Ballistic</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

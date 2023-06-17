@@ -12,6 +12,17 @@
 <br>
 <h1 class="text-center">AUDIO</h1>
 <div class="text-center">
+    {% if form.errors %}
+    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+    {% endif %}
+
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% load cloudinary %}
     <div class="form-box">
         <form action="{% url 'file_manager:upload_audio' %}" method="post" enctype="multipart/form-data">
@@ -19,6 +30,11 @@
             <div class="form-group">
                 <label for="formFile" class="form-label mt-4">Upload Audio:</label>
                 <input class="form-control" type="file" id="formFile" name="audio">
+                <span>{{ form.errors.audio }}</span>
+            </div>
+            <div class="form-group">
+                <label>Artist:</label>
+                <input class="form-control" type="text" name="artist">
             </div>
             <div class="form-group">
                 <label>Title:</label>
@@ -28,27 +44,137 @@
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
     </div>
-    <hr>
-    <div>
-        <h2>Cloud Audio</h2>
-        <br>
-        <ul class="audio-list">
-            {% for audio in cloud_audio %}
-            <li>
-                <div class="audio-item">
-                    <audio controls class="audio-player">
-                        <source src="{{ audio.audio.url }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <h5 class="audio-title">{{ audio.title }}</h5>
-                </div>
-            </li>
-            {% empty %}
-            <li>
-                <h1 class="text-center">No available audio.</h1>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
 </div>
+<hr>
+<style>
+    .form-box {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    background-image: url("https://i.pinimg.com/originals/da/30/27/da30273ba3899b90c91e063afde08242.gif");
+    background-size: 150% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+.audio-player-container {
+    display: none;
+    margin-top: 20px;
+}
+
+.audio-player {
+    width: 100%;
+}
+
+.audio-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.audio-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.audio-list li .audio-title {
+    margin-right: 10px;
+}
+
+.delete-audio-button {
+    margin-left: 10px;
+}
+</style>
+<h2 class="text-center">Cloud Audio</h2>
+<br>
+<div class="audio-player-container">
+    <audio controls class="audio-player">
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+<div>
+    <ul class="audio-list">
+        {% for audio in cloud_audio %}
+        <li>
+            <div class="audio-details">
+                <span class="audio-title">{{ audio.title }}</span>
+                -
+                <span class="audio-artist">{{ audio.artist }}</span>
+            </div>
+            <div class="audio-actions">
+                <button class="audio-play-button badge rounded-pill bg-light" data-src="{{ audio.audio.url }}" data-title="{{ audio.title }}">
+                    Play
+                </button>
+                <button class="badge rounded-pill bg-dark delete-audio-button" data-audio-id="{{ audio.id }}">Delete</button>
+            </div>
+        </li>
+        {% empty %}
+        <li>
+            <h2 class="text-center">No available audio.</h2>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this audio?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel</button>
+        <button type="button" class="btn btn-outline-dark" id="confirmDeleteButton">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    var audioPlayer = $(".audio-player")[0];
+    var audioPlayerContainer = $(".audio-player-container");
+    var deleteAudioId;
+
+    $(".audio-play-button").on("click", function() {
+        var audioSrc = $(this).data("src");
+        var audioTitle = $(this).data("title");
+
+        audioPlayer.src = audioSrc;
+        audioPlayerContainer.show();
+        audioPlayer.play();
+    });
+
+    $(".delete-audio-button").on("click", function() {
+        deleteAudioId = $(this).data("audio-id");
+        $("#confirmDeleteModal").modal("show");
+    });
+
+    $("#confirmDeleteButton").on("click", function() {
+        deleteAudio(deleteAudioId);
+    });
+
+    function deleteAudio(audioId) {
+        var deleteAudioUrl = "{% url 'file_manager:delete_audio' audio_id=0 %}".replace("0", audioId);
+        window.location.href = deleteAudioUrl;
+    }
+
+    $("#cancelDeleteButton").on("click", function() {
+        $("#confirmDeleteModal").modal("hide");
+    });
+});
+</script>
+
+
 {% endblock %}

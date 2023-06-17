@@ -9,12 +9,11 @@ class Picture(models.Model):
     image = CloudinaryField(resource_type='image')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
-    created_at = models.DateTimeField(default=timezone.now)
 
 
 class Document(models.Model):
     title = models.CharField(max_length=255)
-    document = CloudinaryField(resource_type='raw')
+    document = CloudinaryField(resource_type='auto')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -27,7 +26,8 @@ class Video(models.Model):
 
 
 class Audio(models.Model):
-    title = models.CharField(max_length=255)
+    artist = models.CharField(max_length=50, default='Unknown', null=True)
+    title = models.CharField(max_length=100, default=None)
     audio = CloudinaryField(resource_type='auto')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
