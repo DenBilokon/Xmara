@@ -9,12 +9,12 @@
         {% csrf_token %}
         <div class="mb-3">
             <label for="name" class="form-label">Note name:</label>
-            {{ form.name }}
+            <input type="text" class="form-control" id="name" name="name" value="{{ note.name }}" required>
             <span class="text-danger">{{ form.errors.name }}</span>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Note description:</label>
-            {{ form.description }}
+            <textarea class="form-control" id="description" name="description" rows="4" required>{{ note.description }}</textarea>
             <span class="text-danger">{{ form.errors.description }}</span>
         </div>
         <div class="mb-3">
