@@ -40,10 +40,25 @@
     </form>
 </div>
 <br>
+{% if form.errors %}
+<span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+{% endif %}
+
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
 <div class="row">
     {% for video in cloud_video %}
     <div class="card border-secondary mb-3" style="max-width: 20rem;">
         <div class="card-header">{{ video.title }}</div>
+        <div class="video-actions">
+            <button class="badge rounded-pill bg-dark delete-video-button" data-video-id="{{ video.id }}">Delete
+            </button>
+        </div>
         <div class="card-body">
             <div class="video-section square-section">
                 <div class="video-wrapper">
@@ -55,12 +70,59 @@
                     </a>
                 </div>
             </div>
+
         </div>
     </div>
-
     {% empty %}
     <br>
-    <h1 class="text-center">No video available.</h1>
+    <h2 class="text-center">No video available.</h2>
     {% endfor %}
 </div>
+
+<!-- Delete Video Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Video Deletion</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this video?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    var deleteAudioId;
+
+    $(".delete-video-button").on("click", function() {
+        deleteVideoId = $(this).data("video-id");
+        $("#confirmDeleteModal").modal("show");
+    });
+
+    $("#confirmDeleteButton").on("click", function() {
+        deleteVideo(deleteVideoId);
+    });
+
+    function deleteVideo(videoId) {
+        var deleteVideoUrl = "{% url 'file_manager:delete_video' video_id=0 %}".replace("0", videoId);
+        window.location.href = deleteVideoUrl;
+    }
+
+    $("#cancelDeleteButton").on("click", function() {
+        $("#confirmDeleteModal").modal("hide");
+    });
+});
+
+</script>
+
 {% endblock %}

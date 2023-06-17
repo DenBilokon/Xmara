@@ -39,6 +39,17 @@
         <button class="btn btn-primary" type="submit">Search</button>
     </form>
 </div>
+{% if form.errors %}
+    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+    {% endif %}
+
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
 <div class="masonry">
     {% for img in cloud_images %}
     <div class="item-img">
@@ -52,22 +63,24 @@
             </div>
         </div>
         <h6>{{ img.title }}</h6>
-        <form action="{% url 'file_manager:delete' img.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-        </form>
     </div>
 
     <!-- Modal -->
     <div class="modal fade" id="imageModal{{ img.id }}" tabindex="-1" role="dialog"
          aria-labelledby="imageModal{{ img.id }}Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-full-width" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-fluid"
                          style="max-width: 100%; max-height: 100%;">
                 </div>
                 <div class="modal-footer">
+                    {% if request.user == img.user %}
+                    <form action="{% url 'file_manager:delete_picture' img.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-dark">Delete</button>
+                    </form>
+                    {% endif %}
                     <a href="{% url 'file_manager:download_image' img.image.url %}" class="btn btn-primary">Download</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
@@ -82,25 +95,26 @@
 </div>
 <br>
 <div>
-  <ul class="pagination pagination-lg">
-    <li class="page-item {% if not cloud_images.has_previous %}disabled{% endif %}">
-      <a class="page-link" href="{% if cloud_images.has_previous %}?page=1{% else %}#{% endif %}">&laquo;</a>
-    </li>
-    {% for num in cloud_images.paginator.page_range %}
-    {% if num == cloud_images.number %}
-    <li class="page-item active">
-      <a class="page-link" href="#">{{ num }}</a>
-    </li>
-    {% elif num > cloud_images.number|add:'-2' and num < cloud_images.number|add:'3' %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-    <li class="page-item {% if not cloud_images.has_next %}disabled{% endif %}">
-      <a class="page-link" href="{% if cloud_images.has_next %}?page={{ cloud_images.paginator.num_pages }}{% else %}#{% endif %}">&raquo;</a>
-    </li>
-  </ul>
+    <ul class="pagination pagination-lg">
+        <li class="page-item {% if not cloud_images.has_previous %}disabled{% endif %}">
+            <a class="page-link" href="{% if cloud_images.has_previous %}?page=1{% else %}#{% endif %}">&laquo;</a>
+        </li>
+        {% for num in cloud_images.paginator.page_range %}
+        {% if num == cloud_images.number %}
+        <li class="page-item active">
+            <a class="page-link" href="#">{{ num }}</a>
+        </li>
+        {% elif num > cloud_images.number|add:'-2' and num < cloud_images.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <li class="page-item {% if not cloud_images.has_next %}disabled{% endif %}">
+            <a class="page-link"
+               href="{% if cloud_images.has_next %}?page={{ cloud_images.paginator.num_pages }}{% else %}#{% endif %}">&raquo;</a>
+        </li>
+    </ul>
 </div>
 <br>
 
@@ -139,6 +153,8 @@ function downloadImage(url, filename) {
     anchor.click();
     document.body.removeChild(anchor);
 }
+
+
 </script>
 
 {% endblock %}

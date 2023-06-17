@@ -270,4 +270,3 @@ def when_bored(request):
                                                        'date': date_today
                                                        })
 
-
