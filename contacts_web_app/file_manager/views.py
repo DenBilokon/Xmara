@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from cloudinary.exceptions import Error as CloudinaryError
+
 from .models import Picture, Document, Video, Audio
 from .forms import PictureForm, DocumentForm, VideoForm, AudioForm
 
@@ -26,11 +28,14 @@ def upload_picture(request):
 
     if request.method == 'POST':
         form = PictureForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            pic = form.save(commit=False)
-            pic.user = request.user
-            pic.save()
+        try:
+            if form.is_valid():
+                pic = form.save(commit=False)
+                pic.user = request.user
+                pic.save()
+                return redirect(request.META['HTTP_REFERER'])
+        except CloudinaryError:
+            messages.warning(request, "Form not valid.")
             return redirect(request.META['HTTP_REFERER'])
 
     context = {
@@ -69,15 +74,15 @@ def upload_video(request):
     video_form = VideoForm()
     if request.method == 'POST':
         form = VideoForm(request.POST, request.FILES)
-        # video_form['posted'] = form.instance
         if form.is_valid():
-            video = form.save(commit=False)
-            video.user = request.user
-            video.save()
-            return redirect(request.META['HTTP_REFERER'])
-        elif Exception:
-            return render(request, "file_manager/upload_video.html",
-                          context={'form': VideoForm(), "message": "Form not valid"})
+            try:
+                video = form.save(commit=False)
+                video.user = request.user
+                video.save()
+                return redirect(request.META['HTTP_REFERER'])
+            except CloudinaryError:
+                messages.warning(request, "Form not valid.")
+                return redirect(request.META['HTTP_REFERER'])
 
     context = {
         'cloud_video': cloud_video,
@@ -87,20 +92,29 @@ def upload_video(request):
 
 
 @login_required
+def delete_video(request, video_id):
+    video = Video.objects.get(id=video_id, user=request.user)
+    video.delete()
+    messages.success(request, "Video deleted successfully.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
 def upload_document(request):
     user_id = request.user.id
     cloud_document = Document.objects.filter(user_id=user_id)
     document_form = DocumentForm()
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            doc = form.save(commit=False)
-            doc.user = request.user
-            doc.save()
-            return redirect('file_manager:upload_document')
-        elif Exception:
-            return render(request, "file_manager/upload_document.html",
-                          context={'form': DocumentForm(), "message": "Form not valid"})
+        try:
+            if form.is_valid():
+                doc = form.save(commit=False)
+                doc.user = request.user
+                doc.save()
+                return redirect('file_manager:upload_document')
+        except CloudinaryError:
+            messages.warning(request, "Form not valid.")
+            return redirect(request.META['HTTP_REFERER'])
 
     context = {
         'cloud_document': cloud_document,
@@ -111,28 +125,43 @@ def upload_document(request):
 
 
 @login_required
+def delete_document(request, document_id):
+    document = Document.objects.get(id=document_id, user=request.user)
+    document.delete()
+    messages.success(request, "Document deleted successfully.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
 def upload_audio(request):
     user_id = request.user.id
     cloud_audio = Audio.objects.filter(user_id=user_id)
     audio_form = AudioForm()
     if request.method == 'POST':
         form = AudioForm(request.POST, request.FILES)
-        if form.is_valid():
-            aud = form.save(commit=False)
-            aud.user = request.user
-            aud.save()
+        try:
+            if form.is_valid():
+                aud = form.save(commit=False)
+                aud.user = request.user
+                aud.save()
+                return redirect(request.META['HTTP_REFERER'])
+        except CloudinaryError:
+            messages.warning(request, "Form not valid.")
             return redirect(request.META['HTTP_REFERER'])
-            # audio = form.cleaned_data['audio']
-            # result = uploader.upload(audio, resource_type='auto')
-            # audio_url = result['secure_url']
-
-            # Збереження аудіо в базі даних або інші дії з ним
 
     context = {
         'cloud_audio': cloud_audio,
         'audio_form': audio_form,
     }
     return render(request, 'file_manager/upload_audio.html', context=context)
+
+
+@login_required
+def delete_audio(request, audio_id):
+    audio = Audio.objects.get(id=audio_id, user=request.user)
+    audio.delete()
+    messages.success(request, "Audio deleted successfully.")
+    return redirect(request.META['HTTP_REFERER'])
 
 
 @login_required

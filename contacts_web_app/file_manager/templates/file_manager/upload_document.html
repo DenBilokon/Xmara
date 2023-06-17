@@ -38,16 +38,100 @@
         <button class="btn btn-primary" type="submit">Search</button>
     </form>
 </div>
-<div>
-    {% for document in cloud_document %}
-    <ul>
-        <li>{{ document.document.url }} - <a href="{{ document.document.url }}">Download</a></li>
-    </ul>
-    {% empty %}
-    <h1 class="text-center">
-        <a>No available documents.</a>
-    </h1>
-    {% endfor %}
+<br>
+{% if form.errors %}
+    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+    {% endif %}
 
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+<div>
+    <ul class="document-list">
+        {% for document in cloud_document %}
+        <li class="document-item">
+            <div class="document-details">
+                <div class="document-title">{{ document.title }}</div>
+            </div>
+            <div class="document-actions">
+                <button class="badge rounded-pill bg-light download-document-button"
+                        onclick="window.location.href='{{ document.document.url }}'">Download
+                </button>
+                <button class="badge rounded-pill bg-dark delete-document-button" data-document-id="{{ document.id }}">
+                    Delete
+                </button>
+            </div>
+        </li>
+        {% empty %}
+        <li>
+            <h2 class="text-center">No available documents.</h2>
+        </li>
+        {% endfor %}
+    </ul>
 </div>
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Video Deletion</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this video?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    var deleteDocumentId;
+
+    $(".delete-document-button").on("click", function() {
+        deleteDocumentId = $(this).data("document-id");
+        $("#confirmDeleteModal").modal("show");
+    });
+
+    $("#confirmDeleteButton").on("click", function() {
+        deleteDocument(deleteDocumentId);
+    });
+
+    function deleteDocument(documentId) {
+        var deleteDocumentUrl = "{% url 'file_manager:delete_document' document_id=0 %}".replace("0", documentId);
+        window.location.href = deleteDocumentUrl;
+    }
+
+    $("#cancelDeleteButton").on("click", function() {
+        $("#confirmDeleteModal").modal("hide");
+    });
+});
+</script>
+
+<style>
+.document-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.document-title {
+    flex-grow: 1;
+}
+
+.document-actions {
+    margin-left: 10px;
+}
+</style>
 {% endblock %}
