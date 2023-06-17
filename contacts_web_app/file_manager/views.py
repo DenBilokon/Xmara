@@ -10,14 +10,18 @@ from cloudinary.exceptions import Error as CloudinaryError
 from .models import Picture, Document, Video, Audio
 from .forms import PictureForm, DocumentForm, VideoForm, AudioForm
 
+from users.models import Avatar
+
 
 @login_required
 def main_mf(request):
-    return render(request, 'file_manager/index.html', context={})
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    return render(request, 'file_manager/index.html', context={'avatar': avatar})
 
 
 @login_required
 def upload_picture(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_images = Picture.objects.filter(user_id=user_id)
     per_page = 20
@@ -40,7 +44,8 @@ def upload_picture(request):
 
     context = {
         'cloud_images': page_obj,
-        'image_form': image_form
+        'image_form': image_form,
+        'avatar': avatar
     }
     return render(request, 'file_manager/upload_picture.html', context=context)
 
@@ -69,6 +74,7 @@ def delete_picture(request, picture_id):
 
 @login_required
 def upload_video(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_video = Video.objects.filter(user_id=user_id)
     video_form = VideoForm()
@@ -87,6 +93,7 @@ def upload_video(request):
     context = {
         'cloud_video': cloud_video,
         'video_form': video_form,
+        'avatar': avatar
     }
     return render(request, 'file_manager/upload_video.html', context=context)
 
@@ -101,6 +108,7 @@ def delete_video(request, video_id):
 
 @login_required
 def upload_document(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_document = Document.objects.filter(user_id=user_id)
     document_form = DocumentForm()
@@ -119,6 +127,7 @@ def upload_document(request):
     context = {
         'cloud_document': cloud_document,
         'document_form': document_form,
+        'avatar': avatar
 
     }
     return render(request, 'file_manager/upload_document.html', context=context)
@@ -134,6 +143,7 @@ def delete_document(request, document_id):
 
 @login_required
 def upload_audio(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_audio = Audio.objects.filter(user_id=user_id)
     audio_form = AudioForm()
@@ -152,6 +162,7 @@ def upload_audio(request):
     context = {
         'cloud_audio': cloud_audio,
         'audio_form': audio_form,
+        'avatar': avatar
     }
     return render(request, 'file_manager/upload_audio.html', context=context)
 
@@ -166,7 +177,8 @@ def delete_audio(request, audio_id):
 
 @login_required
 def gallery(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     context = {
-
+        'avatar': avatar
     }
     return render(request, 'file_manager/gallery.html', context=context)
