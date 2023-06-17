@@ -123,7 +123,7 @@ def save_csv_to_model(file_path):
 
 @login_required
 def file_uploader(request):
-  avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         file = request.FILES['file']
         File.objects.create(file=file, user=request.user)
