@@ -13,9 +13,5 @@ urlpatterns = [
     path('news_prosport/<int:_id>', news_prosport_show_one, name='news_prosport_show_one'),
     path('war_statistic/', war_statistic, name='war_statistic'),
     path('bored/', when_bored, name='when_bored'),
-<<<<<<< HEAD
-]
-=======
 ]
 
->>>>>>> default

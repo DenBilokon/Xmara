@@ -269,8 +269,5 @@ def when_bored(request):
                                                        'crypto_currency_info': crypto_currency_info,
                                                        'date': date_today
                                                        })
-<<<<<<< HEAD
-=======
 
 
->>>>>>> default
