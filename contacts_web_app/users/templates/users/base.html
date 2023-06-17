@@ -59,16 +59,22 @@
                 {% if user.is_authenticated %}
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
                         {{ user.username }}
-                        <img src="https://i.pinimg.com/originals/9b/93/14/9b93147ca25bfe22b951e35b214ca5b7.gif"
-                             height="30">
+                        {% if avatar %}
+                        <img src="{{ avatar.image.url }}" alt="User Avatar" height="40" style="border-radius: 50%;">
+                        {% else %}
+                        <img src="https://i.pinimg.com/564x/a5/82/9a/a5829ac0d2b9d70943c41c6f48e5acea.jpg"
+                             alt="Placeholder" height="40" style="border-radius: 50%;">
+                        {% endif %}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/users/profile">Profile</a></li>
                         <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
                     </ul>
                 </li>
+
                 {% else %}
                 <li class="nav-item">
                     <a class="btn btn-outline-secondary" href="/users/signup">Sign up</a>
@@ -86,46 +92,19 @@
     <div class="row">
         <div class="col-md-3">
             {% if user.is_authenticated %}
-            <div class="text-center">
-                <div class="btn-group-vertical" role="group" aria-label="Button Group">
-                    <a href="{% url 'contacts:main' %}" class="btn btn-lg btn-primary">CONTACTS</a>
-                    <a href="{% url 'notes:main' %}" class="btn btn-lg btn-primary">NOTES</a>
-                    <a href="{% url 'file_manager:main_mf' %}" class="btn btn-lg btn-primary">FILE MANAGER</a>
-                    <a href="{% url 'news:home' %}" class="btn btn-lg btn-primary">NEWS</a>
-                </div>
+            <div class="btn-group-vertical" role="group" aria-label="Button Group">
+                <a href="{% url 'contacts:main' %}" class="btn btn-lg btn-primary">CONTACTS</a>
+                <a href="{% url 'notes:main' %}" class="btn btn-lg btn-primary">NOTES</a>
+                <a href="{% url 'file_manager:main_mf' %}" class="btn btn-lg btn-primary">FILE MANAGER</a>
+                <a href="{% url 'news:home' %}" class="btn btn-lg btn-primary">NEWS</a>
             </div>
             <br>
             <hr>
+            </script>
             <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
             <div class="commonninja_component pid-3cec20c9-cdf0-402b-8647-2675694e00bd"></div>
             <br>
-            <!--            <div class="currency-block-weather mt-3">-->
-            <!--                <h6>Погода на {{ date }}</h6>-->
-            <!--                <table class="table table-striped">-->
-            <!--                    <thead>-->
-            <!--                    <tr>-->
-            <!--                        <th><img src="{% static 'users/img/city.png' %}" alt="City" class="weather-icon"-->
-            <!--                                 style="width: 40px; height: 40px;"></th>-->
-            <!--                        <th><img src="{% static 'users/img/weather.png' %}" alt="Weather" class="weather-icon"-->
-            <!--                                 style="width: 40px; height: 40px;"></th>-->
-            <!--                        <th><img src="{% static 'users/img/temp.png' %}" alt="Temperature" class="weather-icon"-->
-            <!--                                 style="width: 40px; height: 40px;"></th>-->
-            <!--                        <th><img src="{% static 'users/img/wind.png' %}" alt="Wind" class="weather-icon"-->
-            <!--                                 style="width: 40px; height: 40px;"></th>-->
-            <!--                    </tr>-->
-            <!--                    </thead>-->
-            <!--                    <tbody>-->
-            <!--                    {% for city, info in weather_info.items %}-->
-            <!--                    <tr>-->
-            <!--                        <td>{{ info.city }}</td>-->
-            <!--                        <td><img src="{{ info.icon }}" alt="{{ info.city }}" class="weather-icon"></td>-->
-            <!--                        <td>{{ info.temp_c }}°C</td>-->
-            <!--                        <td>{{ info.wind_kph }} km/h</td>-->
-            <!--                    </tr>-->
-            <!--                    {% endfor %}-->
-            <!--                    </tbody>-->
-            <!--                </table>-->
-            <!--            </div>-->
+
             <div id="m-booked-custom-widget-2176">
                 <div class="weather-customize" style="width:230px;">
                     <div class="booked-weather-custom-160 color-009fde" style="width:230px;" id="width2">
@@ -246,6 +225,7 @@
 
 
 
+
             </script>
 
             {% else %}
@@ -254,9 +234,7 @@
         </div>
 
         <div class="col-md-9">
-            <div class="text-center">
-                {% block content %} {% endblock %}
-            </div>
+            {% block content %} {% endblock %}
         </div>
     </div>
 
@@ -289,6 +267,7 @@ body {
 
     /* Додаткові CSS властивості, якщо необхідно */
 }
+
 
 
 
