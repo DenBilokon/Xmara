@@ -4,71 +4,71 @@
         "currency": "USD",
         "saleRateNB": 36.5686,
         "purchaseRateNB": 36.5686,
-        "saleRate": 37.22,
-        "purchaseRate": 36.72
+        "saleRate": 37.25,
+        "purchaseRate": 36.75
     },
     "currency_EUR": {
         "baseCurrency": "UAH",
         "currency": "EUR",
-        "saleRateNB": 39.357,
-        "purchaseRateNB": 39.357,
-        "saleRate": 40.4,
-        "purchaseRate": 39.4
+        "saleRateNB": 39.5069,
+        "purchaseRateNB": 39.5069,
+        "saleRate": 40.65,
+        "purchaseRate": 39.65
     },
     "currency_GBP": {
         "baseCurrency": "UAH",
         "currency": "GBP",
-        "saleRateNB": 45.9393,
-        "purchaseRateNB": 45.9393,
-        "saleRate": 46.73,
-        "purchaseRate": 45.9
+        "saleRateNB": 46.2501,
+        "purchaseRateNB": 46.2501,
+        "saleRate": 47.23,
+        "purchaseRate": 46.25
     },
     "currency_PLN": {
         "baseCurrency": "UAH",
         "currency": "PLN",
-        "saleRateNB": 8.8662,
-        "purchaseRateNB": 8.8662,
-        "saleRate": 9.01,
-        "purchaseRate": 8.85
+        "saleRateNB": 8.8681,
+        "purchaseRateNB": 8.8681,
+        "saleRate": 9.05,
+        "purchaseRate": 8.86
     },
     "currency_CZK": {
         "baseCurrency": "UAH",
         "currency": "CZK",
-        "saleRateNB": 1.6564,
-        "purchaseRateNB": 1.6564,
-        "saleRate": 1.685,
-        "purchaseRate": 1.655
+        "saleRateNB": 1.6609,
+        "purchaseRateNB": 1.6609,
+        "saleRate": 1.695,
+        "purchaseRate": 1.66
     },
     "currency_JPY": {
         "baseCurrency": "UAH",
         "currency": "JPY",
-        "saleRateNB": 0.26236,
-        "purchaseRateNB": 0.26236
+        "saleRateNB": 0.26127,
+        "purchaseRateNB": 0.26127
     },
     "currency_MDL": {
         "baseCurrency": "UAH",
         "currency": "MDL",
-        "saleRateNB": 2.0548,
-        "purchaseRateNB": 2.0548
+        "saleRateNB": 2.0559,
+        "purchaseRateNB": 2.0559
     },
     "currency_CHF": {
         "baseCurrency": "UAH",
         "currency": "CHF",
-        "saleRateNB": 40.3738,
-        "purchaseRateNB": 40.3738,
-        "saleRate": 41.07,
-        "purchaseRate": 40.34
+        "saleRateNB": 40.5147,
+        "purchaseRateNB": 40.5147,
+        "saleRate": 41.45,
+        "purchaseRate": 40.51
     },
     "currency_CAD": {
         "baseCurrency": "UAH",
         "currency": "CAD",
-        "saleRateNB": 27.4199,
-        "purchaseRateNB": 27.4199
+        "saleRateNB": 27.4911,
+        "purchaseRateNB": 27.4911
     },
     "currency_DKK": {
         "baseCurrency": "UAH",
         "currency": "DKK",
-        "saleRateNB": 5.2815,
-        "purchaseRateNB": 5.2815
+        "saleRateNB": 5.301,
+        "purchaseRateNB": 5.301
     }
 }

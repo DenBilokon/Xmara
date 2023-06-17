@@ -3,49 +3,41 @@
 {% block content %}
 
 <style>
-    table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  border-color: #96D4D4;
-  padding: 10px;
-  text-align: center;
-  color: #2E4053;
-  text-transform: capitalize;
 
-}
-
-tr:hover {background-color: #D6EEEE;}
+td {font-weight:bold;}
 
 </style>
 
-
-<h1>Список контактів у кого день народження на цьому тижні</h1>
+{% if birthday_list %}
+<h1>Contacts who has birthday on this week</h1>
 <br/>
-
-
-
-    <table style="width:100%">
-        <thead>
-            <tr>
-                <th>Ім'я</th>
-                <th>Прізвище</th>
-                <th>Телефон</th>
-                <th>Email</th>
-                <th>День народження</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for contact in birthday_list %}
-            <tr>
-                <td>{{ contact.firstname }}</td>
-                <td>{{ contact.lastname }}</td>
-                <td>{{ contact.phone }}</td>
-                <td>{{ contact.email }}</td>
-                <td>{{ contact.birthday }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th style="background-color: #87CEEB;">Firstname</th>
+        <th style="background-color: #87CEEB;">Lastname</th>
+        <th style="background-color: #87CEEB;">Phone</th>
+        <th style="background-color: #87CEEB;">Email</th>
+        <th style="background-color: #87CEEB;">Birthday</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contact in birthday_list %}
+    <tr>
+        <td>{{ contact.firstname }}</td>
+        <td>{{ contact.lastname }}</td>
+        <td><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></td>
+        <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+        <td>{{ contact.birthday }}</td>
+        <td><a href="{% url 'contacts:edit' contact.id %}" class="btn btn-outline-success btn-sm">Update</a></td>
+        <td><a href="{% url 'contacts:delete_contact' contact.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1>Nobody has birthday on this week</h1>
+{% endif %}
 {% endblock %}
 
 
