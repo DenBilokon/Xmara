@@ -11,19 +11,24 @@ from datetime import date, datetime, timedelta
 from django.db import IntegrityError
 from django.contrib import messages
 
+from users.models import Avatar
+
 
 def main(request):
+
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     contacts = Contacts.objects.filter(user=request.user).all().order_by('id') if request.user.is_authenticated else []
     contacts_per_page = 10
     paginator = Paginator(contacts, contacts_per_page)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
-                  context={'contacts': contacts, 'user': request.user, 'page': page})
+                  context={'contacts': contacts, 'user': request.user, 'page': page, 'avatar': avatar})
 
 
 @login_required
 def search_contact(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         searched = request.POST['searched']
         if len(searched) > 1:
@@ -32,7 +37,8 @@ def search_contact(request):
                 lastname__contains=searched, user=request.user).all() | Contacts.objects.filter(
                 email__contains=searched, user=request.user).all()
             return render(request, 'contacts/search_contact.html',
-                          context={'searched': searched, 'contacts': contacts})
+                          context={'searched': searched, 'contacts': contacts,
+                                   'avatar': avatar})
         return redirect(to='contacts:main')
     else:
         return render(request, 'contacts/search_contact.html')
@@ -40,6 +46,7 @@ def search_contact(request):
 
 @login_required
 def birthday(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     contacts_all = Contacts.objects.all()
     current_year = date.today().year
     birthday_list = []
@@ -50,11 +57,12 @@ def birthday(request):
             birthday_list.append(i)
     return render(request, 'contacts/birthday.html',
                   context={'current_day': current_year, 'birthday_list': birthday_list, 'today': date.today(),
-                           'show': show})
+                           'show': show, 'avatar': avatar})
 
 
 @login_required
 def contacts(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         form = ContactForm(request.POST, )
         if form.is_valid():
@@ -64,8 +72,8 @@ def contacts(request):
             messages.success(request, "Contact was  created successfully !")
             return redirect(to='contacts:main')
         else:
-            return render(request, 'contacts/contact.html', {'form': form})
-    return render(request, 'contacts/contact.html', {'form': ContactForm()})
+            return render(request, 'contacts/contact.html', {'form': form, 'avatar': avatar})
+    return render(request, 'contacts/contact.html', {'form': ContactForm(), 'avatar': avatar})
 
 
 @login_required
@@ -76,16 +84,18 @@ def delete_contact(request, contact_id):
 
 @login_required
 def edit(request, contact_id):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     contact = Contacts.objects.get(pk=contact_id, user=request.user)
     form = ContactForm(request.POST or None, instance=contact)
     if form.is_valid():
         form.save()
         return redirect(to='contacts:main')
-    return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact})
+    return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact, 'avatar': avatar})
 
 
 @login_required
 def sort(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     contacts = Contacts.objects.filter(user=request.user).all().order_by(
         'firstname') if request.user.is_authenticated else []
     contacts_per_page = 10
@@ -93,7 +103,7 @@ def sort(request):
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
-                  context={'contacts': contacts, 'user': request.user, 'page': page})
+                  context={'contacts': contacts, 'user': request.user, 'page': page, 'avatar': avatar})
 
 
 def save_csv_to_model(file_path):
@@ -113,6 +123,7 @@ def save_csv_to_model(file_path):
 
 @login_required
 def file_uploader(request):
+  avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         file = request.FILES['file']
         File.objects.create(file=file, user=request.user)
@@ -139,4 +150,4 @@ def file_uploader(request):
         #     json.dump(data, outfile, indent=4)
 
     return render(request, 'contacts/index.html',
-                  context={'page': page})
+                  context={'page': page, 'avatar': avatar})

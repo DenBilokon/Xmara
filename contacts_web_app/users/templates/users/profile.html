@@ -1,0 +1,52 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="text-center">
+    <h3>User Profile</h3>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <div class="text-center">
+            {% if avatar %}
+            <img src="{{ avatar.image.url }}" alt="User Avatar" style="width: 200px;">
+            {% else %}
+            <img src="https://i.pinimg.com/564x/a5/82/9a/a5829ac0d2b9d70943c41c6f48e5acea.jpg" alt="Placeholder"
+                 style="width: 200px;">
+            {% endif %}
+
+            <form action="{% url 'users:upload_avatar' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-primary btn-sm">
+                    Add/Change Avatar
+                    <input type="file" name="image" style="display: none;">
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <table class="table table-hover">
+            <tr class="table-light">
+                <td>Username</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr class="table-info">
+                <td>First Name</td>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            <tr class="table-light">
+                <td>Last Name</td>
+                <td>{{ user.last_name }}</td>
+            </tr>
+            <tr class="table-info">
+                <td>Email</td>
+                <td>{{ user.email }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
