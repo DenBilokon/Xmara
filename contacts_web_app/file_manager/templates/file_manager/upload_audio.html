@@ -12,17 +12,6 @@
 <br>
 <h1 class="text-center">AUDIO</h1>
 <div class="text-center">
-    {% if form.errors %}
-    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
-    {% endif %}
-
-    {% if messages %}
-    <div>
-        {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
-        {% endfor %}
-    </div>
-    {% endif %}
     {% load cloudinary %}
     <div class="form-box">
         <form action="{% url 'file_manager:upload_audio' %}" method="post" enctype="multipart/form-data">
@@ -92,6 +81,17 @@
 </style>
 <h2 class="text-center">Cloud Audio</h2>
 <br>
+{% if form.errors %}
+    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+    {% endif %}
+
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
 <div class="audio-player-container">
     <audio controls class="audio-player">
         <source src="" type="audio/mpeg">

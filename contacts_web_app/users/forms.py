@@ -1,9 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm
 from django.contrib.auth.models import User
-from django.forms import ModelForm, ClearableFileInput
-
-from .models import Avatar
 
 
 class RegisterForm(UserCreationForm):
@@ -42,10 +39,3 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ["username", "password"]
-
-
-class AvatarForm(ModelForm):
-    class Meta:
-        model = Avatar
-        fields = ['image', ]
-        widgets = {'image': ClearableFileInput(attrs={'class': 'form-control-file'})}
