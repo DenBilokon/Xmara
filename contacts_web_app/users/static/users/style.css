@@ -271,3 +271,13 @@ color: #888;
         width: 1260px;
     }
 }
+
+.smaller-pagination .page-item .page-link {
+  padding: 0.25rem 0.5rem; /* Змініть розмір за потребою */
+  font-size: 0.8rem; /* Змініть розмір за потребою */
+}
+
+
+.smaller-pagination .page-item.disabled .page-link {
+    color: #f7f7f7; /* Змініть колір за потребою */
+}

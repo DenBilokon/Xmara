@@ -51,8 +51,13 @@
                 </div>
             </div>
         </div>
+        <h6>{{ img.title }}</h6>
+        <form action="{% url 'file_manager:delete' img.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
     </div>
-    <h6>{{ img.title }}</h6>
+
     <!-- Modal -->
     <div class="modal fade" id="imageModal{{ img.id }}" tabindex="-1" role="dialog"
          aria-labelledby="imageModal{{ img.id }}Label" aria-hidden="true">
@@ -70,53 +75,70 @@
         </div>
     </div>
     {% empty %}
-    <br>
-    <h1 class="text-center">No images available.</h1>
+    <div class="text-center">
+        <h2>No images available.</h2>
+    </div>
     {% endfor %}
 </div>
-
+<br>
+<div>
+  <ul class="pagination pagination-lg">
+    <li class="page-item {% if not cloud_images.has_previous %}disabled{% endif %}">
+      <a class="page-link" href="{% if cloud_images.has_previous %}?page=1{% else %}#{% endif %}">&laquo;</a>
+    </li>
+    {% for num in cloud_images.paginator.page_range %}
+    {% if num == cloud_images.number %}
+    <li class="page-item active">
+      <a class="page-link" href="#">{{ num }}</a>
+    </li>
+    {% elif num > cloud_images.number|add:'-2' and num < cloud_images.number|add:'3' %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    <li class="page-item {% if not cloud_images.has_next %}disabled{% endif %}">
+      <a class="page-link" href="{% if cloud_images.has_next %}?page={{ cloud_images.paginator.num_pages }}{% else %}#{% endif %}">&raquo;</a>
+    </li>
+  </ul>
+</div>
+<br>
 
 <script>
-    // Додайте event listener для кнопок закриття
-    var closeButtons = document.querySelectorAll(".modal-footer button[data-dismiss='modal']");
-    closeButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            var modal = button.closest(".modal");
-            if (modal) {
-                modal.classList.remove("show");
-                modal.style.display = "none";
-            }
-        });
+// Додайте event listener для кнопок закриття
+var closeButtons = document.querySelectorAll(".modal-footer button[data-dismiss='modal']");
+closeButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        var modal = button.closest(".modal");
+        if (modal) {
+            modal.classList.remove("show");
+            modal.style.display = "none";
+        }
     });
+});
 
-    // Додайте event listener для кнопок фотографій
-    var imageButtons = document.querySelectorAll(".image-btn");
-    imageButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            var modalId = button.getAttribute("data-target");
-            var modal = document.querySelector(modalId);
-            if (modal) {
-                modal.classList.add("show");
-                modal.style.display = "block";
-            }
-        });
+// Додайте event listener для кнопок фотографій
+var imageButtons = document.querySelectorAll(".image-btn");
+imageButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        var modalId = button.getAttribute("data-target");
+        var modal = document.querySelector(modalId);
+        if (modal) {
+            modal.classList.add("show");
+            modal.style.display = "block";
+        }
     });
- function downloadImage(url, filename) {
-        var anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.download = filename;
-        anchor.style.display = 'none';
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
-    }as
+});
 
-
-
-
-
-
+function downloadImage(url, filename) {
+    var anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+}
 </script>
 
 {% endblock %}
-

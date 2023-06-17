@@ -28,27 +28,28 @@
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
     </div>
-    <hr>
-    <div>
-        <h2>Cloud Audio</h2>
-        <br>
-        <ul class="audio-list">
-            {% for audio in cloud_audio %}
-            <li>
-                <div class="audio-item">
-                    <audio controls class="audio-player">
-                        <source src="{{ audio.audio.url }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <h5 class="audio-title">{{ audio.title }}</h5>
-                </div>
-            </li>
-            {% empty %}
-            <li>
-                <h1 class="text-center">No available audio.</h1>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
 </div>
+<hr>
+<h2 class="text-center">Cloud Audio</h2>
+<br>
+<div>
+    <ul class="audio-list">
+        {% for audio in cloud_audio %}
+        <li>
+            <div class="audio-item">
+                <audio controls class="audio-player">
+                    <source src="{{ audio.audio.url }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <h5 class="audio-title">{{ audio.title }}</h5>
+            </div>
+        </li>
+        {% empty %}
+        <li>
+            <h1 class="text-center">No available audio.</h1>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}

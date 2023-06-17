@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, date
+from datetime import datetime
 
 from users.views import date_today
 from contacts_web_app.settings import CRYPTO_API_KEY
@@ -269,3 +269,8 @@ def when_bored(request):
                                                        'crypto_currency_info': crypto_currency_info,
                                                        'date': date_today
                                                        })
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> default
