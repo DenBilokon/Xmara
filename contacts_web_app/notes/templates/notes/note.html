@@ -2,19 +2,19 @@
 
 {% block content %}
 
-<div class="form-box shadow-lg bg-body-tertiary rounded-5"> 
+<div class="form-box shadow-lg bg-body-tertiary rounded-5">
     <h1 class="text-center"><b>Create Note</b></h1>
 
     <form method="POST" action="{% url 'notes:note' %}">
         {% csrf_token %}
         <div class="mb-3">
             <label for="name" class="form-label">Note name:</label>
-            {{ form.name }}
+            <input type="text" class="form-control" id="name" name="name" required>
             <span class="text-danger">{{ form.errors.name }}</span>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Note description:</label>
-            {{ form.description }}
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
             <span class="text-danger">{{ form.errors.description }}</span>
         </div>
         <div class="mb-3">

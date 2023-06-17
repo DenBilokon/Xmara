@@ -1,6 +1,5 @@
 {% extends 'users/base.html' %}
 {% block content %}
-    <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="btn-group-horizontal" role="group" aria-label="Button Group">
@@ -31,29 +30,32 @@
                     </div>
                 </form>
 
-
-                {% for note in notes %}
-                    <div class="card mb-3">
-                        <div class="card-body shadow bg-body-tertiary rounded-5">
-                            {% if not note.done %}
-                                <h5 class="card-title fw-bold">{{ note.name }}</h5>
-                                <p class="card-text">{{ note.description }}</p>
-                                <a href="{% url 'notes:set_done' note.id %}" class="btn btn-outline-success btn-sm">Mark Done</a>
-                            {% else %}
-                                <h5 class="card-title fw-bold"><s>{{ note.name }}</s></h5>
-                                <p class="card-text">{{ note.description }}</p>
-                            {% endif %}
-                            <div class="btn-group" role="group" aria-label="Note Actions">
-                                <a href="{% url 'notes:detail' note.id %}" class="btn btn-outline-secondary btn-sm">Details</a>
-                                <a href="{% url 'notes:edit_note' note.id %}" class="btn btn-outline-primary btn-sm">Edit</a>
-                                <a href="{% url 'notes:delete' note.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                <div class="row">
+                    {% for note in notes %}
+                        <div class="col-4">
+                            <div class="card mb-3">
+                                <div class="card-body shadow bg-body-tertiary rounded-5">
+                                    {% if not note.done %}
+                                        <h5 class="card-title fw-bold">{{ note.name }}</h5>
+                                        <p class="card-text">{{ note.description }}</p>
+                                        <a href="{% url 'notes:set_done' note.id %}" class="btn btn-outline-primary btn-sm">Mark Done</a>
+                                    {% else %}
+                                        <h5 class="card-title fw-bold">{{ note.name }} <i class="bi bi-check-circle-fill text-primary"></i></h5>
+                                        <p class="card-text">{{ note.description }}</p>
+                                        
+                                    {% endif %}
+                                    <div class="btn-group" role="group" aria-label="Note Actions">
+                                        <a href="{% url 'notes:detail' note.id %}" class="btn btn-outline-secondary btn-sm">Details</a>
+                                        <a href="{% url 'notes:edit_note' note.id %}" class="btn btn-outline-info btn-sm">Edit</a>
+                                        <a href="{% url 'notes:delete' note.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% empty %}
-                    <p>No notes found.</p>
-                {% endfor %}
+                    {% empty %}
+                        <p>No notes found.</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
 {% endblock %}
