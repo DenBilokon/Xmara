@@ -222,11 +222,3 @@ def search_audio(request):
     messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
 
-
-@login_required
-def gallery(request):
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
-    context = {
-        'avatar': avatar
-    }
-    return render(request, 'file_manager/gallery.html', context=context)

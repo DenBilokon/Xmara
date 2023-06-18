@@ -19,7 +19,6 @@ urlpatterns = [
     path('audio/', views.upload_audio, name='upload_audio'),
     path('audio/delete/<int:audio_id>/', views.delete_audio, name='delete_audio'),
     path('audio/search_audio/', views.search_audio, name='search_audio'),
-    path('gallery/', views.gallery, name='gallery'),
     path('download_image/<path:image_url>/', views.download_image, name='download_image'),
 
 ]
