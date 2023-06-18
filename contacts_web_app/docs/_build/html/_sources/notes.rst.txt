@@ -1,0 +1,77 @@
+notes package
+=============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   notes.migrations
+
+Submodules
+----------
+
+notes.admin module
+------------------
+
+.. automodule:: notes.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+notes.apps module
+-----------------
+
+.. automodule:: notes.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+notes.forms module
+------------------
+
+.. automodule:: notes.forms
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+notes.models module
+-------------------
+
+.. automodule:: notes.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+notes.tests module
+------------------
+
+.. automodule:: notes.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+notes.urls module
+-----------------
+
+.. automodule:: notes.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+notes.views module
+------------------
+
+.. automodule:: notes.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: notes
+   :members:
+   :undoc-members:
+   :show-inheritance:
