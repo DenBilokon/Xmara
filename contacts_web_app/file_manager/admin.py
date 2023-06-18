@@ -29,7 +29,7 @@ class Video(admin.ModelAdmin):
 
 @admin.register(Audio)
 class Audio(admin.ModelAdmin):
-    list_display = ["title", "audio", "created_at"]
-    list_filter = ["title"]
-    ordering = ("title",)
-    search_fields = ["title"]
+    list_display = ["artist", "title", "audio", "created_at"]
+    list_filter = ["title", "artist"]
+    ordering = ("title", "artist")
+    search_fields = ["title", "artist"]

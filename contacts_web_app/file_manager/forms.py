@@ -16,6 +16,9 @@ class DocumentForm(ModelForm):
     class Meta:
         model = Document
         fields = ['title', 'document']
+        widgets = {
+            'title': TextInput(attrs={'class': 'form-control'}),
+            'document': ClearableFileInput(attrs={'class': 'form-control-file'})}
 
 
 class VideoForm(ModelForm):
@@ -31,8 +34,9 @@ class VideoForm(ModelForm):
 class AudioForm(ModelForm):
     class Meta:
         model = Audio
-        fields = ['title', 'audio']
+        fields = ['artist', 'title', 'audio']
         widgets = {
+            'artist': TextInput(attrs={'class': 'form-control'}),
             'title': TextInput(attrs={'class': 'form-control'}),
             'audio': ClearableFileInput(attrs={'class': 'form-control-file'}),
         }

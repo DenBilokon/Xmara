@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, date
+from datetime import datetime
 
 from users.views import date_today
 from contacts_web_app.settings import CRYPTO_API_KEY
@@ -10,24 +10,31 @@ from bs4 import BeautifulSoup
 
 from django.shortcuts import render
 
+from users.models import Avatar
+
 
 def home(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     currency_info = read_currency_from_file()
     crypto_currency_info = read_crypto_currency_from_file()
     return render(request, "news/index.html", context={'currency_info': currency_info,
                                                        'crypto_currency_info': crypto_currency_info,
-                                                       'date': date_today})
+                                                       'date': date_today,
+                                                       'avatar': avatar})
 
 
 def news_war(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     short_news = tsn_war_spider()
     currency_info = read_currency_from_file()
     return render(request, "news/news_war.html", context={'short_news': short_news,
                                                           'currency_info': currency_info,
-                                                          'date': date_today})
+                                                          'date': date_today,
+                                                          'avatar': avatar})
 
 
 def news_war_show_one(request, _id):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     currency_info = read_currency_from_file()
     short_news = tsn_war_spider()
     news_item = next((item for item in short_news if item['id'] == _id), None)
@@ -36,20 +43,24 @@ def news_war_show_one(request, _id):
         return render(request, 'news/one_news.html', context={'news_item': news_item,
                                                               'news_details': news_details,
                                                               'currency_info': currency_info,
-                                                              'date': date_today})
+                                                              'date': date_today,
+                                                              'avatar': avatar})
     else:
         return render(request, 'news/not_found.html')
 
 
 def news_prosport(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     currency_info = read_currency_from_file()
     short_news = tsn_prosport_spider()
     return render(request, "news/news_prosport.html", context={'short_news': short_news,
                                                                'currency_info': currency_info,
-                                                               'date': date_today})
+                                                               'date': date_today,
+                                                               'avatar': avatar})
 
 
 def news_prosport_show_one(request, _id):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     currency_info = read_currency_from_file()
     short_news = tsn_prosport_spider()
     news_item = next((item for item in short_news if item['id'] == _id), None)
@@ -58,17 +69,33 @@ def news_prosport_show_one(request, _id):
         return render(request, 'news/one_prosport_news.html', context={'news_item': news_item,
                                                                        'news_details': news_details,
                                                                        'currency_info': currency_info,
-                                                                       'date': date_today})
+                                                                       'date': date_today,
+                                                                       'avatar': avatar})
     else:
         return render(request, 'news/not_found.html')
 
 
 def war_statistic(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     currency_info = read_currency_from_file()
     war_stat = war_stat_parse()
     return render(request, "news/war_statistic.html", context={'war_statistic': war_stat,
                                                                'currency_info': currency_info,
-                                                               'date': date_today})
+                                                               'date': date_today,
+                                                               'avatar': avatar})
+
+
+def when_bored(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    url = "https://www.boredapi.com/api/activity/"
+    response = requests.get(url).json()
+    currency_info = read_currency_from_file()
+    crypto_currency_info = read_crypto_currency_from_file()
+    return render(request, 'news/index.html', context={'bored': response,
+                                                       'currency_info': currency_info,
+                                                       'crypto_currency_info': crypto_currency_info,
+                                                       'date': date_today,
+                                                       'avatar': avatar})
 
 
 def tsn_war_spider():
@@ -259,13 +286,5 @@ def read_crypto_currency_from_file():
         return None
 
 
-def when_bored(request):
-    url = "https://www.boredapi.com/api/activity/"
-    response = requests.get(url).json()
-    currency_info = read_currency_from_file()
-    crypto_currency_info = read_crypto_currency_from_file()
-    return render(request, 'news/index.html', context={'bored': response,
-                                                       'currency_info': currency_info,
-                                                       'crypto_currency_info': crypto_currency_info,
-                                                       'date': date_today
-                                                       })
+
+

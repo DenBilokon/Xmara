@@ -81,7 +81,6 @@ def edit(request, contact_id):
     form = ContactForm(request.POST or None, instance=contact)
     if form.is_valid():
         form.save()
-        messages.success(request, "Contact was updated successfully !")
         return redirect(to='contacts:main')
     return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact})
 
@@ -102,30 +101,28 @@ def save_csv_to_model(file_path):
     with open(file_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)  # Skip the header row
-        for row in csv_reader:
-            model_instance = Contacts()
-            model_instance.firstname = row[0].strip()
-            model_instance.lastname = row[1].strip()
-            model_instance.phone = row[2].strip()
-            model_instance.email = row[3].strip()
-            model_instance.birthday = datetime.strptime(row[4].strip('\t'), '%Y-%m-%d').date()
-            model_instance.save()
-
+        try:
+            for row in csv_reader:
+                model_instance = Contacts()
+                model_instance.firstname = row[0].strip()
+                model_instance.lastname = row[1].strip()
+                model_instance.phone = row[2].strip()
+                model_instance.email = row[3].strip()
+                model_instance.birthday = datetime.strptime(row[4].strip('\t'), '%Y-%m-%d').date()
+                model_instance.save()
+        except:
+            #messages.warning(request, 'Your format of CSV file unfitisfied !')
+            return redirect(to='contacts:main')
 
 
 @login_required
 def file_uploader(request):
     if request.method == 'POST':
-        try:
-            file = request.FILES.get('file')
-            if not file.name.endswith('.csv'):
-                messages.warning(request, 'Invalid file format. Please upload a CSV file.')
-                return redirect(to='contacts:main')
-        except AttributeError:
-            messages.warning(request, 'You forgot to choose a file. Please make sure you chose CSV file and upload it.')
+        file = request.FILES.get('file', False)
+        if not file.name.endswith('.csv'):
+            messages.warning(request, 'Invalid file format. Please upload a CSV file.')
             return redirect(to='contacts:main')
-
-        # return HttpResponse('Invalid file format. Please upload a CSV file.')
+            #return HttpResponse('Invalid file format. Please upload a CSV file.')
         else:
             try:
                 File.objects.create(file=file, user=request.user)
@@ -156,6 +153,7 @@ def file_uploader(request):
     page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
                   context={'page': page})
+
 
 # try:
 #     with open(file_path, 'rb+') as destination:
