@@ -53,8 +53,6 @@ def download_image(request, image_url):
     response = requests.get(image_url)
     content_type = response.headers.get('content-type')
     filename = image_url.split('/')[-1]  # Отримати назву файлу з URL
-
-    # Налаштувати заголовки відповіді для завантаження файлу
     response = HttpResponse(response.content, content_type=content_type)
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
 
@@ -70,21 +68,19 @@ def delete_picture(request, picture_id):
 
 
 def search_picture(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Picture.objects.filter(Q(title__icontains=query))
         files_search = pagination(request, files)
-        return render(request, "file_manager/search_picture.html", context={"cloud_images": files_search, "query": query})
+        context = {
+            "query": query,
+            "cloud_picture": files_search,
+            'avatar': avatar
+        }
+        return render(request, "file_manager/search_picture.html", context=context)
     messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
-
-
-def pagination(request, files):
-    per_page = 20
-    paginator = Paginator(list(files), per_page)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return page_obj
 
 
 @login_required
@@ -123,11 +119,17 @@ def delete_video(request, video_id):
 
 
 def search_video(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Video.objects.filter(Q(title__icontains=query))
         files_search = pagination(request, files)
-        return render(request, "file_manager/search_video.html", context={"cloud_video": files_search, "query": query})
+        context = {
+            "query": query,
+            "cloud_video": files_search,
+            'avatar': avatar
+        }
+        return render(request, "file_manager/search_video.html", context=context)
     messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
 
@@ -169,11 +171,17 @@ def delete_document(request, document_id):
 
 
 def search_document(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Document.objects.filter(Q(title__icontains=query))
         files_search = pagination(request, files)
-        return render(request, "file_manager/search_document.html", context={"cloud_document": files_search, "query": query})
+        context = {
+            "query": query,
+            "cloud_document": files_search,
+            'avatar': avatar
+        }
+        return render(request, "file_manager/search_document.html", context=context)
     messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
 
@@ -214,11 +222,24 @@ def delete_audio(request, audio_id):
 
 
 def search_audio(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Audio.objects.filter(Q(title__icontains=query) | Q(artist__icontains=query))
         files_search = pagination(request, files)
-        return render(request, "file_manager/search_audio.html", context={"cloud_audio": files_search, "query": query})
+        context = {
+            "query": query,
+            "cloud_audio": files_search,
+            'avatar': avatar
+        }
+        return render(request, "file_manager/search_audio.html", context=context)
     messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
 
+
+def pagination(request, files):
+    per_page = 20
+    paginator = Paginator(list(files), per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
