@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 from .forms import NoteForm, TagForm
 from .models import Tag, Note
 
@@ -52,9 +53,8 @@ def tag(request):
             tag.save()
             return redirect(to='notes:main')
         else:
-            return render(request, 'notes/tag.html', {'form': form, 'avatar': avatar})
-
-    return render(request, 'notes/tag.html', {'form': TagForm(), 'avatar': avatar})
+            return render(request, 'notes/tag.html', {'form': form})
+    return render(request, 'notes/tag.html', {'form': TagForm()})
 
 
 @login_required
@@ -85,7 +85,7 @@ def note(request):
         else:
             return render(request, 'notes/note.html', {'tags': tags, 'form': form})
 
-    return render(request, 'notes/note.html', {'tags': tags, 'form': NoteForm(), 'avatar': avatar})
+    return render(request, 'notes/note.html', {'tags': tags, 'form': NoteForm()})
 
 
 @login_required
@@ -101,7 +101,7 @@ def detail(request, note_id):
     :doc-author: Trelent
     """
     note = get_object_or_404(Note, pk=note_id, user=request.user)
-    return render(request, 'notes/detail.html', {'note': note, 'avatar': avatar})
+    return render(request, 'notes/detail.html', {'note': note})
 
 
 @login_required
@@ -167,12 +167,10 @@ def edit_note(request, note_id):
 
             return redirect(to='notes:main')
         else:
-            return render(request, 'notes/edit_note.html', {'note': note, 'tags': tags, 'form': form,
-                                                            'avatar': avatar})
+            return render(request, 'notes/edit_note.html', {'note': note, 'tags': tags, 'form': form})
 
     form = NoteForm(instance=note)
-    return render(request, 'notes/edit_note.html', {'note': note, 'tags': tags, 'form': form,
-                                                    'avatar': avatar})
+    return render(request, 'notes/edit_note.html', {'note': note, 'tags': tags, 'form': form})
 
 @login_required
 def search(request):
@@ -191,8 +189,7 @@ def search(request):
             Q(name__icontains=query) | Q(description__icontains=query),
             user=request.user
         )
-        return render(request, 'notes/search_results.html', {'notes': notes,
-                                                             'avatar': avatar})
+        return render(request, 'notes/search_results.html', {'notes': notes})
     else:
         return redirect(to='notes:main')
 
@@ -208,7 +205,6 @@ def sort(request):
     if request.method == 'GET':
         selected_tags = request.GET.getlist('selected_tags')
         notes = Note.objects.filter(tags__name__in=selected_tags, user=request.user).distinct()
-        return render(request, 'notes/search_results.html', {'notes': notes, 'selected_tags': selected_tags,
-                                                             'avatar': avatar})
+        return render(request, 'notes/search_results.html', {'notes': notes, 'selected_tags': selected_tags})
     else:
         return redirect(to='notes:main')
