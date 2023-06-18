@@ -9,32 +9,9 @@
     <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
 </div>
 <br>
-<h1 class="text-center">AUDIO</h1>
-<div class="text-center">
-    {% load cloudinary %}
-    <div class="form-box">
-        <form action="{% url 'file_manager:upload_audio' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="formFile" class="form-label mt-4">Upload Audio:</label>
-                <input class="form-control" type="file" id="formFile" name="audio">
-                <span>{{ form.errors.audio }}</span>
-            </div>
-            <div class="form-group">
-                <label>Artist:</label>
-                <input class="form-control" type="text" name="artist">
-            </div>
-            <div class="form-group">
-                <label>Title:</label>
-                <input class="form-control" type="text" name="title">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-    </div>
-</div>
-<hr>
-<h2 class="text-center">Cloud Audio</h2>
+<h1>Search results: {{ query }}</h1>
+<br>
+<h2 class="text-center">Cloud Document</h2>
 <br>
 <div class="d-flex justify-content-center align-items-center mx-auto">
     <form class="d-flex search-form" action="{% url 'file_manager:search_audio' %}" method="get">
@@ -44,22 +21,22 @@
 </div>
 <br>
 {% if form.errors %}
-    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
-    {% endif %}
+<span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+{% endif %}
 
-    {% if messages %}
-    <div>
-        {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
-        {% endfor %}
-    </div>
-    {% endif %}
-<div class="audio-player-container">
-    <audio controls class="audio-player">
-        <source src="" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+    {% endfor %}
 </div>
+{% endif %}
+<br>
+{% csrf_token %}
+{% if not cloud_audio %}
+<div>Not found "{{query}}"</div>
+{% endif %}
+<br>
 <div>
     <ul class="audio-list">
         {% for audio in cloud_audio %}
