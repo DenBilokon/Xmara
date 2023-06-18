@@ -1,50 +1,8 @@
 /* Загальні стилі */
 
-/*body {
-    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
-    color: #ad998b;
-}
-
-a {
-    text-decoration: none;
-    color: #ad998b;
-}
 
 /* Стилі для модального вікна */
 
-.modal-footer button[data-dismiss='modal'] {
-    color: #ad998b;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-dialog {
-    position: relative;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    max-width: 80%;
-    overflow: hidden;
-}
-
-.modal.show {
-    display: block;
-}
-
-.modal-body img {
-    width: 100%;
-}
 
 /* Стилі для блоку новин */
 
@@ -290,5 +248,4 @@ a {
         width: 1260px;
     }
 }
-
 

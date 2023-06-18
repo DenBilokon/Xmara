@@ -3,6 +3,7 @@ import requests
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from cloudinary.exceptions import Error as CloudinaryError
@@ -24,10 +25,7 @@ def upload_picture(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_images = Picture.objects.filter(user_id=user_id)
-    per_page = 20
-    paginator = Paginator(list(cloud_images), per_page)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = pagination(request, cloud_images)
     image_form = PictureForm()
 
     if request.method == 'POST':
@@ -55,7 +53,6 @@ def download_image(request, image_url):
     response = requests.get(image_url)
     content_type = response.headers.get('content-type')
     filename = image_url.split('/')[-1]  # Отримати назву файлу з URL
-    print(filename)
 
     # Налаштувати заголовки відповіді для завантаження файлу
     response = HttpResponse(response.content, content_type=content_type)
@@ -72,11 +69,30 @@ def delete_picture(request, picture_id):
     return redirect(request.META['HTTP_REFERER'])
 
 
+def search_picture(request):
+    query = request.GET.get("q")
+    if query:
+        files = Picture.objects.filter(Q(title__icontains=query))
+        files_search = pagination(request, files)
+        return render(request, "file_manager/search_picture.html", context={"cloud_images": files_search, "query": query})
+    messages.success(request, "Enter your request.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
+def pagination(request, files):
+    per_page = 20
+    paginator = Paginator(list(files), per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
+
+
 @login_required
 def upload_video(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_video = Video.objects.filter(user_id=user_id)
+    page_obj = pagination(request, cloud_video)
     video_form = VideoForm()
     if request.method == 'POST':
         form = VideoForm(request.POST, request.FILES)
@@ -91,7 +107,7 @@ def upload_video(request):
                 return redirect(request.META['HTTP_REFERER'])
 
     context = {
-        'cloud_video': cloud_video,
+        'cloud_video': page_obj,
         'video_form': video_form,
         'avatar': avatar
     }
@@ -106,11 +122,22 @@ def delete_video(request, video_id):
     return redirect(request.META['HTTP_REFERER'])
 
 
+def search_video(request):
+    query = request.GET.get("q")
+    if query:
+        files = Video.objects.filter(Q(title__icontains=query))
+        files_search = pagination(request, files)
+        return render(request, "file_manager/search_video.html", context={"cloud_video": files_search, "query": query})
+    messages.success(request, "Enter your request.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
 @login_required
 def upload_document(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_document = Document.objects.filter(user_id=user_id)
+    page_obj = pagination(request, cloud_document)
     document_form = DocumentForm()
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -119,13 +146,13 @@ def upload_document(request):
                 doc = form.save(commit=False)
                 doc.user = request.user
                 doc.save()
-                return redirect('file_manager:upload_document')
+                return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
             messages.warning(request, "Form not valid.")
             return redirect(request.META['HTTP_REFERER'])
 
     context = {
-        'cloud_document': cloud_document,
+        'cloud_document': page_obj,
         'document_form': document_form,
         'avatar': avatar
 
@@ -141,11 +168,22 @@ def delete_document(request, document_id):
     return redirect(request.META['HTTP_REFERER'])
 
 
+def search_document(request):
+    query = request.GET.get("q")
+    if query:
+        files = Document.objects.filter(Q(title__icontains=query))
+        files_search = pagination(request, files)
+        return render(request, "file_manager/search_document.html", context={"cloud_document": files_search, "query": query})
+    messages.success(request, "Enter your request.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
 @login_required
 def upload_audio(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_audio = Audio.objects.filter(user_id=user_id)
+    page_obj = pagination(request, cloud_audio)
     audio_form = AudioForm()
     if request.method == 'POST':
         form = AudioForm(request.POST, request.FILES)
@@ -160,7 +198,7 @@ def upload_audio(request):
             return redirect(request.META['HTTP_REFERER'])
 
     context = {
-        'cloud_audio': cloud_audio,
+        'cloud_audio': page_obj,
         'audio_form': audio_form,
         'avatar': avatar
     }
@@ -172,6 +210,16 @@ def delete_audio(request, audio_id):
     audio = Audio.objects.get(id=audio_id, user=request.user)
     audio.delete()
     messages.success(request, "Audio deleted successfully.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
+def search_audio(request):
+    query = request.GET.get("q")
+    if query:
+        files = Audio.objects.filter(Q(title__icontains=query) | Q(artist__icontains=query))
+        files_search = pagination(request, files)
+        return render(request, "file_manager/search_audio.html", context={"cloud_audio": files_search, "query": query})
+    messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
 
 

@@ -10,26 +10,7 @@
     <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
 </div>
 <br>
-<h1 class="text-center">PICTURES</h1>
-<div class="text-center">
-    {% load cloudinary %}
-    <div class="form-box">
-        <form action="{% url 'file_manager:upload_picture' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="formFile" class="form-label mt-4">Upload Picture:</label>
-                <input class="form-control" type="file" id="formFile" name="image">
-            </div>
-            <div class="form-group">
-                <label>Title:</label>
-                <input class="form-control" type="text" name="title">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-    </div>
-</div>
-
+<h1>Search results: {{ query }}</h1>
 <br>
 <h2 class="text-center">Cloud Pictures</h2>
 <br>
@@ -50,6 +31,11 @@
     <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
     {% endfor %}
 </div>
+{% endif %}
+<br>
+{% csrf_token %}
+{% if  not cloud_images %}
+<div>Not found "{{query}}"</div>
 {% endif %}
 <br>
 <div class="masonry">
@@ -156,6 +142,7 @@ function downloadImage(url, filename) {
     anchor.click();
     document.body.removeChild(anchor);
 }
+
 
 
 </script>
