@@ -62,7 +62,7 @@ def contacts(request):
             contacts = form.save(commit=False)
             contacts.user = request.user
             contacts.save()
-            messages.success(request, "Contact was created successfully !")
+            messages.success(request, "Contact was  created successfully !")
             return redirect(to='contacts:main')
         else:
             return render(request, 'contacts/contact.html', {'form': form})
