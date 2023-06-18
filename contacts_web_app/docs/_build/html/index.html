@@ -44,16 +44,13 @@
 <dt class="sig sig-object py" id="contacts.views.birthday">
 <span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">birthday</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.birthday" title="Permalink to this definition">¶</a></dt>
 <dd><p>The birthday function takes the request and returns a rendered template of all contacts whose birthday is within
-the next 7 days. It also includes the current year, today’s date, and an empty list for show.</p>
+the next 7 days.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The current_year, birthday_list, today and show</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>A list of contacts whose birthday is within 7 days from today</p>
 </dd>
 </dl>
 </dd></dl>
@@ -62,19 +59,16 @@ the next 7 days. It also includes the current year, today’s date, and an empty
 <dt class="sig sig-object py" id="contacts.views.contacts">
 <span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.contacts" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>The contacts function is a view that allows users to add contacts.</dt><dd><p>It takes in the request and returns a rendered template of the contact form.
-If the user submits data, it will be saved to the database.</p>
+<dt>The contacts function is used to create a new contact.</dt><dd><p>It takes the request as an argument and returns a rendered template with the form.
+If the method is POST, it will save the data from that form into our database.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the function</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The html page with the form</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>A response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -94,14 +88,11 @@ contact_id (int): The primary key of the Contact object to be deleted.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>request</strong> – Get the current user</p></li>
-<li><p><strong>contact_id</strong> – Identify the contact to be deleted</p></li>
+<li><p><strong>contact_id</strong> – Identify which contact to delete</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A redirect to the main page</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
 </dd>
 </dl>
 </dd></dl>
@@ -110,25 +101,20 @@ contact_id (int): The primary key of the Contact object to be deleted.</p>
 <dt class="sig sig-object py" id="contacts.views.edit">
 <span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.edit" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>The edit function is used to edit a contact.</dt><dd><p>It takes in the request and contact_id as parameters.
-The function then gets the contact from Contacts model using the primary key of that object, which is also equal to 
-the user who created it. Then we create an instance of ContactForm with either POST data or None if there’s no POST data, 
-and pass in our instance variable (contact). If form is valid, save it and redirect back to main page; otherwise render 
-edit template with context containing form and contact variables.</p>
+<dt>The edit function is used to edit a contact.</dt><dd><p>It takes the request and contact_id as parameters.
+The function gets the user’s contacts from the database, then it creates an instance of ContactForm with that data, 
+and if it is valid, saves it in the database and redirects to main page with a success message. Otherwise renders edit page.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>request</strong> – Get the user information, contact_id is used to find the specific contact and then save it</p></li>
+<li><p><strong>request</strong> – Get the user information from the request object</p></li>
 <li><p><strong>contact_id</strong> – Get the contact object from the database</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The edit</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>A redirect to the main page</p>
 </dd>
 </dl>
 </dd></dl>
@@ -136,20 +122,15 @@ edit template with context containing form and contact variables.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="contacts.views.file_uploader">
 <span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">file_uploader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.file_uploader" title="Permalink to this definition">¶</a></dt>
-<dd><p>The file_uploader function is responsible for handling the file upload process.
-It first checks if the request method is POST, which means that a file has been uploaded.
-If so, it creates an instance of File with the uploaded file and user who uploaded it.
-Then, it saves the CSV to a model using save_csv_to_model function (see below). 
-Afterwards, it converts CSV to JSON and saves this JSON in media/files folder.</p>
+<dd><p>The file_uploader function is responsible for uploading a CSV file to the server.
+It also saves the uploaded file in the database and then calls save_csv_to_model function, which saves all contacts from 
+the CSV file to Contacts model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Get the file from the form</p>
+<dd class="field-odd"><p><strong>request</strong> – Get the request from the user</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A redirect to the main page</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>The rendered template</p>
 </dd>
 </dl>
 </dd></dl>
@@ -157,18 +138,14 @@ Afterwards, it converts CSV to JSON and saves this JSON in media/files folder.</
 <dl class="py function">
 <dt class="sig sig-object py" id="contacts.views.main">
 <span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>The main function is the entry point for the contacts app.
-It renders a list of all contacts in the database, if any exist.
-If no user is logged in, it will render an empty list.</p>
+<dd><p>The main function is the main view of the contacts app.
+It displays a list of all contacts for a given user, and allows them to be edited or deleted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Get the current user</p>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object that is sent to the server</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A rendered template</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>A render function</p>
 </dd>
 </dl>
 </dd></dl>
@@ -176,18 +153,16 @@ If no user is logged in, it will render an empty list.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="contacts.views.save_csv_to_model">
 <span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">save_csv_to_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.save_csv_to_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>The save_csv_to_model function takes a file path as an argument and saves the data in that CSV to the Contacts model.
-The function opens the file, reads it line by line, skips over the header row (firstname, lastname…), and then creates a new instance of Contacts for each row in the CSV.
-It then assigns values from each column to attributes on that instance of Contacts before saving it.</p>
+<dd><p>The save_csv_to_model function takes a file path to a CSV file and saves the data in that CSV
+file to the Contacts model. The function assumes that the first row of data in the CSV is a header
+row, so it skips over this row when saving each record. If an error occurs while trying to save any 
+record, then all records saved up until that point are rolled back.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>file_path</strong> – Specify the path to the csv file</p>
+<dd class="field-odd"><p><strong>file_path</strong> – Get the path of the file</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A none type</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>A redirect object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -202,34 +177,10 @@ renders the search_contact template with context containing searched, contacts.<
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+<dd class="field-odd"><p><strong>request</strong> – Get the request from the user</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A render of the search_contact</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="contacts.views.show_files">
-<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">show_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.show_files" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>The show_files function is a view that displays all of the files uploaded by the user.</dt><dd><p>It takes in a request object and returns an HTML page with all of the files uploaded by
-that user.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Get the current user</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The files</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>The search_contact</p>
 </dd>
 </dl>
 </dd></dl>
@@ -237,16 +188,16 @@ that user.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="contacts.views.sort">
 <span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.sort" title="Permalink to this definition">¶</a></dt>
-<dd><p>The sort function is used to sort the contacts by first name.</p>
+<dd><dl class="simple">
+<dt>The sort function is used to sort the contacts by first name.</dt><dd><p>It also paginates the contacts so that only 10 are shown per page.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Get the current user</p>
+<dd class="field-odd"><p><strong>request</strong> – Get the current request object</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The firstname of the contacts in alphabetical order</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+<dd class="field-even"><p>A list of contacts ordered by firstname</p>
 </dd>
 </dl>
 </dd></dl>
@@ -255,44 +206,286 @@ that user.</p>
 <section id="module-file_manager.views">
 <span id="xmara-service-file-manager"></span><h1>Xmara service File manager<a class="headerlink" href="#module-file_manager.views" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.delete_audio">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">delete_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.delete_audio" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The delete_audio function deletes an audio file from the database.</dt><dd><p>It takes a request and an audio_id as parameters, then uses the Audio model to get the audio object with that id.
+The function then deletes that object and redirects back to where it came from.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the user from the request object</p></li>
+<li><p><strong>audio_id</strong> – Get the audio object from the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the previous page</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.delete_document">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">delete_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.delete_document" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The delete_document function deletes a document from the database.</dt><dd><dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): The request object sent by the user.
+document_id (int): The id of the document to be deleted.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the current user</p></li>
+<li><p><strong>document_id</strong> – Get the document that is to be deleted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the previous page</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="file_manager.views.delete_picture">
 <span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">delete_picture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picture_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.delete_picture" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The delete_picture function takes a request and picture_id as arguments.
+It gets the picture with the given id, which is owned by the user making
+the request, and deletes it. It then displays a success message to let them know
+that their picture was deleted successfully.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the current user</p></li>
+<li><p><strong>picture_id</strong> – Get the picture that we want to delete</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The redirect function which returns a httpresponseredirect object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.delete_video">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">delete_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">video_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.delete_video" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The delete_video function deletes a video from the database.</dt><dd><dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): The request object sent by the user.
+video_id (int): The id of the video to be deleted.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the current user</p></li>
+<li><p><strong>video_id</strong> – Identify the video that is to be deleted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The http_referer</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="file_manager.views.download_image">
 <span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">download_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.download_image" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="file_manager.views.gallery">
-<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">gallery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.gallery" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The download_image function takes a request and an image_url as arguments.
+It then makes a GET request to the image_url, gets the content-type from the response headers,
+and saves it in a variable called content_type. It also splits up the URL into its component parts using split(),
+and saves only the last part of that list (the filename) in another variable called filename. 
+Then it creates an HttpResponse object with response’s content and our previously saved content type, 
+sets Content-Disposition to attachment; filename=&amp;quot;{filename}&amp;quot;, and returns this new HttpResponse object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the request object</p></li>
+<li><p><strong>image_url</strong> – Pass the image url to the function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An image file with the specified url</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="file_manager.views.main_mf">
 <span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">main_mf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.main_mf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The main_mf function is the main view for the file manager.
+It renders a template with an avatar object, which is used to display
+the user’s profile picture in the top right corner of the page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the user’s avatar from the database</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render with the context of avatar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.pagination">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">pagination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.pagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pagination function takes in a request and a list of files.
+It then creates a paginator object with the number of items per page set to 20,
+and the list of files as its argument. It then gets the current page number from 
+the request, and returns an object containing that page’s information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the page number from the url</p></li>
+<li><p><strong>files</strong> – Pass in the queryset of files to be paginated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A page object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.search_audio">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">search_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.search_audio" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The search_audio function is used to search for audio files in the database.</dt><dd><p>The function takes a request as an argument and returns a rendered template with the results of the search.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object from the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the search for audio files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.search_document">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">search_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.search_document" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The search_document function is used to search for documents in the database.</dt><dd><p>The function takes a request as an argument and returns a rendered template with the results of the query.
+If there is no query, then it redirects to another page.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The search_document</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.search_picture">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">search_picture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.search_picture" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The search_picture function is used to search for a picture in the database.</dt><dd><p>The function takes a request as an argument and returns the result of searching
+for pictures by title.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The search_picture</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.search_video">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">search_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.search_video" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The search_video function is used to search for videos in the database.</dt><dd><p>The function takes a request object as an argument and returns a rendered template with the results of the query.
+If there are no results, it redirects back to where it came from.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object from the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The following error:</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="file_manager.views.upload_audio">
 <span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_audio" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The upload_audio function is responsible for uploading audio files to the cloudinary server.
+It also displays all of the uploaded audio files on a page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The file_manager/upload_audio</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="file_manager.views.upload_document">
 <span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_document" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>The upload_document function is responsible for uploading documents to the cloud.</dt><dd><p>It also displays all uploaded documents on the page.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the same page</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="file_manager.views.upload_picture">
 <span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_picture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_picture" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The upload_picture function is responsible for uploading a picture to the cloudinary server.
+It also displays all of the pictures that have been uploaded by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The render function</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="file_manager.views.upload_video">
 <span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_video" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>The upload_video function is responsible for uploading a video to the cloudinary server.</dt><dd><p>It also displays all videos uploaded by the user on the same page.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render of the upload_video</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-news.views">
@@ -300,87 +493,314 @@ that user.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.add_crypto_currency_to_file">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">add_crypto_currency_to_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.add_crypto_currency_to_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The add_crypto_currency_to_file function takes the crypto_currency_dict dictionary and writes it to a file called cryptocurrency_data.json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.add_currency_to_file">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">add_currency_to_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.add_currency_to_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The add_currency_to_file function takes the currency_dict dictionary and writes it to a file called ‘currency_data.json’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary of currencies and their values</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.crypto_currency_parse">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">crypto_currency_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.crypto_currency_parse" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The crypto_currency_parse function takes no arguments and returns a dictionary of the current exchange rates for 
+the top 10 cryptocurrencies. The function uses the CoinAPI API to get the data, which is then parsed into a dictionary 
+with each cryptocurrency as a key and its exchange rate as its value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.currency_parse">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">currency_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.currency_parse" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The currency_parse function takes the date_today variable and uses it to query the PrivatBank API.
+The response is then parsed into a dictionary with currency names as keys and exchange rates as values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.home">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.home" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>The home function is the main view of the website. It renders a template</dt><dd><p>with information about currency and crypto-currency rates, as well as
+news articles from various sources.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rendered template</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.news_prosport">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_prosport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_prosport" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The news_prosport function is responsible for rendering the news_prosport.html template,
+which displays a list of short news from the prosport.ua website.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object, which contains information about the current web request</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A page with the news_prosport</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.news_prosport_show_one">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_prosport_show_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_prosport_show_one" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>The news_prosport_show_one function is used to show one news item from the Prosport website.</dt><dd><p>It takes a request and an id as arguments, then it gets the avatar of the user who made this request,
+reads currency info from file, gets short news list from tsn_prosport_spider function and finds a news item with 
+given id in this list. If such an item exists it calls tsn_page_spider function to get detailed information about 
+this particular article and renders one_prosport_news template with all necessary data.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the request object, which contains information about the current http request</p></li>
+<li><p><strong>_id</strong> – Identify the news item in the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The news_item, which is a dictionary</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.news_war">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_war</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_war" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>The news_war function is a view that renders the news_war.html template,</dt><dd><p>which displays the short war news from tsn.ua website.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The news_war</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.news_war_show_one">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_war_show_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_war_show_one" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The news_war_show_one function is used to render the one_news.html template, which displays a single news item
+from the TSN website. The function takes in an id parameter and uses it to find a matching news item from the list of
+shortened news items returned by tsn_war_spider(). If there is no match, then not_found.html will be rendered instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the information about the current user</p></li>
+<li><p><strong>_id</strong> – Get the news item from the list of short news</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A response object</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.read_crypto_currency_from_file">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">read_crypto_currency_from_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.read_crypto_currency_from_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The read_crypto_currency_from_file function reads the cryptocurrency_data.json file and returns a dictionary of 
+cryptocurrency data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.read_currency_from_file">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">read_currency_from_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.read_currency_from_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The read_currency_from_file function reads the currency_data.json file and returns a dictionary of the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.tsn_page_spider">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">tsn_page_spider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_link</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">news_date</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.tsn_page_spider" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The tsn_page_spider function takes in a url, img_link and news_date as parameters.
+It then makes a request to the url and parses the response using BeautifulSoup.
+The function then searches for all elements with class ‘l-page__main l-sheet l-sheet__gap .l-flex l-row .l-col</p>
+<blockquote>
+<div><p>l-col–xl l-gap .carticle carticle__box’ within the soup object. It iterates through each of these elements, 
+creating an empty dictionary called one_news_dict on each iteration. The function then searches for</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> – Pass the url of the page to be scraped</p></li>
+<li><p><strong>img_link</strong> – Pass the image link to the tsn_page_spider function</p></li>
+<li><p><strong>news_date</strong> – Pass the date of the news to tsn_page_spider function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A single dictionary</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.tsn_prosport_spider">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">tsn_prosport_spider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.tsn_prosport_spider" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The tsn_prosport_spider function scrapes the TSN Prosport news page and returns a list of dictionaries.
+Each dictionary contains information about one article:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>href (str): link to the article;</p></li>
+<li><p>id (int): unique identifier of an article;</p></li>
+<li><p>data_src (str): link to the image on the main page;</p></li>
+<li><p>title (str): title of an article;</p></li>
+<li><p>datetime(str) : time when an article was published.</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.tsn_war_spider">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">tsn_war_spider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.tsn_war_spider" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The tsn_war_spider function scrapes the TSN.ua website for news articles related to the war in Ukraine, and returns a list of dictionaries containing information about each article.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.war_stat_parse">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">war_stat_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.war_stat_parse" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>The war_stat_parse function takes the URL of a JSON file and returns a dictionary with two keys:</dt><dd><p>war_stats - A list of dictionaries containing the statistics for each ship type.
+war_increase - A list of dictionaries containing the increase in statistics for each ship type.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary with two keys: war_stats and war_increase</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.war_statistic">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">war_statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.war_statistic" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The war_statistic function is responsible for parsing the war_statistic.txt file and displaying it on the page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The war_statistic</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="news.views.when_bored">
 <span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">when_bored</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.when_bored" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The when_bored function is a view that returns the bored.html template, which displays an activity to do when bored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rendered template</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-notes.views">
@@ -403,9 +823,6 @@ It redirects to ‘notes:main’ after deleting.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A redirect to the main view</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -424,9 +841,6 @@ If no such note exists, it raises an Http404 exception.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A httpresponseredirect object</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
 </dd>
 </dl>
 </dd></dl>
@@ -450,9 +864,6 @@ with data from form but without saving to database yet. Then we set its user att
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The render function</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -468,9 +879,6 @@ It also paginates notes so that only 9 are displayed per page.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A render function</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
 </dd>
 </dl>
 </dd></dl>
@@ -489,9 +897,6 @@ If so, we create an instance of NoteForm with this data and check if it’s vali
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The note</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -507,9 +912,6 @@ Otherwise, it filters notes by name or description and renders them.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A list of notes that match the query</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
 </dd>
 </dl>
 </dd></dl>
@@ -530,9 +932,6 @@ and updates the done field to True. It then redirects to ‘notes:main’.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A redirect to the main page</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -546,9 +945,6 @@ and updates the done field to True. It then redirects to ‘notes:main’.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A list of notes that have the selected tags</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
 </dd>
 </dl>
 </dd></dl>
@@ -568,9 +964,6 @@ If it’s a POST request, then it will save the data from that form into our dat
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A redirect to the main page</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -581,14 +974,6 @@ If it’s a POST request, then it will save the data from that form into our dat
 <dt class="sig sig-object py" id="scheduler.views.start">
 <span class="sig-prename descclassname"><span class="pre">scheduler.views.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scheduler.views.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>The start function is called by the scheduler.py file, which is run as a cron job every minute.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-<dt class="field-even">Doc-author<span class="colon">:</span></dt>
-<dd class="field-even"><p>Trelent</p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
@@ -618,9 +1003,6 @@ If not, it calls super().dispatch() which will call get(), post(), etc.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A redirect to the home page if user is authenticated, otherwise it returns a super()</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -644,9 +1026,6 @@ If not, it calls super().dispatch() which will call get(), post(), etc.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A render of the template_name with the form_class</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -669,9 +1048,6 @@ If the form has been filled out correctly, then it will save that information in
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The render function which renders the template</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
 </dd>
 </dl>
 </dd></dl>
@@ -722,18 +1098,32 @@ If the form has been filled out correctly, then it will save that information in
 <dl class="py function">
 <dt class="sig sig-object py" id="users.views.main">
 <span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>The main function is the entry point for the application.
-It renders a template with a form that allows users to enter their name and age.
-The user’s input is then sent to another view, which displays it in an HTML page.</p>
+<dd><p>The main function is the entry point for the view.
+It takes a request object as an argument and returns a response object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A render function</p>
+<dd class="field-even"><p>A render function, which is not a httpresponse object</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="users.views.profile">
+<span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.profile" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The profile function is used to render the profile page of a user.</dt><dd><p>It takes in a request object and returns an HttpResponse object with the rendered template.
+The function also passes in context variables for use by the template.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current user and their id</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -741,17 +1131,33 @@ The user’s input is then sent to another view, which displays it in an HTML pa
 <dl class="py function">
 <dt class="sig sig-object py" id="users.views.question_to_ai">
 <span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">question_to_ai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.question_to_ai" title="Permalink to this definition">¶</a></dt>
-<dd><p>The question_to_ai function takes a question from the user and sends it to OpenAI’s API.
-The function then returns an answer to the user.</p>
+<dd><dl class="simple">
+<dt>The question_to_ai function is used to get a response from the OpenAI API.</dt><dd><p>The function takes in a request object and returns an HTML page with the user’s avatar and answer.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – Get the data from the form</p>
+<dd class="field-odd"><p><strong>request</strong> – Get the user’s question from the form</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A response_html variable, which is a string</p>
+<dd class="field-even"><p>The answer_for_user variable</p>
 </dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="users.views.upload_avatar">
+<span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">upload_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.upload_avatar" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The upload_avatar function allows a user to upload an avatar image.</dt><dd><p>The function first checks if the request method is POST, and if so, it creates a form instance with the request.POST and request.FILES data (the latter of which contains information about uploaded files). If this form is valid, then we save it to our database using commit=False in order to delay saving the model until we’re ready to avoid integrity problems (see <a class="reference external" href="https://docs.djangoproject.com/en/2.0/topics/forms/#the-save-method">https://docs.djangoproject.com/en/2.0/topics/forms/#the-save-method</a> for more info). We also assign this avatar’s user attribute</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the profile page</p>
 </dd>
 </dl>
 </dd></dl>
@@ -766,9 +1172,6 @@ The function then returns an answer to the user.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The user</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
 </dd>
 </dl>
 </dd></dl>
@@ -803,15 +1206,21 @@ The function then returns an answer to the user.</p>
 <li><a class="reference internal" href="#contacts.views.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li><a class="reference internal" href="#contacts.views.save_csv_to_model"><code class="docutils literal notranslate"><span class="pre">save_csv_to_model()</span></code></a></li>
 <li><a class="reference internal" href="#contacts.views.search_contact"><code class="docutils literal notranslate"><span class="pre">search_contact()</span></code></a></li>
-<li><a class="reference internal" href="#contacts.views.show_files"><code class="docutils literal notranslate"><span class="pre">show_files()</span></code></a></li>
 <li><a class="reference internal" href="#contacts.views.sort"><code class="docutils literal notranslate"><span class="pre">sort()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-file_manager.views">Xmara service File manager</a><ul>
+<li><a class="reference internal" href="#file_manager.views.delete_audio"><code class="docutils literal notranslate"><span class="pre">delete_audio()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.delete_document"><code class="docutils literal notranslate"><span class="pre">delete_document()</span></code></a></li>
 <li><a class="reference internal" href="#file_manager.views.delete_picture"><code class="docutils literal notranslate"><span class="pre">delete_picture()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.delete_video"><code class="docutils literal notranslate"><span class="pre">delete_video()</span></code></a></li>
 <li><a class="reference internal" href="#file_manager.views.download_image"><code class="docutils literal notranslate"><span class="pre">download_image()</span></code></a></li>
-<li><a class="reference internal" href="#file_manager.views.gallery"><code class="docutils literal notranslate"><span class="pre">gallery()</span></code></a></li>
 <li><a class="reference internal" href="#file_manager.views.main_mf"><code class="docutils literal notranslate"><span class="pre">main_mf()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.pagination"><code class="docutils literal notranslate"><span class="pre">pagination()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.search_audio"><code class="docutils literal notranslate"><span class="pre">search_audio()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.search_document"><code class="docutils literal notranslate"><span class="pre">search_document()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.search_picture"><code class="docutils literal notranslate"><span class="pre">search_picture()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.search_video"><code class="docutils literal notranslate"><span class="pre">search_video()</span></code></a></li>
 <li><a class="reference internal" href="#file_manager.views.upload_audio"><code class="docutils literal notranslate"><span class="pre">upload_audio()</span></code></a></li>
 <li><a class="reference internal" href="#file_manager.views.upload_document"><code class="docutils literal notranslate"><span class="pre">upload_document()</span></code></a></li>
 <li><a class="reference internal" href="#file_manager.views.upload_picture"><code class="docutils literal notranslate"><span class="pre">upload_picture()</span></code></a></li>
@@ -873,7 +1282,9 @@ The function then returns an answer to the user.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#users.views.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#users.views.profile"><code class="docutils literal notranslate"><span class="pre">profile()</span></code></a></li>
 <li><a class="reference internal" href="#users.views.question_to_ai"><code class="docutils literal notranslate"><span class="pre">question_to_ai()</span></code></a></li>
+<li><a class="reference internal" href="#users.views.upload_avatar"><code class="docutils literal notranslate"><span class="pre">upload_avatar()</span></code></a></li>
 <li><a class="reference internal" href="#users.views.user_data"><code class="docutils literal notranslate"><span class="pre">user_data()</span></code></a></li>
 </ul>
 </li>
