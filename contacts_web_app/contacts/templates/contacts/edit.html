@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-<h1>Update contact</h1>
+<center><h1>Update your contact...</h1></center>
 
 <form action="{% url 'contacts:edit' contact.id %}" method="post">
     {% csrf_token %}
