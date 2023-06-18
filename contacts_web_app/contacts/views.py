@@ -89,6 +89,7 @@ def edit(request, contact_id):
     form = ContactForm(request.POST or None, instance=contact)
     if form.is_valid():
         form.save()
+        messages.success(request, "Contact was updated successfully !")
         return redirect(to='contacts:main')
     return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact, 'avatar': avatar})
 
