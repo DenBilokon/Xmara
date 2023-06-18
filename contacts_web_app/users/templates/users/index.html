@@ -13,9 +13,7 @@
             <br>
             <br>
             <div class="mb-2">
-                <label for="question" style="font-weight: bold;">I am the assistant of this website. You can ask me
-                    about the information on this site and what you can do here. I will gladly assist you with that!
-                    Enter your question and press the button. I will provide the answer! </label>
+                <label for="question" style="font-weight: bold;">Xmara-GPT assistant </label>
             </div>
             <div class="d-flex">
                 <input type="text" id="question" name="question" class="form-control me-2">
@@ -27,11 +25,21 @@
     </div>
 </div>
 
-<h1 id="question-response">
-    {{ answer_for_user }}
-</h1>
 
+<div class="alert alert-dismissible alert-light" id="question-response">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{ answer_for_user }}</strong>
 </div>
+<style>
+#question-response {
+    width: 68%; /* Змініть це значення на бажану ширину вікна */
+    height: 10%;
+    background-image: url("https://i.pinimg.com/564x/c9/e6/33/c9e63307eb217b51db2e5811ef9836b3.jpg");
+    background-size: 105% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+</style>
 
 <script>
   $(document).ready(function() {
@@ -51,7 +59,6 @@
       });
     });
   });
-
 
 </script>
 

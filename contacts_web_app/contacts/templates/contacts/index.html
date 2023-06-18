@@ -3,91 +3,134 @@
 {% block content %}
 
 <style>
-    table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  border-color: #96D4D4;
-  padding: 10px;
-  text-align: center;
-  color: #2E4053;
-  text-transform: capitalize;
+th{
+text-align: center;
 
 }
 
-tr:hover {background-color: #D6EEEE;}
+td{
+    color:#263B50;
+    font-weight:bold;
+}
+
+
 
 </style>
 
 
-<h1>Список ваших контактів</h1>
-<!--<h1>Вітаю, {{ user }}!</h1>-->
-<nav style="margin-bottom: 50px; border-bottom: 2px solid; padding-left: 30px">
-    <div class="text-center">
-        <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 33%">Додати контакт</a>
-        <a href="{% url 'contacts:sort' %}" class="btn btn-primary" style="width: 33%">Сортувати по імені</a>
-        <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 33%">День народження на цьому
-            тижні</a>
-        <a href="{% url 'contacts:show_files' %}" class="btn btn-primary" style="width: 33%">Files</a>
+<div class="text-center">
+    <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 24%">Add contact</a>
+    <a href="{% url 'contacts:sort' %}" class="btn btn-primary" style="width: 24%">Sort by name</a>
+    <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 24%">Who has birthday on this week</a>
+</div>
+<br/><br>
+<center>
+    {% if messages %}
+
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-{{ message.tags }}">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>.
     </div>
-    <br/>
-
-    <center>
-        <form action="{% url 'contacts:file_uploader' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <br/>
-            <button type="submit"><input type="file" name="file">Upload</button>
-        </form>
-    </center>
-    <br/><br/>
-
-
-    <form class="example" method="POST" action="{% url 'contacts:search_contact'%}" style="margin:auto;max-width:300px">
+    {% endfor %}
+    {% endif %}
+</center>
+<!--{% if message.tags %}{% endif %}-->
+<br/><br/>
+<div class="form-box">
+    <form action="{% url 'contacts:file_uploader' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="text" placeholder="Search Contact" name="searched">
-        <button type="submit">Search</button>
+        <div class="form-group">
+            <label for="formFile" class="form-label mt-4">Upload CSV file:</label>
+            <input class="form-control" type="file" id="formFile" name="file">
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Upload CSV</button>
     </form>
-    <br/>
-    <br>
+</div>
+
+
+<br><br><br>
+<div class="d-flex justify-content-center align-items-center mx-auto">
+    <form class="d-flex search-form" action="{% url 'contacts:search_contact'%}" method="POST">
+        {% csrf_token %}
+        <h2 class="text-center" style="font-weight: bold;">Search contact</h2>
+        <input class="form-control me-2" type="search" name="searched" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary btn-block" type="submit">Search</button>
+    </form>
+</div>
+
+<br/>
+<br>
 </nav>
 <br/>
 
 
-{% if files %}
-        <ul>
-        {% for file in files %}
-            {{media}}{{file.file}}
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No documents.</p>
-    {% endif %}
-<table style="width:100%">
+{% if page %}
+<center><h1>List of your contacts...</h1></center>
+<table class="table table-hover">
     <thead>
     <tr>
-        <th>Ім'я</th>
-        <th>Прізвище</th>
-        <th>Телефон</th>
-        <th>Email</th>
-        <th>День народження</th>
+        <th style="background-color: #87CEEB;">Firstname</th>
+        <th style="background-color: #87CEEB;">Lastname</th>
+        <th style="background-color: #87CEEB;">Phone</th>
+        <th style="background-color: #87CEEB;">Email</th>
+        <th style="background-color: #87CEEB;">Birthday</th>
+
     </tr>
     </thead>
     <tbody>
-    {% for contact in contacts %}
-    <tr>
+    {% for contact in page %}
+    <tr class=active">
         <td>{{ contact.firstname }}</td>
         <td>{{ contact.lastname }}</td>
-        <td>{{ contact.phone }}</td>
-        <td>{{ contact.email }}</td>
+        <td><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></td>
+        <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
         <td>{{ contact.birthday }}</td>
-        <td><a href="{% url 'contacts:edit' contact.id %}" role="button">Оновити контакт</a></td>
-        <td><a href="{% url 'contacts:delete_contact' contact.id %}" role="button" class="contrast">Видалити контакт</a>
+        <td><a href="{% url 'contacts:edit' contact.id %}" class="btn btn-outline-success btn-sm">Update</a></td>
+        <td><a href="{% url 'contacts:delete_contact' contact.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
         </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+{% else %}
+<center><h1>No contacts yet...</h1></center>
+{% endif %}
 
 
-
+<br>
+{% if page.has_other_pages %}
+<div>
+    <ul class="pagination pagination-lg">
+        <li class="page-item">
+            {% if page.has_previous %}
+            <a class="page-link" href="?page=1">&laquo;</a>
+            <a class="page-link" href="?page={{ page.previous_page_number }}">&raquo;</a>
+            {% endif %}
+        </li>
+        {% for i in page.paginator.page_range %}
+        {% if page.number == i %}
+        <li class="page-item active">
+            <a class="page-link" href="{{ i }}">{{ i }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if page.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.next_page_number }}">next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.paginator.num_pages }}">last</a>
+        </li>
+        {% endif %}
+    </ul>
+    {%endif%}
+</div>
 
 {% endblock %}

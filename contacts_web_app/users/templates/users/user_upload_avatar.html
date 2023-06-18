@@ -1,0 +1,30 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<h1 class="text-center">Upload avatar</h1>
+<div class="text-center">
+    <div class="form-box">
+        <form action="{% url 'users:upload_avatar' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="formFile" class="form-label mt-4">Upload avatar:</label>
+                <input class="form-control" type="file" id="formFile" name="image">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</div>
+
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

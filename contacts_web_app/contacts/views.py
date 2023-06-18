@@ -1,42 +1,35 @@
 import csv
-import json
 
-from django.conf import settings
+
+
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from .models import Contacts, File
 from datetime import date, datetime, timedelta
 
+from django.contrib import messages
+
+from users.models import Avatar
+
 
 def main(request):
-    """
-    The main function is the entry point for the contacts app.
-    It renders a list of all contacts in the database, if any exist.
-    If no user is logged in, it will render an empty list.
-    
-    :param request: Get the current user
-    :return: A rendered template
-    :doc-author: Trelent
-    """
-    contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    contacts = Contacts.objects.filter(user=request.user).all().order_by('id') if request.user.is_authenticated else []
+    contacts_per_page = 10
+    paginator = Paginator(contacts, contacts_per_page)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
-                  context={'contacts': contacts, 'user': request.user})
+                  context={'contacts': contacts, 'user': request.user, 'page': page, 'avatar': avatar})
 
 
 @login_required
 def search_contact(request):
-    """
-    The search_contact function is used to search for a contact in the database.
-        The function takes in a request object and returns either the main page or 
-        renders the search_contact template with context containing searched, contacts.
-    
-    
-    :param request: Get the request object
-    :return: A render of the search_contact
-    :doc-author: Trelent
-    """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         searched = request.POST['searched']
         if len(searched) > 1:
@@ -45,7 +38,7 @@ def search_contact(request):
                 lastname__contains=searched, user=request.user).all() | Contacts.objects.filter(
                 email__contains=searched, user=request.user).all()
             return render(request, 'contacts/search_contact.html',
-                          context={'searched': searched, 'contacts': contacts})
+                          context={'searched': searched, 'contacts': contacts, 'avatar': avatar})
         return redirect(to='contacts:main')
     else:
         return render(request, 'contacts/search_contact.html')
@@ -53,48 +46,34 @@ def search_contact(request):
 
 @login_required
 def birthday(request):
-    """
-    The birthday function takes the request and returns a rendered template of all contacts whose birthday is within
-    the next 7 days. It also includes the current year, today's date, and an empty list for show.
-    
-    :param request: Get the request object
-    :return: The current_year, birthday_list, today and show
-    :doc-author: Trelent
-    """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     contacts_all = Contacts.objects.all()
     current_year = date.today().year
     birthday_list = []
     show = []
     for i in contacts_all:
-        if date.today() < (datetime.strptime(i.birthday, '%Y-%m-%d').date()).replace(
+        if date.today() <= (datetime.strptime(i.birthday, '%Y-%m-%d').date()).replace(
                 current_year) < date.today() + timedelta(7):
             birthday_list.append(i)
     return render(request, 'contacts/birthday.html',
                   context={'current_day': current_year, 'birthday_list': birthday_list, 'today': date.today(),
-                           'show': show})
+                           'show': show, 'avatar': avatar})
 
 
 @login_required
 def contacts(request):
-    """
-    The contacts function is a view that allows users to add contacts.
-        It takes in the request and returns a rendered template of the contact form.
-        If the user submits data, it will be saved to the database.
-    
-    :param request: Pass the request object to the view
-    :return: The html page with the form
-    :doc-author: Trelent
-    """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         form = ContactForm(request.POST, )
         if form.is_valid():
             contacts = form.save(commit=False)
             contacts.user = request.user
             contacts.save()
+            messages.success(request, "Contact was  created successfully !")
             return redirect(to='contacts:main')
         else:
-            return render(request, 'contacts/contact.html', {'form': form})
-    return render(request, 'contacts/contact.html', {'form': ContactForm()})
+            return render(request, 'contacts/contact.html', {'form': form, 'avatar': avatar})
+    return render(request, 'contacts/contact.html', {'form': ContactForm(), 'avatar': avatar})
 
 
 @login_required
@@ -116,40 +95,27 @@ def delete_contact(request, contact_id):
 
 @login_required
 def edit(request, contact_id):
-    """
-    The edit function is used to edit a contact.
-        It takes in the request and contact_id as parameters.
-        The function then gets the contact from Contacts model using the primary key of that object, which is also equal to 
-        the user who created it. Then we create an instance of ContactForm with either POST data or None if there's no POST data, 
-        and pass in our instance variable (contact). If form is valid, save it and redirect back to main page; otherwise render 
-        edit template with context containing form and contact variables.
-    
-    :param request: Get the user information, contact_id is used to find the specific contact and then save it
-    :param contact_id: Get the contact object from the database
-    :return: The edit
-    :doc-author: Trelent
-    """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     contact = Contacts.objects.get(pk=contact_id, user=request.user)
     form = ContactForm(request.POST or None, instance=contact)
     if form.is_valid():
         form.save()
+        messages.success(request, "Contact was updated successfully !")
         return redirect(to='contacts:main')
-    return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact})
+    return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact, 'avatar': avatar})
 
 
 @login_required
 def sort(request):
-    """
-    The sort function is used to sort the contacts by first name.
-        
-    
-    :param request: Get the current user
-    :return: The firstname of the contacts in alphabetical order
-    :doc-author: Trelent
-    """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     contacts = Contacts.objects.filter(user=request.user).all().order_by(
-        'firstname').values() if request.user.is_authenticated else []
-    return render(request, 'contacts/index.html', context={'contacts': contacts})
+        'firstname') if request.user.is_authenticated else []
+    contacts_per_page = 10
+    paginator = Paginator(contacts, contacts_per_page)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+    return render(request, 'contacts/index.html',
+                  context={'contacts': contacts, 'user': request.user, 'page': page, 'avatar': avatar})
 
 
 def save_csv_to_model(file_path):
@@ -165,60 +131,62 @@ def save_csv_to_model(file_path):
     with open(file_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)  # Skip the header row
-
-        for row in csv_reader:
-            model_instance = Contacts()
-            model_instance.firstname = row[0]
-            model_instance.lastname = row[1]
-            model_instance.phone = row[2]
-            model_instance.email = row[3]
-            model_instance.birthday = datetime.strptime(row[4].strip(), '%Y-%m-%d').date()
-            model_instance.save()
+        try:
+            for row in csv_reader:
+                model_instance = Contacts()
+                model_instance.firstname = row[0].strip()
+                model_instance.lastname = row[1].strip()
+                model_instance.phone = row[2].strip()
+                model_instance.email = row[3].strip()
+                model_instance.birthday = datetime.strptime(row[4].strip('\t'), '%Y-%m-%d').date()
+                model_instance.save()
+        except:
+            #messages.warning(request, 'Your format of CSV file unfitisfied !')
+            return redirect(to='contacts:main')
 
 
 @login_required
 def file_uploader(request):
-    """
-    The file_uploader function is responsible for handling the file upload process.
-    It first checks if the request method is POST, which means that a file has been uploaded.
-    If so, it creates an instance of File with the uploaded file and user who uploaded it.
-    Then, it saves the CSV to a model using save_csv_to_model function (see below). 
-    Afterwards, it converts CSV to JSON and saves this JSON in media/files folder.
-    
-    :param request: Get the file from the form
-    :return: A redirect to the main page
-    :doc-author: Trelent
-    """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
-        file = request.FILES['file']
-        File.objects.create(file=file, user=request.user)
-        file_path = f'media/files/{file}'
-        with open(file_path, 'rb+') as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
-        save_csv_to_model(file_path)
-        data = []
-        with open(file_path, 'r', encoding='utf-8') as csv_file:
-            csv_reader = csv.DictReader(csv_file)
-            for row in csv_reader:
-                data.append({k.strip(): v.strip() for k, v in row.items()})
-        with open(f'media/files/{file}.json', 'w') as outfile:
-            json.dump(data, outfile, indent=4)
-        return redirect(to='contacts:main')
+        try:
+            file = request.FILES.get('file')
+            if not file.name.endswith('.csv'):
+                messages.warning(request, 'Invalid file format. Please upload a CSV file.')
+                return redirect(to='contacts:main')
+        except AttributeError:
+            messages.warning(request, 'You forgot to choose a file. Please make sure you chose CSV file and upload it.')
+            return redirect(to='contacts:main')
+
+        # return HttpResponse('Invalid file format. Please upload a CSV file.')
+        else:
+            try:
+                File.objects.create(file=file, user=request.user)
+            except:
+                messages.warning(request, 'Your format of CSV file unfitisfied !')
+                return redirect(to='contacts:main')
+            file_path = f'media/files/{file}'
+            with open(file_path, 'rb+') as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
+            try:
+                file.user = request.user
+                save_csv_to_model(file_path)
+            except:
+                messages.warning(request, 'Your format of CSV file unfitisfied !')
+
+            contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+            contacts_per_page = 10
+            paginator = Paginator(contacts, contacts_per_page)
+            page_number = request.GET.get('page')
+            page = paginator.get_page(page_number)
+            messages.success(request, "File was uploaded successfully")
+            return render(request, 'contacts/index.html', context={'page': page})
+    contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
+    contacts_per_page = 10
+    paginator = Paginator(contacts, contacts_per_page)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
-                  context={})
+                  context={'page': page, 'avatar': avatar})
 
-
-@login_required
-def show_files(request):
-    """
-    The show_files function is a view that displays all of the files uploaded by the user.
-        It takes in a request object and returns an HTML page with all of the files uploaded by
-        that user.
-    
-    :param request: Get the current user
-    :return: The files
-    :doc-author: Trelent
-    """
-    files = File.objects.filter(user=request.user).all()
-    return render(request, 'contacts/files.html', context={'files': files, "media": settings.MEDIA_URL})
