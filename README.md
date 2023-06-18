@@ -56,23 +56,22 @@ When running Xmara app and following link http://localhost:8000/ you have opport
   - change your avatar
 
 
-
-
 # Used technologies:
 - Python 3.11
 - Django 4.2.2
 - BeautifulSoup 4
 - Sphinx
 - PostgreSQL 12.0
-- OpenWeatherMap API
 - OpenAI API
 - Cloudinary
 - Privatbank API
+- Coin API
 - Bootswatch
 - HTML5
 - CSS3
 - Docker
 - GitHub
+- Fly
 
 # Developers:
 1. Denis Bilokon

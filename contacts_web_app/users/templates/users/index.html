@@ -5,6 +5,7 @@
 <div class="text-center">
     <br>
     <br>
+    {% if user.is_authenticated %}
     <div class="Title" rel="stylesheet" style="text-align: left; margin-left: 190px; font-size: 40px;">HELLO WORLD</div>
     <br>
     <div class="chat-form" style="max-width: 630px; margin: 15px;">
@@ -23,24 +24,29 @@
         <br>
         <div id="response-container"></div>
     </div>
+    {% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+    {% endif %}
 </div>
 
-
+{% if user.is_authenticated %}
 <div class="alert alert-dismissible alert-light" id="question-response">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     <strong>{{ answer_for_user }}</strong>
 </div>
 <style>
 #question-response {
-    width: 68%; /* Змініть це значення на бажану ширину вікна */
-    height: 10%;
-    background-image: url("https://i.pinimg.com/564x/c9/e6/33/c9e63307eb217b51db2e5811ef9836b3.jpg");
+    width: 72%;
+    min-height: 7%;
     background-size: 105% auto;
     background-position: center;
     background-repeat: no-repeat;
 }
-</style>
 
+</style>
+{% endif %}
 <script>
   $(document).ready(function() {
     $('#question-form').submit(function(event) {
@@ -59,6 +65,7 @@
       });
     });
   });
+
 
 </script>
 

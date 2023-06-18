@@ -1,0 +1,10 @@
+news.migrations package
+=======================
+
+Module contents
+---------------
+
+.. automodule:: news.migrations
+   :members:
+   :undoc-members:
+   :show-inheritance:
