@@ -9,7 +9,7 @@ from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-
+from django.core.exceptions import ValidationError
 from cloudinary.exceptions import Error as CloudinaryError
 
 from .forms import RegisterForm, AvatarForm
@@ -40,7 +40,7 @@ class RegisterView(View):
         :param *args: Send a non-keyworded variable length argument list to the function
         :param **kwargs: Pass keyworded, variable-length argument list to a function
         :return: A redirect to the home page if user is authenticated, otherwise it returns a super()
-        :doc-author: Trelent
+        :doc-author: Xmara
         """
         if self.request.user.is_authenticated:
             return redirect(to='quotes:home')
@@ -54,7 +54,7 @@ class RegisterView(View):
         :param self: Access the attributes and methods of the class in python
         :param request: Get the request object
         :return: A render of the template_name with the form_class
-        :doc-author: Trelent
+        :doc-author: Xmara
         """
         return render(request, self.template_name, {'form': self.form_class})
 
@@ -69,7 +69,7 @@ class RegisterView(View):
         :param self: Represent the instance of the object itself
         :param request: Pass the request object to the view
         :return: The render function which renders the template
-        :doc-author: Trelent
+        :doc-author: Xmara
         """
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -95,12 +95,22 @@ def user_data(request):
     
     :param request: Pass the request object to the view
     :return: The user
-    :doc-author: Trelent
+    :doc-author: Xmara
     """
     return render(request, "users/user.html", context={})
 
 
 def question_to_ai(request):
+    """
+    The question_to_ai function is used to get a question from the user and send it to OpenAI.
+        The function then gets an answer from OpenAI, which is returned as a response_html variable.
+        This variable is passed into the context of the index page, where it will be displayed in
+        place of any previous answer.
+
+    :param request: Get the user's request
+    :return: The answer of the OpenAI to the user's question
+    :doc-author: Xmara
+    """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     openai.api_key = OPENAI_KEY
 
@@ -130,28 +140,57 @@ def question_to_ai(request):
 
 @login_required
 def upload_avatar(request):
+    """
+    The upload_avatar function allows a user to upload an avatar image.
+        The function first checks if the request method is POST, and if so, it instantiates the AvatarForm with
+        the request data and files. If form is valid, it saves the uploaded file as an avatar for that user.
+        If there was already an existing avatar for that user, then delete it before saving new one.
+
+    :param request: Get the current user
+    :return: A render function that renders the user_upload_avatar
+    :doc-author: Xmara
+    """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    form = AvatarForm()  # Instantiate the form
+
     if request.method == 'POST':
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            previous_avatar = Avatar.objects.filter(user=request.user).first()
+            try:
+                previous_avatar = Avatar.objects.filter(user=request.user).first()
+                avatar = form.save(commit=False)
+                avatar.user = request.user
 
-            avatar = form.save(commit=False)
-            avatar.user = request.user
-            avatar.save()
+                # Validate if the uploaded file is an image
+                uploaded_file = form.cleaned_data['image']
+                if not uploaded_file.content_type.startswith('image'):
+                    raise ValidationError("Invalid file format. Please upload an image.")
 
-            if previous_avatar:
-                previous_avatar.delete()
+                avatar.save()
+                if previous_avatar:
+                    previous_avatar.delete()
 
-            return redirect('users:profile')
-    else:
-        form = AvatarForm()
+                return redirect('users:profile')
+            except (CloudinaryError, ValidationError) as e:
+                messages.warning(request, "Invalid file format.")
 
     return render(request, 'users/user_upload_avatar.html', {'form': form, 'avatar': avatar})
 
 
+
+
 @login_required
 def profile(request):
+    """
+    The profile function is used to render the profile page of a user.
+    It takes in a request object and returns an HttpResponse object with the rendered template.
+    The function first gets the current user from the request, then it gets their id, and finally it uses that id to
+    get their avatar from Avatar model.
+
+    :param request: Get the current user
+    :return: A dictionary with the user and avatar
+    :doc-author: Xmara
+    """
     user = request.user
     user_id = request.user.id
     avatar = Avatar.objects.filter(user_id=user_id).first()
