@@ -20,6 +20,7 @@ def main(request):
     :return: A render function
     :doc-author: Trelent
     """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     paginator = Paginator(notes, 9)
@@ -30,7 +31,7 @@ def main(request):
         pages = paginator.page(1)
     except EmptyPage:
         pages = paginator.page(paginator.num_pages)
-    return render(request, 'notes/index.html', context={'notes': pages, 'tags': tags})
+    return render(request, 'notes/index.html', context={'notes': pages, 'tags': tags, 'avatar': avatar})
 
 
 
@@ -45,6 +46,7 @@ def tag(request):
     :return: A redirect to the main page
     :doc-author: Trelent
     """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         form = TagForm(request.POST)
         if form.is_valid():
@@ -69,6 +71,7 @@ def note(request):
     :return: The note
     :doc-author: Trelent
     """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     tags = Tag.objects.filter(user=request.user).all()
 
     if request.method == 'POST':
@@ -100,6 +103,7 @@ def detail(request, note_id):
     :return: A httpresponseredirect object
     :doc-author: Trelent
     """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     note = get_object_or_404(Note, pk=note_id, user=request.user)
     return render(request, 'notes/detail.html', {'note': note})
 
@@ -151,6 +155,7 @@ def edit_note(request, note_id):
     :return: The render function
     :doc-author: Trelent
     """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     note = get_object_or_404(Note, pk=note_id, user=request.user)
     tags = Tag.objects.filter(user=request.user).all()
 
@@ -183,6 +188,7 @@ def search(request):
     :return: A list of notes that match the query
     :doc-author: Trelent
     """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if 'query' in request.GET:
         query = request.GET['query']
         notes = Note.objects.filter(
@@ -202,6 +208,7 @@ def sort(request):
     :return: A list of notes that have the selected tags
     :doc-author: Trelent
     """
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'GET':
         selected_tags = request.GET.getlist('selected_tags')
         notes = Note.objects.filter(tags__name__in=selected_tags, user=request.user).distinct()
