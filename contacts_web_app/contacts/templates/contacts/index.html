@@ -1,0 +1,136 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+
+<style>
+th{
+text-align: center;
+
+}
+
+td{
+    color:#263B50;
+    font-weight:bold;
+}
+
+
+
+</style>
+
+
+<div class="text-center">
+    <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 24%">Add contact</a>
+    <a href="{% url 'contacts:sort' %}" class="btn btn-primary" style="width: 24%">Sort by name</a>
+    <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 24%">Who has birthday on this week</a>
+</div>
+<br/><br>
+<center>
+    {% if messages %}
+
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-{{ message.tags }}">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>.
+    </div>
+    {% endfor %}
+    {% endif %}
+</center>
+<!--{% if message.tags %}{% endif %}-->
+<br/><br/>
+<div class="form-box">
+    <form action="{% url 'contacts:file_uploader' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="formFile" class="form-label mt-4">Upload CSV file:</label>
+            <input class="form-control" type="file" id="formFile" name="file">
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Upload CSV</button>
+    </form>
+</div>
+
+
+<br><br><br>
+<div class="d-flex justify-content-center align-items-center mx-auto">
+    <form class="d-flex search-form" action="{% url 'contacts:search_contact'%}" method="POST">
+        {% csrf_token %}
+        <h2 class="text-center" style="font-weight: bold;">Search contact</h2>
+        <input class="form-control me-2" type="search" name="searched" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary btn-block" type="submit">Search</button>
+    </form>
+</div>
+
+<br/>
+<br>
+</nav>
+<br/>
+
+
+{% if page %}
+<center><h1>List of your contacts...</h1></center>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th style="background-color: #87CEEB;">Firstname</th>
+        <th style="background-color: #87CEEB;">Lastname</th>
+        <th style="background-color: #87CEEB;">Phone</th>
+        <th style="background-color: #87CEEB;">Email</th>
+        <th style="background-color: #87CEEB;">Birthday</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for contact in page %}
+    <tr class=active">
+        <td>{{ contact.firstname }}</td>
+        <td>{{ contact.lastname }}</td>
+        <td><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></td>
+        <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+        <td>{{ contact.birthday }}</td>
+        <td><a href="{% url 'contacts:edit' contact.id %}" class="btn btn-outline-success btn-sm">Update</a></td>
+        <td><a href="{% url 'contacts:delete_contact' contact.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<center><h1>No contacts yet...</h1></center>
+{% endif %}
+
+
+<br>
+{% if page.has_other_pages %}
+<div>
+    <ul class="pagination pagination-lg">
+        <li class="page-item">
+            {% if page.has_previous %}
+            <a class="page-link" href="?page=1">&laquo;</a>
+            <a class="page-link" href="?page={{ page.previous_page_number }}">&raquo;</a>
+            {% endif %}
+        </li>
+        {% for i in page.paginator.page_range %}
+        {% if page.number == i %}
+        <li class="page-item active">
+            <a class="page-link" href="{{ i }}">{{ i }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if page.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.next_page_number }}">next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.paginator.num_pages }}">last</a>
+        </li>
+        {% endif %}
+    </ul>
+    {%endif%}
+</div>
+
+{% endblock %}

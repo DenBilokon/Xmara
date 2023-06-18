@@ -1,0 +1,44 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+<style>
+    td {font-weight:bold;}
+</style>
+
+<br>
+
+{% if contacts %}
+<h1> Contacts you may search for...</h1>
+<br/>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th style="background-color: #87CEEB;">Firstname</th>
+        <th style="background-color: #87CEEB;">Lastname</th>
+        <th style="background-color: #87CEEB;">Phone</th>
+        <th style="background-color: #87CEEB;">Email</th>
+        <th style="background-color: #87CEEB;">Birthday</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contact in contacts %}
+    <tr>
+        <td>{{ contact.firstname }}</td>
+        <td>{{ contact.lastname }}</td>
+        <td><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></td>
+        <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+        <td>{{ contact.birthday }}</td>
+        <td><a href="{% url 'contacts:edit' contact.id %}" class="btn btn-outline-success btn-sm">Update</a></td>
+        <td><a href="{% url 'contacts:delete_contact' contact.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h1>Contacts with "{{ searched }}" not found</h1>
+{% endif %}
+{% endblock %}
+
+
+
+

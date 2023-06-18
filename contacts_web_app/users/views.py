@@ -1,5 +1,4 @@
-import requests
-import json
+import openai
 
 from datetime import date
 
@@ -9,18 +8,21 @@ from django.contrib import messages
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm
+from cloudinary.exceptions import Error as CloudinaryError
 
-from contacts_web_app.settings import WEATHER_API
+from .forms import RegisterForm, AvatarForm
+from .models import Avatar
+
+from contacts_web_app.settings import OPENAI_KEY
+
+date_today = date.today().strftime('%d.%m.%Y')
 
 
 def main(request):
-    currency_info = currency_parse()
-    weather_info = weather_parse()
-    return render(request, 'users/index.html', context={'currency_info': currency_info,
-                                                        'date': date.today().strftime('%d.%m.%Y'),
-                                                        'weather_info': weather_info})
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    return render(request, 'users/index.html', context={'avatar': avatar})
 
 
 class RegisterView(View):
@@ -58,28 +60,63 @@ def user_data(request):
     return render(request, "users/user.html", context={})
 
 
-def currency_parse():
-    url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date.today().strftime('%d.%m.%Y')}"
-    response = requests.get(url)
-    currency_data = json.loads(response.text).get('exchangeRate')
-    currency_dict = {"currency_USD": currency_data[23],
-                     "currency_EUR": currency_data[8],
-                     "currency_GBR": currency_data[9],
-                     "currency_PLN": currency_data[17]}
-    return currency_dict
+def question_to_ai(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    openai.api_key = OPENAI_KEY
+
+    question = request.POST.get('question')
+    prompt = f'You are website helper. Also, you should know everything about this website from documentation, ' \
+             f'answer clearly and a little defiantly, but without exaggeration and no more than 300 symbols ' \
+             f'Only truth. Use emoticons to decorate the dialogue. So, the question is - {question}'
+
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        max_tokens=50,
+        temperature=0.7,
+        n=1,
+        stop=None,
+        echo=True
+    )
+
+    if 'choices' in response and len(response.choices) > 0:
+        answer = response.choices[0].text.strip()
+        response_html = f'Your helper-AI: {answer.replace(prompt, "")}'
+    else:
+        response_html = None
+
+    return render(request, 'users/index.html', context={'answer_for_user': response_html, 'avatar': avatar})
 
 
-def weather_parse():
-    weather_data = {}
-    cities = ['London', 'Prague', 'Berlin', 'Paris', 'Stockholm', 'Warsaw']
-    for city in cities:
-        url = f'http://api.weatherapi.com/v1/current.json?key={WEATHER_API}&q={city}'
-        response = requests.get(url)
-        city_data = json.loads(response.text).get('current')
-        city_dict = {'city': city,
-                     'temp_c': city_data.get('temp_c'),
-                     'wind_kph': city_data.get('wind_kph'),
-                     'icon': city_data.get('condition').get('icon'),
-                     'text': city_data.get('condition').get('text')}
-        weather_data[city] = city_dict
-    return weather_data
+@login_required
+def upload_avatar(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            previous_avatar = Avatar.objects.filter(user=request.user).first()
+
+            avatar = form.save(commit=False)
+            avatar.user = request.user
+            avatar.save()
+
+            if previous_avatar:
+                previous_avatar.delete()
+
+            return redirect('users:profile')
+    else:
+        form = AvatarForm()
+
+    return render(request, 'users/user_upload_avatar.html', {'form': form, 'avatar': avatar})
+
+
+@login_required
+def profile(request):
+    user = request.user
+    user_id = request.user.id
+    avatar = Avatar.objects.filter(user_id=user_id).first()
+    return render(request, 'users/profile.html', context={'user': user, 'avatar': avatar})
+
+
+
+

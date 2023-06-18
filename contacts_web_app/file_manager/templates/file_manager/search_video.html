@@ -1,0 +1,138 @@
+{% extends 'users/base.html' %}
+
+
+{% block content %}
+
+<div class="text-center">
+    <a href="{% url 'file_manager:gallery' %}" class="btn btn-primary" style="width: 19%">Gallery</a>
+    <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 19%">Pictures</a>
+    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 19%">Video</a>
+    <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 19%">Audio</a>
+    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
+</div>
+<br>
+<h1>Search results: {{ query }}</h1>
+<br>
+<h2 class="text-center">Cloud Video</h2>
+<br>
+<div class="d-flex justify-content-center align-items-center mx-auto">
+    <form class="d-flex search-form" action="{% url 'file_manager:search_video' %}" method="get">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>
+<br>
+{% if form.errors %}
+<span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+{% endif %}
+
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+<br>
+{% csrf_token %}
+{% if  not cloud_video %}
+<div>Not found "{{query}}"</div>
+{% endif %}
+<br>
+<div class="row">
+    {% for video in cloud_video %}
+    <div class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">{{ video.title }}
+
+            <button class="badge rounded-pill bg-dark delete-video-button" data-video-id="{{ video.id }}">Delete
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="video-section square-section">
+                <div class="video-wrapper">
+                    <a href="{{ video.video.url }}">
+                        <video width="250" height="270" controls>
+                            <source src="{{ video.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Delete Video Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Video Deletion</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this video?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div>
+    <ul class="pagination pagination-lg">
+        <li class="page-item {% if not cloud_video.has_previous %}disabled{% endif %}">
+            <a class="page-link" href="{% if cloud_video.has_previous %}?page=1{% else %}#{% endif %}">&laquo;</a>
+        </li>
+        {% for num in cloud_video.paginator.page_range %}
+        {% if num == cloud_video.number %}
+        <li class="page-item active">
+            <a class="page-link" href="#">{{ num }}</a>
+        </li>
+        {% elif num > cloud_video.number|add:'-2' and num < cloud_video.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <li class="page-item {% if not cloud_video.has_next %}disabled{% endif %}">
+            <a class="page-link"
+               href="{% if cloud_video.has_next %}?page={{ cloud_video.paginator.num_pages }}{% else %}#{% endif %}">&raquo;</a>
+        </li>
+    </ul>
+</div>
+<br>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    var deleteVideoId;
+
+    $(".delete-video-button").on("click", function() {
+        deleteVideoId = $(this).data("video-id");
+        $("#confirmDeleteModal").modal("show");
+    });
+
+    $("#confirmDeleteButton").on("click", function() {
+        deleteVideo(deleteVideoId);
+    });
+
+    function deleteVideo(videoId) {
+        var deleteVideoUrl = "{% url 'file_manager:delete_video' video_id=0 %}".replace("0", videoId);
+        window.location.href = deleteVideoUrl;
+    }
+
+    $("#cancelDeleteButton").on("click", function() {
+        $("#confirmDeleteModal").modal("hide");
+    });
+});
+
+</script>
+
+{% endblock %}

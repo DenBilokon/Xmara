@@ -1,0 +1,20 @@
+{% extends 'users/base.html' %}
+
+
+{% block content %}
+
+<div class="text-center">
+    <a href="{% url 'file_manager:gallery' %}" class="btn btn-primary" style="width: 19%">Gallery</a>
+    <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 19%">Pictures</a>
+    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 19%">Video</a>
+    <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 19%">Audio</a>
+    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
+</div>
+<h1 class="text-center">GALLERY</h1>
+
+<br>
+<div class="text-center">
+    <a href="/"><img src="https://i.pinimg.com/564x/ac/b7/ff/acb7ffcbb39413e1026d3350b6e47af5.jpg" height="250"></a>
+</div>
+
+{% endblock %}

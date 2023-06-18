@@ -1,18 +1,32 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="text-center">
-        <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 33%">War</a>
-        <a href="#" class="btn btn-primary" style="width: 33%">Sport</a>
-        <a href="#" class="btn btn-primary" style="width: 33%">War statistics</a>
-    </div>
 
-    <div class="news-details">
+<br>
+<div class="text-center">
+    <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
+    <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 24%">War</a>
+    <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 24%">Sport</a>
+    <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 24%">War statistics</a>
+</div>
+
+<br>
+<div class="card" style="width: 60rem;">
+    <div class="card-body">
         <img src="{{ news_details.src_img }}" alt="{{ news_details.title }}" class="news-image">
-        <h3 class="news-title">{{ news_details.head_content }}</h3>
-        <p class="news-content">{{ news_details.content }}</p>
-        <p class="news-date">{{ news_details.news_date }}</p>
+        <br>
+        <br>
+        <h5 class="card-title">{{ news_details.head_content }}</h5>
+        <p class="card-text">{{ news_details.content }}</p>
     </div>
 </div>
+
+
+<!--<div class="news-details">-->
+<!--    <img src="{{ news_details.src_img }}" alt="{{ news_details.title }}" class="news-image">-->
+<!--    <h3 class="news-title">{{ news_details.head_content }}</h3>-->
+<!--    <p class="news-content">{{ news_details.content }}</p>-->
+<!--    <p class="news-date">{{ news_details.news_date }}</p>-->
+<!--</div>-->
+
 {% endblock %}

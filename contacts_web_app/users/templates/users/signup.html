@@ -1,57 +1,57 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2 class="titleForm">SignUp:</h2>
+
+<h2 class="titleForm">SignUp:</h2>
+<br>
+{% if form.errors %}
+<span class="alert alert-danger" role="alert">{{ form.non_field_errors }}</span>
+{% endif %}
+
+<form class="col-sm-6" method="POST">
+    {% csrf_token %}
+
+    <div>
+        <label>Username:</label>
+        {{ form.username }}
+        <span>{{ form.errors.username }}</span>
+    </div>
     <br>
-    {% if form.errors %}
-    <span class="alert alert-danger" role="alert">{{ form.non_field_errors }}</span>
-    {% endif %}
+    <div>
+        <label>First name:</label>
+        {{ form.first_name }}
+        <span>{{ form.errors.first_name }}</span>
+    </div>
+    <br>
+    <div>
+        <label>Last name:</label>
+        {{ form.last_name }}
+        <span>{{ form.errors.last_name }}</span>
+    </div>
+    <br>
+    <div>
+        <label>Email:</label>
+        {{ form.email }}
+        <span>{{ form.errors.email }}</span>
+    </div>
+    <br>
+    <div>
+        <label>Password:</label>
+        {{ form.password1 }}
+        <span>{{ form.errors.password1 }}</span>
+    </div>
+    <br>
+    <div>
+        <label>Password:</label>
+        {{ form.password2}}
+        <span>{{ form.errors.password2 }}</span>
+    </div>
+    <br>
+    <div>
+        <button type="submit" class="btn btn-primary btn">Submit</button>
+        <button type="reset" class="btn btn-secondary btn">Reset</button>
+    </div>
+</form>
 
-    <form class="col-sm-6" method="POST">
-        {% csrf_token %}
-
-        <div>
-            <label>Username:</label>
-            {{ form.username }}
-            <span>{{ form.errors.username }}</span>
-        </div>
-        <br>
-        <div>
-            <label>Username:</label>
-            {{ form.first_name }}
-            <span>{{ form.errors.first_name }}</span>
-        </div>
-        <br>
-        <div>
-            <label>Username:</label>
-            {{ form.last_name }}
-            <span>{{ form.errors.last_name }}</span>
-        </div>
-        <br>
-        <div>
-            <label>Email:</label>
-            {{ form.email }}
-            <span>{{ form.errors.email }}</span>
-        </div>
-        <br>
-        <div>
-            <label>Password:</label>
-            {{ form.password1 }}
-            <span>{{ form.errors.password1 }}</span>
-        </div>
-        <br>
-        <div>
-            <label>Password:</label>
-            {{ form.password2}}
-            <span>{{ form.errors.password2 }}</span>
-        </div>
-        <br>
-        <div>
-            <button type="submit" class="btn btn-primary btn">Submit</button>
-            <button type="reset" class="btn btn-secondary btn">Reset</button>
-        </div>
-    </form>
-</div>
 {% endblock %}
 

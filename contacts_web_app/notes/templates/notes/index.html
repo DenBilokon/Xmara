@@ -1,38 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Organizer</title>
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
-</head>
-<body>
-<main class="container">
-    <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
-        {% if user.is_authenticated %}
-        <ul>
-            <li><a href="{% url 'notes:note' %}" role="button">Add note</a></li>
-            <li><a href="{% url 'notes:tag' %}" role="button">Add Tag</a></li>
-        </ul>
-        <ul>
-            <li>Welcome <b>{{ user.username }}!</b></li>
-            <li><a href="{% url 'users:main' %}" role="button">Home</a></li>
-        </ul>
-        {% endif %}
-    </nav>
+{% extends 'users/base.html' %}
+{% block content %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-group-horizontal" role="group" aria-label="Button Group">
+                    <a href="{% url 'notes:note' %}" class="btn btn-outline-primary btn-block">Add Note</a>
+                    <a href="{% url 'notes:tag' %}" class="btn btn-secondary btn-block">Add Tag</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <form method="GET" action="{% url 'notes:search' %}" class="mb-4 border p-3">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control p-3" placeholder="Search notes..." required>
+                        <button type="submit" class="btn btn-outline-primary">Search</button>
+                    </div>
+                </form>
 
-    {% for note in notes %}
-    <ul>
-        <li>
-            {% if not note.done %}
-            <a href="{% url 'notes:detail' note.id %}" role="button" class="outline"> {{ note.name }} </a>
-            <a href="{% url 'notes:set_done' note.id %}" role="button"> Mark Done </a>
-            <a href="{% url 'notes:delete' note.id %}" role="button" class="contrast"> Delete note </a>
-            {% else %}
-            <a href="{% url 'notes:detail' note.id %}" role="button" class="secondary"><s>{{ note.name }}</s></a>
-            {% endif %}
-        </li>
-    </ul>
-    {% endfor %}
-</main>
-</body>
-</html>
+                <form method="GET" action="{% url 'notes:sort' %}" class="mb-4 border p-3">
+                {% csrf_token %}
+                    <div class="input-group">
+                        <label class="input-group-text">Select tags:</label>
+                        <select class="form-select" aria-label="Default select example" name="selected_tags">
+                            <option selected></option>
+                            {% for tag in tags.all %}
+                                <option value="{{ tag.name }}">{{ tag.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <button type="submit" class="btn btn-outline-primary">Filter</button>
+                    </div>
+                </form>
+
+                <div class="row">
+                    {% for note in notes %}
+                        <div class="col-4">
+                            <div class="card mb-3">
+                                <div class="card-body shadow bg-body-tertiary rounded-5">
+                                    {% if not note.done %}
+                                        <h5 class="card-title fw-bold">{{ note.name }}</h5>
+                                        <p class="card-text">{{ note.description }}</p>
+                                        <a href="{% url 'notes:set_done' note.id %}" class="btn btn-outline-primary btn-sm">Mark Done</a>
+                                    {% else %}
+                                        <h5 class="card-title fw-bold">{{ note.name }} <i class="bi bi-check-circle-fill text-primary"></i></h5>
+                                        <p class="card-text">{{ note.description }}</p>
+                                        
+                                    {% endif %}
+                                    <div class="btn-group" role="group" aria-label="Note Actions">
+                                        <a href="{% url 'notes:detail' note.id %}" class="btn btn-outline-secondary btn-sm">Details</a>
+                                        <a href="{% url 'notes:edit_note' note.id %}" class="btn btn-outline-info btn-sm">Edit</a>
+                                        <a href="{% url 'notes:delete' note.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No notes found.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{% endblock %}

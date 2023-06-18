@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<br>
+    <div class="text-center">
+    <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
+    <a href="{% url 'news:news_war' %}" class="btn btn-primary" style="width: 24%">War</a>
+    <a href="{% url 'news:news_prosport' %}" class="btn btn-primary" style="width: 24%">Sport</a>
+    <a href="{% url 'news:war_statistic' %}" class="btn btn-primary" style="width: 24%">War statistics</a>
+    </div>
+
+<br>
+<div class="card" style="width: 60rem;">
+    <div class="card-body">
+        <img src="{{ news_details.src_img }}" alt="{{ news_details.title }}" class="news-image">
+        <br>
+        <br>
+        <h5 class="card-title">{{ news_details.head_content }}</h5>
+        <p class="card-text">{{ news_details.content }}</p>
+    </div>
+</div>
+
+{% endblock %}
