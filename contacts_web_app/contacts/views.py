@@ -128,11 +128,16 @@ def save_csv_to_model(file_path):
 def file_uploader(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
-        file = request.FILES.get('file', False)
-        if not file.name.endswith('.csv'):
-            messages.warning(request, 'Invalid file format. Please upload a CSV file.')
+        try:
+            file = request.FILES.get('file')
+            if not file.name.endswith('.csv'):
+                messages.warning(request, 'Invalid file format. Please upload a CSV file.')
+                return redirect(to='contacts:main')
+        except AttributeError:
+            messages.warning(request, 'You forgot to choose a file. Please make sure you chose CSV file and upload it.')
             return redirect(to='contacts:main')
-            #return HttpResponse('Invalid file format. Please upload a CSV file.')
+
+        # return HttpResponse('Invalid file format. Please upload a CSV file.')
         else:
             try:
                 File.objects.create(file=file, user=request.user)
