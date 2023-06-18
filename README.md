@@ -1,6 +1,6 @@
 # Command_project_WEB_Django
 
-![alt text](https://raw.githubusercontent.com/DenBilokon/Xmara/default/contacts_web_app/users/static/users/img/logo-no-background.png)
+![alt text](https://raw.githubusercontent.com/DenBilokon/Xmara/main/contacts_web_app/users/static/users/img/logo-no-background_2.png)
 
 # "Personal Assistant" (Web application)
 ## Basic features of the web application:
