@@ -3,11 +3,10 @@
 
 {% block content %}
 <div class="text-center">
-    <a href="{% url 'file_manager:gallery' %}" class="btn btn-primary" style="width: 19%">Gallery</a>
-    <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 19%">Pictures</a>
-    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 19%">Video</a>
-    <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 19%">Audio</a>
-    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
+    <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 24%">Pictures</a>
+    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 24%">Video</a>
+    <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 24%">Audio</a>
+    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 24%">Documents</a>
 </div>
 <br>
 <h1 class="text-center">DOCUMENTS</h1>
@@ -56,7 +55,7 @@
         {% for document in cloud_document %}
         <li class="document-item">
             <div class="document-details">
-                <div class="document-title">{{ document.title }}</div>
+                <div class="document-title">{{ document.title|truncatechars:50 }}</div>
             </div>
             <div class="document-actions">
                 <button class="badge rounded-pill bg-light download-document-button"
