@@ -2,11 +2,10 @@
 
 {% block content %}
 <div class="text-center">
-    <a href="{% url 'file_manager:gallery' %}" class="btn btn-primary" style="width: 19%">Gallery</a>
-    <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 19%">Pictures</a>
-    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 19%">Video</a>
-    <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 19%">Audio</a>
-    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
+    <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 24%">Pictures</a>
+    <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 24%">Video</a>
+    <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 24%">Audio</a>
+    <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 24%">Documents</a>
 </div>
 <br>
 <h1 class="text-center">AUDIO</h1>
@@ -65,9 +64,9 @@
         {% for audio in cloud_audio %}
         <li>
             <div class="audio-details">
-                <span class="audio-title">{{ audio.title }}</span>
+                <span class="audio-title">{{ audio.title|truncatechars:50 }}</span>
                 -
-                <span class="audio-artist">{{ audio.artist }}</span>
+                <span class="audio-artist">{{ audio.title|truncatechars:50 }}</span>
             </div>
             <div class="audio-actions">
                 <button class="audio-play-button badge rounded-pill bg-light" data-src="{{ audio.audio.url }}" data-title="{{ audio.title }}">
@@ -161,19 +160,6 @@ $(document).ready(function() {
 });
 </script>
 <style>
-    .form-box {
-    width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    background-image: url("https://i.pinimg.com/originals/da/30/27/da30273ba3899b90c91e063afde08242.gif");
-    background-size: 150% auto;
-    background-position: center top;
-    background-repeat: no-repeat;
-}
-
 .audio-player-container {
     display: none;
     margin-top: 20px;

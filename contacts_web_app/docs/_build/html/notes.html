@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>notes package &#8212; Xmara  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Xmara  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notes package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="notes-package">
+<h1>notes package<a class="headerlink" href="#notes-package" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notes.migrations.html">notes.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes.migrations.html#module-notes.migrations.0001_initial">notes.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes.migrations.html#notes.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notes.migrations.html#notes.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="notes.migrations.html#notes.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="notes.migrations.html#notes.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes.migrations.html#module-notes.migrations.0002_note_user_tag_user_alter_tag_name_and_more">notes.migrations.0002_note_user_tag_user_alter_tag_name_and_more module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes.migrations.html#notes.migrations.0002_note_user_tag_user_alter_tag_name_and_more.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notes.migrations.html#notes.migrations.0002_note_user_tag_user_alter_tag_name_and_more.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="notes.migrations.html#notes.migrations.0002_note_user_tag_user_alter_tag_name_and_more.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes.migrations.html#module-notes.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-notes.admin">
+<span id="notes-admin-module"></span><h2>notes.admin module<a class="headerlink" href="#module-notes.admin" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-notes.apps">
+<span id="notes-apps-module"></span><h2>notes.apps module<a class="headerlink" href="#module-notes.apps" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="notes.apps.NotesConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notes.apps.</span></span><span class="sig-name descname"><span class="pre">NotesConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.apps.NotesConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.apps.NotesConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#notes.apps.NotesConfig.default_auto_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.apps.NotesConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'notes'</span></em><a class="headerlink" href="#notes.apps.NotesConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-notes.forms">
+<span id="notes-forms-module"></span><h2>notes.forms module<a class="headerlink" href="#module-notes.forms" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="notes.forms.NoteForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notes.forms.</span></span><span class="sig-name descname"><span class="pre">NoteForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.forms.NoteForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="notes.forms.NoteForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#notes.forms.NoteForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.NoteForm.Meta.exclude">
+<span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['tags']</span></em><a class="headerlink" href="#notes.forms.NoteForm.Meta.exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.NoteForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'description']</span></em><a class="headerlink" href="#notes.forms.NoteForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.NoteForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#notes.forms.NoteForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#notes.models.Note" title="notes.models.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">Note</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.NoteForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#notes.forms.NoteForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.NoteForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#notes.forms.NoteForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="notes.forms.NoteForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#notes.forms.NoteForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notes.forms.TagForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notes.forms.</span></span><span class="sig-name descname"><span class="pre">TagForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.forms.TagForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="notes.forms.TagForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#notes.forms.TagForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.TagForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name']</span></em><a class="headerlink" href="#notes.forms.TagForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.TagForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#notes.forms.TagForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#notes.models.Tag" title="notes.models.Tag"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.TagForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#notes.forms.TagForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.forms.TagForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#notes.forms.TagForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="notes.forms.TagForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#notes.forms.TagForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-notes.models">
+<span id="notes-models-module"></span><h2>notes.models module<a class="headerlink" href="#module-notes.models" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="notes.models.Note">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notes.models.</span></span><span class="sig-name descname"><span class="pre">Note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.models.Note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="notes.models.Note.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#notes.models.Note.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="notes.models.Note.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#notes.models.Note.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.created">
+<span class="sig-name descname"><span class="pre">created</span></span><a class="headerlink" href="#notes.models.Note.created" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#notes.models.Note.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.done">
+<span class="sig-name descname"><span class="pre">done</span></span><a class="headerlink" href="#notes.models.Note.done" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notes.models.Note.get_next_by_created">
+<span class="sig-name descname"><span class="pre">get_next_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.models.Note.get_next_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="notes.models.Note.get_previous_by_created">
+<span class="sig-name descname"><span class="pre">get_previous_by_created</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">created&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.models.Note.get_previous_by_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#notes.models.Note.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#notes.models.Note.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#notes.models.Note.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><a class="headerlink" href="#notes.models.Note.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#notes.models.Note.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Note.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#notes.models.Note.user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="notes.models.Tag">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">notes.models.</span></span><span class="sig-name descname"><span class="pre">Tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.models.Tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="notes.models.Tag.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#notes.models.Tag.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="notes.models.Tag.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#notes.models.Tag.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Tag.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#notes.models.Tag.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Tag.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#notes.models.Tag.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Tag.note_set">
+<span class="sig-name descname"><span class="pre">note_set</span></span><a class="headerlink" href="#notes.models.Tag.note_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Tag.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#notes.models.Tag.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Tag.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#notes.models.Tag.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="notes.models.Tag.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#notes.models.Tag.user_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-notes.tests">
+<span id="notes-tests-module"></span><h2>notes.tests module<a class="headerlink" href="#module-notes.tests" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-notes.urls">
+<span id="notes-urls-module"></span><h2>notes.urls module<a class="headerlink" href="#module-notes.urls" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-notes.views">
+<span id="notes-views-module"></span><h2>notes.views module<a class="headerlink" href="#module-notes.views" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.delete_note">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">delete_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.delete_note" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The delete_note function takes in a request and note_id,</dt><dd><p>then deletes the Note object with the given id.
+It redirects to ‘notes:main’ after deleting.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the user information from the request object</p></li>
+<li><p><strong>note_id</strong> – Find the note to delete</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main view</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.detail">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>The detail function is used to display a single note.
+It takes the request and the note_id as parameters, and returns a rendered template with the requested note.
+If no such note exists, it raises an Http404 exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the current user</p></li>
+<li><p><strong>note_id</strong> – Retrieve the note from the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A httpresponseredirect object</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.edit_note">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">edit_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.edit_note" title="Permalink to this definition">¶</a></dt>
+<dd><p>The edit_note function is responsible for editing a note.
+It takes the request and note_id as parameters, gets the Note object with that id or returns 404 if it doesn’t exist,
+gets all tags of this user and checks if the request method is POST. If so, it creates a form from NoteForm class with
+the data from POST request and instance of edited note (note). If form is valid then we create an edited_note variable 
+with data from form but without saving to database yet. Then we set its user attribute to current logged in user 
+(request.user) and save it to database using .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the request object</p></li>
+<li><p><strong>note_id</strong> – Get the note object from the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The render function</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.main">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main function is the view for the main page of our site.
+It displays all notes and tags that belong to a user if they are logged in, or an empty list otherwise.
+It also paginates notes so that only 9 are displayed per page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render function</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.note">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.note" title="Permalink to this definition">¶</a></dt>
+<dd><p>The note function is responsible for creating a new note.
+It first gets all the tags that belong to the user and passes them to the template.
+Then it checks if there was a POST request, which means that someone submitted data through our form.
+If so, we create an instance of NoteForm with this data and check if it’s valid (if all fields are filled correctly). If not, we render our template again but this time with errors in form fields (they will be highlighted). Otherwise we save our new note without committing changes yet because we need to add some tags first. Then we get all chosen tags from request body and</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the data from the form</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The note</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.search">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>The search function takes a request and returns the search results.
+If there is no query in the request, it redirects to main.
+Otherwise, it filters notes by name or description and renders them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of notes that match the query</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.set_done">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">set_done</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.set_done" title="Permalink to this definition">¶</a></dt>
+<dd><p>The set_done function takes a request and note_id as arguments.
+It then filters the Note objects by the primary key of note_id, 
+and updates the done field to True. It then redirects to ‘notes:main’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the user from the request object</p></li>
+<li><p><strong>note_id</strong> – Find the note that we want to mark as done</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main page</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.sort">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sort function takes in a request object and returns the search_results.html template with notes that have been filtered by tags selected by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of notes that have the selected tags</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.tag">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.tag" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The tag function is used to create a new tag.</dt><dd><p>It takes in the request and returns a rendered template of the form.
+If it’s a POST request, then it will save the data from that form into our database.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main page</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-notes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-notes" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">notes package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-notes.admin">notes.admin module</a></li>
+<li><a class="reference internal" href="#module-notes.apps">notes.apps module</a><ul>
+<li><a class="reference internal" href="#notes.apps.NotesConfig"><code class="docutils literal notranslate"><span class="pre">NotesConfig</span></code></a><ul>
+<li><a class="reference internal" href="#notes.apps.NotesConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">NotesConfig.default_auto_field</span></code></a></li>
+<li><a class="reference internal" href="#notes.apps.NotesConfig.name"><code class="docutils literal notranslate"><span class="pre">NotesConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-notes.forms">notes.forms module</a><ul>
+<li><a class="reference internal" href="#notes.forms.NoteForm"><code class="docutils literal notranslate"><span class="pre">NoteForm</span></code></a><ul>
+<li><a class="reference internal" href="#notes.forms.NoteForm.Meta"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#notes.forms.NoteForm.Meta.exclude"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.exclude</span></code></a></li>
+<li><a class="reference internal" href="#notes.forms.NoteForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#notes.forms.NoteForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">NoteForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes.forms.NoteForm.base_fields"><code class="docutils literal notranslate"><span class="pre">NoteForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#notes.forms.NoteForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">NoteForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#notes.forms.NoteForm.media"><code class="docutils literal notranslate"><span class="pre">NoteForm.media</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes.forms.TagForm"><code class="docutils literal notranslate"><span class="pre">TagForm</span></code></a><ul>
+<li><a class="reference internal" href="#notes.forms.TagForm.Meta"><code class="docutils literal notranslate"><span class="pre">TagForm.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#notes.forms.TagForm.Meta.fields"><code class="docutils literal notranslate"><span class="pre">TagForm.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#notes.forms.TagForm.Meta.model"><code class="docutils literal notranslate"><span class="pre">TagForm.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes.forms.TagForm.base_fields"><code class="docutils literal notranslate"><span class="pre">TagForm.base_fields</span></code></a></li>
+<li><a class="reference internal" href="#notes.forms.TagForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">TagForm.declared_fields</span></code></a></li>
+<li><a class="reference internal" href="#notes.forms.TagForm.media"><code class="docutils literal notranslate"><span class="pre">TagForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-notes.models">notes.models module</a><ul>
+<li><a class="reference internal" href="#notes.models.Note"><code class="docutils literal notranslate"><span class="pre">Note</span></code></a><ul>
+<li><a class="reference internal" href="#notes.models.Note.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Note.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Note.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.created"><code class="docutils literal notranslate"><span class="pre">Note.created</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.description"><code class="docutils literal notranslate"><span class="pre">Note.description</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.done"><code class="docutils literal notranslate"><span class="pre">Note.done</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.get_next_by_created"><code class="docutils literal notranslate"><span class="pre">Note.get_next_by_created()</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.get_previous_by_created"><code class="docutils literal notranslate"><span class="pre">Note.get_previous_by_created()</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.id"><code class="docutils literal notranslate"><span class="pre">Note.id</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.name"><code class="docutils literal notranslate"><span class="pre">Note.name</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.objects"><code class="docutils literal notranslate"><span class="pre">Note.objects</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.tags"><code class="docutils literal notranslate"><span class="pre">Note.tags</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.user"><code class="docutils literal notranslate"><span class="pre">Note.user</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Note.user_id"><code class="docutils literal notranslate"><span class="pre">Note.user_id</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes.models.Tag"><code class="docutils literal notranslate"><span class="pre">Tag</span></code></a><ul>
+<li><a class="reference internal" href="#notes.models.Tag.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Tag.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Tag.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Tag.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Tag.id"><code class="docutils literal notranslate"><span class="pre">Tag.id</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Tag.name"><code class="docutils literal notranslate"><span class="pre">Tag.name</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Tag.note_set"><code class="docutils literal notranslate"><span class="pre">Tag.note_set</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Tag.objects"><code class="docutils literal notranslate"><span class="pre">Tag.objects</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Tag.user"><code class="docutils literal notranslate"><span class="pre">Tag.user</span></code></a></li>
+<li><a class="reference internal" href="#notes.models.Tag.user_id"><code class="docutils literal notranslate"><span class="pre">Tag.user_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-notes.tests">notes.tests module</a></li>
+<li><a class="reference internal" href="#module-notes.urls">notes.urls module</a></li>
+<li><a class="reference internal" href="#module-notes.views">notes.views module</a><ul>
+<li><a class="reference internal" href="#notes.views.delete_note"><code class="docutils literal notranslate"><span class="pre">delete_note()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.detail"><code class="docutils literal notranslate"><span class="pre">detail()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.edit_note"><code class="docutils literal notranslate"><span class="pre">edit_note()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.note"><code class="docutils literal notranslate"><span class="pre">note()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.search"><code class="docutils literal notranslate"><span class="pre">search()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.set_done"><code class="docutils literal notranslate"><span class="pre">set_done()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.sort"><code class="docutils literal notranslate"><span class="pre">sort()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.tag"><code class="docutils literal notranslate"><span class="pre">tag()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-notes">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/notes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Xmara  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">notes package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Team One.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    </div>
+  </body>
+</html>
