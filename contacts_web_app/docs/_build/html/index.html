@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to Xmara’s documentation! &#8212; Xmara  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Xmara  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to Xmara’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-xmara-s-documentation">
+<h1>Welcome to Xmara’s documentation!<a class="headerlink" href="#welcome-to-xmara-s-documentation" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-contacts.views">
+<span id="xmara-service-contacts"></span><h1>Xmara service Contacts<a class="headerlink" href="#module-contacts.views" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.birthday">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">birthday</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.birthday" title="Permalink to this definition">¶</a></dt>
+<dd><p>The birthday function takes the request and returns a rendered template of all contacts whose birthday is within
+the next 7 days. It also includes the current year, today’s date, and an empty list for show.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current_year, birthday_list, today and show</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.contacts">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.contacts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The contacts function is a view that allows users to add contacts.</dt><dd><p>It takes in the request and returns a rendered template of the contact form.
+If the user submits data, it will be saved to the database.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The html page with the form</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.delete_contact">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">delete_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.delete_contact" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The delete_contact function deletes a contact from the database.</dt><dd><dl class="simple">
+<dt>Args:</dt><dd><p>request (HttpRequest): The HTTP request sent to the server.
+contact_id (int): The primary key of the Contact object to be deleted.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the current user</p></li>
+<li><p><strong>contact_id</strong> – Identify the contact to be deleted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main page</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.edit">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.edit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The edit function is used to edit a contact.</dt><dd><p>It takes in the request and contact_id as parameters.
+The function then gets the contact from Contacts model using the primary key of that object, which is also equal to 
+the user who created it. Then we create an instance of ContactForm with either POST data or None if there’s no POST data, 
+and pass in our instance variable (contact). If form is valid, save it and redirect back to main page; otherwise render 
+edit template with context containing form and contact variables.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the user information, contact_id is used to find the specific contact and then save it</p></li>
+<li><p><strong>contact_id</strong> – Get the contact object from the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The edit</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.file_uploader">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">file_uploader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.file_uploader" title="Permalink to this definition">¶</a></dt>
+<dd><p>The file_uploader function is responsible for handling the file upload process.
+It first checks if the request method is POST, which means that a file has been uploaded.
+If so, it creates an instance of File with the uploaded file and user who uploaded it.
+Then, it saves the CSV to a model using save_csv_to_model function (see below). 
+Afterwards, it converts CSV to JSON and saves this JSON in media/files folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the file from the form</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main page</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.main">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main function is the entry point for the contacts app.
+It renders a list of all contacts in the database, if any exist.
+If no user is logged in, it will render an empty list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rendered template</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.save_csv_to_model">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">save_csv_to_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.save_csv_to_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>The save_csv_to_model function takes a file path as an argument and saves the data in that CSV to the Contacts model.
+The function opens the file, reads it line by line, skips over the header row (firstname, lastname…), and then creates a new instance of Contacts for each row in the CSV.
+It then assigns values from each column to attributes on that instance of Contacts before saving it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Specify the path to the csv file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A none type</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.search_contact">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">search_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.search_contact" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The search_contact function is used to search for a contact in the database.</dt><dd><p>The function takes in a request object and returns either the main page or 
+renders the search_contact template with context containing searched, contacts.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render of the search_contact</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.show_files">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">show_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.show_files" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The show_files function is a view that displays all of the files uploaded by the user.</dt><dd><p>It takes in a request object and returns an HTML page with all of the files uploaded by
+that user.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The files</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="contacts.views.sort">
+<span class="sig-prename descclassname"><span class="pre">contacts.views.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts.views.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sort function is used to sort the contacts by first name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The firstname of the contacts in alphabetical order</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-file_manager.views">
+<span id="xmara-service-file-manager"></span><h1>Xmara service File manager<a class="headerlink" href="#module-file_manager.views" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.delete_picture">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">delete_picture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picture_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.delete_picture" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.download_image">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">download_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.download_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.gallery">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">gallery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.gallery" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.main_mf">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">main_mf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.main_mf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.upload_audio">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_audio" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.upload_document">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_document" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.upload_picture">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_picture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_picture" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="file_manager.views.upload_video">
+<span class="sig-prename descclassname"><span class="pre">file_manager.views.</span></span><span class="sig-name descname"><span class="pre">upload_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manager.views.upload_video" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-news.views">
+<span id="xmara-service-news"></span><h1>Xmara service News<a class="headerlink" href="#module-news.views" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.add_crypto_currency_to_file">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">add_crypto_currency_to_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.add_crypto_currency_to_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.add_currency_to_file">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">add_currency_to_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.add_currency_to_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.crypto_currency_parse">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">crypto_currency_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.crypto_currency_parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.currency_parse">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">currency_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.currency_parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.home">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.home" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.news_prosport">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_prosport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_prosport" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.news_prosport_show_one">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_prosport_show_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_prosport_show_one" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.news_war">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_war</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_war" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.news_war_show_one">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">news_war_show_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.news_war_show_one" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.read_crypto_currency_from_file">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">read_crypto_currency_from_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.read_crypto_currency_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.read_currency_from_file">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">read_currency_from_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.read_currency_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.tsn_page_spider">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">tsn_page_spider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_link</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">news_date</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.tsn_page_spider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.tsn_prosport_spider">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">tsn_prosport_spider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.tsn_prosport_spider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.tsn_war_spider">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">tsn_war_spider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.tsn_war_spider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.war_stat_parse">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">war_stat_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#news.views.war_stat_parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.war_statistic">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">war_statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.war_statistic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="news.views.when_bored">
+<span class="sig-prename descclassname"><span class="pre">news.views.</span></span><span class="sig-name descname"><span class="pre">when_bored</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#news.views.when_bored" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-notes.views">
+<span id="xmara-service-notes"></span><h1>Xmara service Notes<a class="headerlink" href="#module-notes.views" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.delete_note">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">delete_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.delete_note" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The delete_note function takes in a request and note_id,</dt><dd><p>then deletes the Note object with the given id.
+It redirects to ‘notes:main’ after deleting.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the user information from the request object</p></li>
+<li><p><strong>note_id</strong> – Find the note to delete</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main view</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.detail">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>The detail function is used to display a single note.
+It takes the request and the note_id as parameters, and returns a rendered template with the requested note.
+If no such note exists, it raises an Http404 exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the current user</p></li>
+<li><p><strong>note_id</strong> – Retrieve the note from the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A httpresponseredirect object</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.edit_note">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">edit_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.edit_note" title="Permalink to this definition">¶</a></dt>
+<dd><p>The edit_note function is responsible for editing a note.
+It takes the request and note_id as parameters, gets the Note object with that id or returns 404 if it doesn’t exist,
+gets all tags of this user and checks if the request method is POST. If so, it creates a form from NoteForm class with
+the data from POST request and instance of edited note (note). If form is valid then we create an edited_note variable 
+with data from form but without saving to database yet. Then we set its user attribute to current logged in user 
+(request.user) and save it to database using .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the request object</p></li>
+<li><p><strong>note_id</strong> – Get the note object from the database</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The render function</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.main">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main function is the view for the main page of our site.
+It displays all notes and tags that belong to a user if they are logged in, or an empty list otherwise.
+It also paginates notes so that only 9 are displayed per page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render function</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.note">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.note" title="Permalink to this definition">¶</a></dt>
+<dd><p>The note function is responsible for creating a new note.
+It first gets all the tags that belong to the user and passes them to the template.
+Then it checks if there was a POST request, which means that someone submitted data through our form.
+If so, we create an instance of NoteForm with this data and check if it’s valid (if all fields are filled correctly). If not, we render our template again but this time with errors in form fields (they will be highlighted). Otherwise we save our new note without committing changes yet because we need to add some tags first. Then we get all chosen tags from request body and</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the data from the form</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The note</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.search">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>The search function takes a request and returns the search results.
+If there is no query in the request, it redirects to main.
+Otherwise, it filters notes by name or description and renders them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of notes that match the query</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.set_done">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">set_done</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.set_done" title="Permalink to this definition">¶</a></dt>
+<dd><p>The set_done function takes a request and note_id as arguments.
+It then filters the Note objects by the primary key of note_id, 
+and updates the done field to True. It then redirects to ‘notes:main’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – Get the user from the request object</p></li>
+<li><p><strong>note_id</strong> – Find the note that we want to mark as done</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main page</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.sort">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sort function takes in a request object and returns the search_results.html template with notes that have been filtered by tags selected by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of notes that have the selected tags</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="notes.views.tag">
+<span class="sig-prename descclassname"><span class="pre">notes.views.</span></span><span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#notes.views.tag" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The tag function is used to create a new tag.</dt><dd><p>It takes in the request and returns a rendered template of the form.
+If it’s a POST request, then it will save the data from that form into our database.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the current request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the main page</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-scheduler.views">
+<span id="xmara-service-scheduler"></span><h1>Xmara service Scheduler<a class="headerlink" href="#module-scheduler.views" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="scheduler.views.start">
+<span class="sig-prename descclassname"><span class="pre">scheduler.views.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#scheduler.views.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>The start function is called by the scheduler.py file, which is run as a cron job every minute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Doc-author<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-users.views">
+<span id="xmara-service-users"></span><h1>Xmara service Users<a class="headerlink" href="#module-users.views" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="users.views.RegisterView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">RegisterView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.RegisterView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="users.views.RegisterView.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.RegisterView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>The dispatch function is a method that gets called when the view is requested.
+It checks if the user is authenticated, and if so redirects them to the home page.
+If not, it calls super().dispatch() which will call get(), post(), etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – Refer to the current instance of the class</p></li>
+<li><p><strong>request</strong> – Get the request object, which is used to check if the user is authenticated</p></li>
+<li><p><strong>*args</strong> – <p>Send a non-keyworded variable length argument list to the function</p>
+</p></li>
+<li><p><strong>**kwargs</strong> – <p>Pass keyworded, variable-length argument list to a function</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the home page if user is authenticated, otherwise it returns a super()</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.RegisterView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#users.views.RegisterView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">RegisterForm</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="users.views.RegisterView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.RegisterView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>The get function renders the form to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – Access the attributes and methods of the class in python</p></li>
+<li><p><strong>request</strong> – Get the request object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render of the template_name with the form_class</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="users.views.RegisterView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.RegisterView.post" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The post function is used to create a new user.</dt><dd><p>The form_class variable is set to the UserCreationForm class, which allows us to create a new user.
+The form variable is set equal to the post request and cleaned data from the UserCreationForm class.
+If the form has been filled out correctly, then it will save that information into our database and redirect you back</p>
+</dd>
+</dl>
+<p>to login page with a success message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> – Represent the instance of the object itself</p></li>
+<li><p><strong>request</strong> – Pass the request object to the view</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The render function which renders the template</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.RegisterView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/signup.html'</span></em><a class="headerlink" href="#users.views.RegisterView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="users.views.ResetPasswordView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">ResetPasswordView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.ResetPasswordView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SuccessMessageMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PasswordResetView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.ResetPasswordView.email_template_name">
+<span class="sig-name descname"><span class="pre">email_template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/password_reset_email.html'</span></em><a class="headerlink" href="#users.views.ResetPasswordView.email_template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.ResetPasswordView.html_email_template_name">
+<span class="sig-name descname"><span class="pre">html_email_template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/password_reset_email.html'</span></em><a class="headerlink" href="#users.views.ResetPasswordView.html_email_template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.ResetPasswordView.subject_template_name">
+<span class="sig-name descname"><span class="pre">subject_template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/password_reset_subject.txt'</span></em><a class="headerlink" href="#users.views.ResetPasswordView.subject_template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.ResetPasswordView.success_message">
+<span class="sig-name descname"><span class="pre">success_message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'An</span> <span class="pre">email</span> <span class="pre">with</span> <span class="pre">instructions</span> <span class="pre">to</span> <span class="pre">reset</span> <span class="pre">your</span> <span class="pre">password</span> <span class="pre">has</span> <span class="pre">been</span> <span class="pre">sent</span> <span class="pre">to</span> <span class="pre">%(email)s.'</span></em><a class="headerlink" href="#users.views.ResetPasswordView.success_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.ResetPasswordView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/users/reset-password/done/'</span></em><a class="headerlink" href="#users.views.ResetPasswordView.success_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.ResetPasswordView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'users/password_reset.html'</span></em><a class="headerlink" href="#users.views.ResetPasswordView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="users.views.main">
+<span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main function is the entry point for the application.
+It renders a template with a form that allows users to enter their name and age.
+The user’s input is then sent to another view, which displays it in an HTML page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the request object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A render function</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="users.views.question_to_ai">
+<span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">question_to_ai</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.question_to_ai" title="Permalink to this definition">¶</a></dt>
+<dd><p>The question_to_ai function takes a question from the user and sends it to OpenAI’s API.
+The function then returns an answer to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Get the data from the form</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A response_html variable, which is a string</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="users.views.user_data">
+<span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">user_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.user_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user_data function renders the user.html template, which displays a list of all users in the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Pass the request object to the view</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The user</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to Xmara’s documentation!</a></li>
+<li><a class="reference internal" href="#module-contacts.views">Xmara service Contacts</a><ul>
+<li><a class="reference internal" href="#contacts.views.birthday"><code class="docutils literal notranslate"><span class="pre">birthday()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.contacts"><code class="docutils literal notranslate"><span class="pre">contacts()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.delete_contact"><code class="docutils literal notranslate"><span class="pre">delete_contact()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.edit"><code class="docutils literal notranslate"><span class="pre">edit()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.file_uploader"><code class="docutils literal notranslate"><span class="pre">file_uploader()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.save_csv_to_model"><code class="docutils literal notranslate"><span class="pre">save_csv_to_model()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.search_contact"><code class="docutils literal notranslate"><span class="pre">search_contact()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.show_files"><code class="docutils literal notranslate"><span class="pre">show_files()</span></code></a></li>
+<li><a class="reference internal" href="#contacts.views.sort"><code class="docutils literal notranslate"><span class="pre">sort()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-file_manager.views">Xmara service File manager</a><ul>
+<li><a class="reference internal" href="#file_manager.views.delete_picture"><code class="docutils literal notranslate"><span class="pre">delete_picture()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.download_image"><code class="docutils literal notranslate"><span class="pre">download_image()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.gallery"><code class="docutils literal notranslate"><span class="pre">gallery()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.main_mf"><code class="docutils literal notranslate"><span class="pre">main_mf()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.upload_audio"><code class="docutils literal notranslate"><span class="pre">upload_audio()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.upload_document"><code class="docutils literal notranslate"><span class="pre">upload_document()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.upload_picture"><code class="docutils literal notranslate"><span class="pre">upload_picture()</span></code></a></li>
+<li><a class="reference internal" href="#file_manager.views.upload_video"><code class="docutils literal notranslate"><span class="pre">upload_video()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-news.views">Xmara service News</a><ul>
+<li><a class="reference internal" href="#news.views.add_crypto_currency_to_file"><code class="docutils literal notranslate"><span class="pre">add_crypto_currency_to_file()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.add_currency_to_file"><code class="docutils literal notranslate"><span class="pre">add_currency_to_file()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.crypto_currency_parse"><code class="docutils literal notranslate"><span class="pre">crypto_currency_parse()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.currency_parse"><code class="docutils literal notranslate"><span class="pre">currency_parse()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.news_prosport"><code class="docutils literal notranslate"><span class="pre">news_prosport()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.news_prosport_show_one"><code class="docutils literal notranslate"><span class="pre">news_prosport_show_one()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.news_war"><code class="docutils literal notranslate"><span class="pre">news_war()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.news_war_show_one"><code class="docutils literal notranslate"><span class="pre">news_war_show_one()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.read_crypto_currency_from_file"><code class="docutils literal notranslate"><span class="pre">read_crypto_currency_from_file()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.read_currency_from_file"><code class="docutils literal notranslate"><span class="pre">read_currency_from_file()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.tsn_page_spider"><code class="docutils literal notranslate"><span class="pre">tsn_page_spider()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.tsn_prosport_spider"><code class="docutils literal notranslate"><span class="pre">tsn_prosport_spider()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.tsn_war_spider"><code class="docutils literal notranslate"><span class="pre">tsn_war_spider()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.war_stat_parse"><code class="docutils literal notranslate"><span class="pre">war_stat_parse()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.war_statistic"><code class="docutils literal notranslate"><span class="pre">war_statistic()</span></code></a></li>
+<li><a class="reference internal" href="#news.views.when_bored"><code class="docutils literal notranslate"><span class="pre">when_bored()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-notes.views">Xmara service Notes</a><ul>
+<li><a class="reference internal" href="#notes.views.delete_note"><code class="docutils literal notranslate"><span class="pre">delete_note()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.detail"><code class="docutils literal notranslate"><span class="pre">detail()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.edit_note"><code class="docutils literal notranslate"><span class="pre">edit_note()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.note"><code class="docutils literal notranslate"><span class="pre">note()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.search"><code class="docutils literal notranslate"><span class="pre">search()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.set_done"><code class="docutils literal notranslate"><span class="pre">set_done()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.sort"><code class="docutils literal notranslate"><span class="pre">sort()</span></code></a></li>
+<li><a class="reference internal" href="#notes.views.tag"><code class="docutils literal notranslate"><span class="pre">tag()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-scheduler.views">Xmara service Scheduler</a><ul>
+<li><a class="reference internal" href="#scheduler.views.start"><code class="docutils literal notranslate"><span class="pre">start()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-users.views">Xmara service Users</a><ul>
+<li><a class="reference internal" href="#users.views.RegisterView"><code class="docutils literal notranslate"><span class="pre">RegisterView</span></code></a><ul>
+<li><a class="reference internal" href="#users.views.RegisterView.dispatch"><code class="docutils literal notranslate"><span class="pre">RegisterView.dispatch()</span></code></a></li>
+<li><a class="reference internal" href="#users.views.RegisterView.form_class"><code class="docutils literal notranslate"><span class="pre">RegisterView.form_class</span></code></a></li>
+<li><a class="reference internal" href="#users.views.RegisterView.get"><code class="docutils literal notranslate"><span class="pre">RegisterView.get()</span></code></a></li>
+<li><a class="reference internal" href="#users.views.RegisterView.post"><code class="docutils literal notranslate"><span class="pre">RegisterView.post()</span></code></a></li>
+<li><a class="reference internal" href="#users.views.RegisterView.template_name"><code class="docutils literal notranslate"><span class="pre">RegisterView.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#users.views.ResetPasswordView"><code class="docutils literal notranslate"><span class="pre">ResetPasswordView</span></code></a><ul>
+<li><a class="reference internal" href="#users.views.ResetPasswordView.email_template_name"><code class="docutils literal notranslate"><span class="pre">ResetPasswordView.email_template_name</span></code></a></li>
+<li><a class="reference internal" href="#users.views.ResetPasswordView.html_email_template_name"><code class="docutils literal notranslate"><span class="pre">ResetPasswordView.html_email_template_name</span></code></a></li>
+<li><a class="reference internal" href="#users.views.ResetPasswordView.subject_template_name"><code class="docutils literal notranslate"><span class="pre">ResetPasswordView.subject_template_name</span></code></a></li>
+<li><a class="reference internal" href="#users.views.ResetPasswordView.success_message"><code class="docutils literal notranslate"><span class="pre">ResetPasswordView.success_message</span></code></a></li>
+<li><a class="reference internal" href="#users.views.ResetPasswordView.success_url"><code class="docutils literal notranslate"><span class="pre">ResetPasswordView.success_url</span></code></a></li>
+<li><a class="reference internal" href="#users.views.ResetPasswordView.template_name"><code class="docutils literal notranslate"><span class="pre">ResetPasswordView.template_name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#users.views.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#users.views.question_to_ai"><code class="docutils literal notranslate"><span class="pre">question_to_ai()</span></code></a></li>
+<li><a class="reference internal" href="#users.views.user_data"><code class="docutils literal notranslate"><span class="pre">user_data()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Xmara  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to Xmara’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Team One.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    </div>
+  </body>
+</html>

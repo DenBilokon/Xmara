@@ -71,6 +71,17 @@ def contacts(request):
 
 @login_required
 def delete_contact(request, contact_id):
+    """
+    The delete_contact function deletes a contact from the database.
+        Args:
+            request (HttpRequest): The HTTP request sent to the server.
+            contact_id (int): The primary key of the Contact object to be deleted.
+    
+    :param request: Get the current user
+    :param contact_id: Identify the contact to be deleted
+    :return: A redirect to the main page
+    :doc-author: Trelent
+    """
     Contacts.objects.get(pk=contact_id, user=request.user).delete()
     return redirect(to='contacts:main')
 
@@ -98,6 +109,15 @@ def sort(request):
 
 
 def save_csv_to_model(file_path):
+    """
+    The save_csv_to_model function takes a file path as an argument and saves the data in that CSV to the Contacts model.
+    The function opens the file, reads it line by line, skips over the header row (firstname, lastname...), and then creates a new instance of Contacts for each row in the CSV.
+    It then assigns values from each column to attributes on that instance of Contacts before saving it.
+    
+    :param file_path: Specify the path to the csv file
+    :return: A none type
+    :doc-author: Trelent
+    """
     with open(file_path, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)  # Skip the header row
