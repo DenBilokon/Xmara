@@ -75,7 +75,7 @@ def search_picture(request):
         files_search = pagination(request, files)
         context = {
             "query": query,
-            "cloud_picture": files_search,
+            "cloud_images": files_search,
             'avatar': avatar
         }
         return render(request, "file_manager/search_picture.html", context=context)
