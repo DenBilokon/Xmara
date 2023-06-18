@@ -1,0 +1,77 @@
+contacts package
+================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   contacts.migrations
+
+Submodules
+----------
+
+contacts.admin module
+---------------------
+
+.. automodule:: contacts.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+contacts.apps module
+--------------------
+
+.. automodule:: contacts.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+contacts.forms module
+---------------------
+
+.. automodule:: contacts.forms
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+contacts.models module
+----------------------
+
+.. automodule:: contacts.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+contacts.tests module
+---------------------
+
+.. automodule:: contacts.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+contacts.urls module
+--------------------
+
+.. automodule:: contacts.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+contacts.views module
+---------------------
+
+.. automodule:: contacts.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: contacts
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,16 +1,11 @@
 import csv
 
-
-
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from .models import Contacts, File
 from datetime import date, datetime, timedelta
-
 from django.contrib import messages
 
 from users.models import Avatar
@@ -91,7 +86,8 @@ def edit(request, contact_id):
         form.save()
         messages.success(request, "Contact was updated successfully !")
         return redirect(to='contacts:main')
-    return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact, 'avatar': avatar})
+    return render(request, 'contacts/edit.html', context={'form': form, 'contact': contact,
+                                                          'avatar': avatar})
 
 
 @login_required
@@ -104,7 +100,8 @@ def sort(request):
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
-                  context={'contacts': contacts, 'user': request.user, 'page': page, 'avatar': avatar})
+                  context={'contacts': contacts, 'user': request.user, 'page': page,
+                           'avatar': avatar})
 
 
 def save_csv_to_model(file_path):
@@ -169,4 +166,3 @@ def file_uploader(request):
     page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
                   context={'page': page, 'avatar': avatar})
-

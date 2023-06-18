@@ -5,6 +5,7 @@
 <div class="text-center">
     <br>
     <br>
+    {% if user.is_authenticated %}
     <div class="Title" rel="stylesheet" style="text-align: left; margin-left: 190px; font-size: 40px;">HELLO WORLD</div>
     <br>
     <div class="chat-form" style="max-width: 630px; margin: 15px;">
@@ -23,6 +24,11 @@
         <br>
         <div id="response-container"></div>
     </div>
+    {% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+    {% endif %}
 </div>
 
 
@@ -40,8 +46,9 @@
     background-repeat: no-repeat;
     opacity: 0.8;
 }
-</style>
 
+</style>
+{% endif %}
 <script>
   $(document).ready(function() {
     $('#question-form').submit(function(event) {
@@ -60,6 +67,7 @@
       });
     });
   });
+
 
 </script>
 
