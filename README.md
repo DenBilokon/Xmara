@@ -23,6 +23,7 @@ $ source env/bin/activate
 - Create your **.env file** using env.example:
     - Create Postgres database to storage data and fill the neccessary fields in **.env file** ( DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT ).
     - Create your Cloudinary account ( https://cloudinary.com/ ) in order to obtain credentials for **.env file** ( CLOUD_NAME, CLOUD_API_KAY, CLOUD_API_SECRET ). On your **Cloudinary** account **Dashabosrd** use data from variables **Cloud Name**, **API Key**, **API Secret**.
+    - Use your email account credentials to fill **.env file** ( EMAIL_PORT,EMAIL_HOST_USER, EMAIL_HOST_PASSWORD ).
     - Create your OPEN AI account ( https://openai.com/blog/openai-api ) in order to obtain credentials for **.env file**(OPENAI_KEY). On your **Cloudinary** account **Dashabosrd** use values from **Cloud Name**, **API Key**, **API Secret**.
     
 - Install the dependencies.
