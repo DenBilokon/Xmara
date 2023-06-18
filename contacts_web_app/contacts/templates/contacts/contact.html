@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<h1>Save your contact...</h1>
 
 <form class="col-sm-6" method="POST" action="{% url 'contacts:contacts' %}">
     {% csrf_token %}
