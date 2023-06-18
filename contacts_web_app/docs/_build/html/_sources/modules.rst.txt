@@ -1,0 +1,14 @@
+contacts_web_app
+================
+
+.. toctree::
+   :maxdepth: 4
+
+   contacts
+   contacts_web_app
+   file_manager
+   manage
+   news
+   notes
+   scheduler
+   users

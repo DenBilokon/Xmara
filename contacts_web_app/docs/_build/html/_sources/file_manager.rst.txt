@@ -1,0 +1,77 @@
+file\_manager package
+=====================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   file_manager.migrations
+
+Submodules
+----------
+
+file\_manager.admin module
+--------------------------
+
+.. automodule:: file_manager.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+file\_manager.apps module
+-------------------------
+
+.. automodule:: file_manager.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+file\_manager.forms module
+--------------------------
+
+.. automodule:: file_manager.forms
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+file\_manager.models module
+---------------------------
+
+.. automodule:: file_manager.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+file\_manager.tests module
+--------------------------
+
+.. automodule:: file_manager.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+file\_manager.urls module
+-------------------------
+
+.. automodule:: file_manager.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+file\_manager.views module
+--------------------------
+
+.. automodule:: file_manager.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: file_manager
+   :members:
+   :undoc-members:
+   :show-inheritance:

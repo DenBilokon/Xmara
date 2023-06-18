@@ -1,0 +1,21 @@
+scheduler package
+=================
+
+Submodules
+----------
+
+scheduler.views module
+----------------------
+
+.. automodule:: scheduler.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: scheduler
+   :members:
+   :undoc-members:
+   :show-inheritance:
