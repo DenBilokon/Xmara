@@ -8,8 +8,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from cloudinary.exceptions import Error as CloudinaryError
 
-from .models import Picture, Document, Video, Audio
-from .forms import PictureForm, DocumentForm, VideoForm, AudioForm
+from .models import Picture, Document, Video, Audio, Archive
+from .forms import PictureForm, DocumentForm, VideoForm, AudioForm, ArchiveForm
 
 from users.models import Avatar
 
@@ -233,6 +233,58 @@ def search_audio(request):
             'avatar': avatar
         }
         return render(request, "file_manager/search_audio.html", context=context)
+    messages.success(request, "Enter your request.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def upload_archive(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    user_id = request.user.id
+    cloud_archive = Archive.objects.filter(user_id=user_id)
+    page_obj = pagination(request, cloud_archive)
+    archive_form = ArchiveForm()
+    if request.method == 'POST':
+        form = ArchiveForm(request.POST, request.FILES)
+        try:
+            if form.is_valid():
+                arch = form.save(commit=False)
+                arch.user = request.user
+                arch.save()
+                return redirect(request.META['HTTP_REFERER'])
+        except CloudinaryError:
+            messages.warning(request, "File not valid.")
+            return redirect(request.META['HTTP_REFERER'])
+
+    context = {
+        'cloud_archive': page_obj,
+        'archive_form': archive_form,
+        'avatar': avatar
+
+    }
+    return render(request, 'file_manager/upload_archive.html', context=context)
+
+
+@login_required
+def delete_archive(request, document_id):
+    archive = Archive.objects.get(id=document_id, user=request.user)
+    archive.delete()
+    messages.success(request, "Archive deleted successfully.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
+def search_archive(request):
+    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+    query = request.GET.get("q")
+    if query:
+        files = Archive.objects.filter(Q(title__icontains=query))
+        files_search = pagination(request, files)
+        context = {
+            "query": query,
+            "cloud_archive": files_search,
+            'avatar': avatar
+        }
+        return render(request, "file_manager/search_archive.html", context=context)
     messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
 

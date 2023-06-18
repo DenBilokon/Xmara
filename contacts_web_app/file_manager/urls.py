@@ -19,6 +19,9 @@ urlpatterns = [
     path('audio/', views.upload_audio, name='upload_audio'),
     path('audio/delete/<int:audio_id>/', views.delete_audio, name='delete_audio'),
     path('audio/search_audio/', views.search_audio, name='search_audio'),
+    path('archive/', views.upload_archive, name='upload_archive'),
+    path('archive/delete/<int:archive_id>/', views.delete_archive, name='delete_archive'),
+    path('archive/search_archive/', views.search_archive, name='search_archive'),
     path('download_image/<path:image_url>/', views.download_image, name='download_image'),
 
 ]
