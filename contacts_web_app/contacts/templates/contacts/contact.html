@@ -3,6 +3,9 @@
 {% block content %}
 
 
+<center>
+    <h1>Save your contact...</h1>
+    <br>
 <form class="col-sm-6" method="POST" action="{% url 'contacts:contacts' %}">
     {% csrf_token %}
     <div style="padding: 10px">
@@ -29,6 +32,7 @@
         {{form.birthday}}
         <span>{{ form.errors.birthday }}</span>
     </div>
+    <br>
     <center>
         <div class="grid">
             <button class="btn btn-outline-primary btn-block" type="submit">Submit</button>
@@ -36,5 +40,6 @@
         </div>
     </center>
 </form>
-
+</center>
 {% endblock %}
+
