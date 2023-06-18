@@ -213,6 +213,16 @@ def delete_audio(request, audio_id):
     return redirect(request.META['HTTP_REFERER'])
 
 
+def search_audio(request):
+    query = request.GET.get("q")
+    if query:
+        files = Audio.objects.filter(Q(title__icontains=query) | Q(artist__icontains=query))
+        files_search = pagination(request, files)
+        return render(request, "file_manager/search_audio.html", context={"cloud_audio": files_search, "query": query})
+    messages.success(request, "Enter your request.")
+    return redirect(request.META['HTTP_REFERER'])
+
+
 @login_required
 def gallery(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
