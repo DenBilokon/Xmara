@@ -2,10 +2,15 @@
 
 {% block content %}
 
-
+<div class="text-center">
+    <a href="{% url 'contacts:main' %}" class="btn btn-primary" style="width: 24%">Home</a>
+    <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 24%">Add contact</a>
+    <a href="{% url 'contacts:sort' %}" class="btn btn-primary" style="width: 24%">Sort by name</a>
+    <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 24%">Birthday on this week</a>
+</div>
+<br>
 <center>
-    <h1>Save your contact...</h1>
-    <br>
+    <h1><b>SAVE YOUR CONTACT</b></h1>
 <form class="col-sm-6" method="POST" action="{% url 'contacts:contacts' %}">
     {% csrf_token %}
     <div style="padding: 10px">
@@ -41,5 +46,6 @@
     </center>
 </form>
 </center>
+<br><br><br><br>
 {% endblock %}
 
