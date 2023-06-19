@@ -19,11 +19,13 @@ td{
 
 
 <div class="text-center">
+    <a href="{% url 'contacts:main' %}" class="btn btn-primary" style="width: 24%">Home</a>
     <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 24%">Add contact</a>
     <a href="{% url 'contacts:sort' %}" class="btn btn-primary" style="width: 24%">Sort by name</a>
-    <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 24%">Who has birthday on this week</a>
+    <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 24%">Birthday on this week</a>
 </div>
-<br/><br>
+<br/>
+<center><h1><b>CONTACTS</b></h1></center>
 <center>
     {% if messages %}
 
@@ -36,7 +38,8 @@ td{
     {% endif %}
 </center>
 <!--{% if message.tags %}{% endif %}-->
-<br/><br/>
+
+
 <div class="form-box">
     <form action="{% url 'contacts:file_uploader' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -51,24 +54,23 @@ td{
 </div>
 
 
-<br><br><br>
+<br>
 <div class="d-flex justify-content-center align-items-center mx-auto">
     <form class="d-flex search-form" action="{% url 'contacts:search_contact'%}" method="POST">
         {% csrf_token %}
-        <h2 class="text-center" style="font-weight: bold;">Search contact</h2>
-        <input class="form-control me-2" type="search" name="searched" placeholder="Search" aria-label="Search">
+        <label class="text-center" style="font-weight: bold;"></label>
+        <input class="form-control me-2" type="search" name="searched" placeholder="Search contact" aria-label="Search">
         <button class="btn btn-outline-primary btn-block" type="submit">Search</button>
     </form>
 </div>
 
-<br/>
 <br>
 </nav>
 <br/>
 
 
 {% if page %}
-<center><h1>List of your contacts...</h1></center>
+
 <table class="table table-hover">
     <thead>
     <tr>
@@ -88,8 +90,8 @@ td{
         <td><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></td>
         <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
         <td>{{ contact.birthday }}</td>
-        <td><a href="{% url 'contacts:edit' contact.id %}" class="btn btn-outline-success btn-sm">Update</a></td>
-        <td><a href="{% url 'contacts:delete_contact' contact.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+        <td><a href="{% url 'contacts:edit' contact.id %}" class="btn btn-outline-info btn-sm">Update</a></td>
+        <td><a href="{% url 'contacts:delete_contact' contact.id %}" class="btn btn-outline-dark btn-sm">Delete</a>
         </td>
     </tr>
     {% endfor %}
