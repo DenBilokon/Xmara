@@ -8,7 +8,7 @@ EXTENSIONS_IMG = ['jpeg', 'png', 'jpg', 'svg', 'gif']
 EXTENSIONS_DOC = ['doc', 'docx', 'txt', 'pdf', 'xlsx', 'pptx', 'py', 'csv', 'css', 'html', 'js']
 EXTENSIONS_VIDEO = ['avi', 'mp4', 'mov', 'mkv']
 EXTENSIONS_MUSIC = ['mp3', 'ogg', 'wav', 'amr']
-EXTENSIONS_ARCHIVES = ['zip', 'gz', 'tar', '7z']
+EXTENSIONS_ARCHIVES = ['zip', 'gz', 'tar', '7z', 'rar']
 
 
 class Picture(models.Model):
