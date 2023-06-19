@@ -40,16 +40,17 @@
 </div>
 <br>
 {% if form.errors %}
-<span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+<span class="alert alert-danger" role="alert" id="error-message">{{form.non_field_errors}}</span>
 {% endif %}
 
 {% if messages %}
 <div>
     {% for message in messages %}
-    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert" id="message">{{ message }}</div>
     {% endfor %}
 </div>
 {% endif %}
+<br>
 <div>
     <ul class="archive-list">
         {% for archive in cloud_archive %}
@@ -59,7 +60,7 @@
             </div>
             <div class="archive-actions">
                 <a href="{% url 'file_manager:download_archive' archive.archive.url %}"
-                   class="btn btn-primary">Download</a>
+                   class="badge rounded-pill bg-light" style="text-decoration: none;">Download</a>
                 <button class="badge rounded-pill bg-dark delete-archive-button" data-archive-id="{{ archive.id }}">
                     Delete
                 </button>
@@ -84,7 +85,7 @@
                 <p>Are you sure you want to delete this Archive?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                <button type="button" class="btn btn-outline-dark" id="confirmDeleteButton">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel
                 </button>
 
@@ -116,7 +117,16 @@
     </ul>
 </div>
 <br>
+<div class="alert alert-dismissible alert-secondary">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Important note!</strong>
+    Xmara does not support direct download of <b>rar</b> files.
 
+    However, you can extract the <b>rar</b> archive locally on your computer and then upload the contents as individual files
+    to Xmara. If you have questions about uploading a specific file type to Xmara or performing certain file
+    operations, I recommend contacting Xmara's documentation or their support directly for more information.
+</div>
+<br>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -151,7 +161,24 @@ function downloadArchive(url, filename) {
     document.body.removeChild(anchor);
 }
 </script>
+<script>
+    // Функція для автоматичного приховування повідомлення після певного часу
+    function hideMessage() {
+        var errorMessage = document.getElementById("error-message");
+        var message = document.getElementById("message");
 
+        if (errorMessage) {
+            errorMessage.style.display = "none";
+        }
+
+        if (message) {
+            message.style.display = "none";
+        }
+    }
+
+    // Запуск функції приховування через 5 секунд
+    setTimeout(hideMessage, 5000);
+</script>
 <style>
 .archive-item {
     display: flex;
@@ -167,8 +194,6 @@ function downloadArchive(url, filename) {
 .archive-actions {
     margin-left: 10px;
 }
-
-
 
 </style>
 {% endblock %}

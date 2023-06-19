@@ -78,3 +78,4 @@ When running Xmara app and following link http://localhost:8000/ you have opport
 2. Oleksand Vasylyna
 3. Denis Zaytsev
 4. Oleksii Latypov
+
