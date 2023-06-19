@@ -22,6 +22,7 @@ def main_mf(request):
 
 @login_required
 def upload_picture(request):
+    exp_message = "File not valid, you can upload the following types of files: 'jpeg', 'png', 'jpg', 'svg', 'gif'"
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_images = Picture.objects.filter(user_id=user_id)
@@ -37,7 +38,7 @@ def upload_picture(request):
                 pic.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
-            messages.warning(request, "Form not valid.")
+            messages.warning(request, exp_message)
             return redirect(request.META['HTTP_REFERER'])
 
     context = {
@@ -85,6 +86,7 @@ def search_picture(request):
 
 @login_required
 def upload_video(request):
+    exp_message = "File not valid, you can upload the following types of files: 'avi', 'mp4', 'mov', 'mkv'"
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_video = Video.objects.filter(user_id=user_id)
@@ -99,7 +101,7 @@ def upload_video(request):
                 video.save()
                 return redirect(request.META['HTTP_REFERER'])
             except CloudinaryError:
-                messages.warning(request, "Form not valid.")
+                messages.warning(request, exp_message)
                 return redirect(request.META['HTTP_REFERER'])
 
     context = {
@@ -136,6 +138,8 @@ def search_video(request):
 
 @login_required
 def upload_document(request):
+    exp_message = "File not valid, you can upload the following types of files: 'doc', 'docx', 'txt', 'pdf', 'xlsx', " \
+                  "'pptx', 'py', 'csv', 'css', 'html', 'js'"
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_document = Document.objects.filter(user_id=user_id)
@@ -150,7 +154,7 @@ def upload_document(request):
                 doc.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
-            messages.warning(request, "Form not valid.")
+            messages.warning(request, exp_message)
             return redirect(request.META['HTTP_REFERER'])
 
     context = {
@@ -187,7 +191,19 @@ def search_document(request):
 
 
 @login_required
+def download_document(request, document_url):
+    response = requests.get(document_url)
+    content_type = response.headers.get('content-type')
+    filename = document_url.split('/')[-1]  # Отримати назву файлу з URL
+    response = HttpResponse(response.content, content_type=content_type)
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+    return response
+
+
+@login_required
 def upload_audio(request):
+    exp_message = "File not valid, you can upload the following types of files: 'avi', 'mp4', 'mov', 'mkv'"
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_audio = Audio.objects.filter(user_id=user_id)
@@ -202,7 +218,7 @@ def upload_audio(request):
                 aud.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
-            messages.warning(request, "Form not valid.")
+            messages.warning(request, exp_message)
             return redirect(request.META['HTTP_REFERER'])
 
     context = {
@@ -239,6 +255,7 @@ def search_audio(request):
 
 @login_required
 def upload_archive(request):
+    exp_message = "File not valid, you can upload the following types of files: 'zip', 'gz', 'tar', '7z'"
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_archive = Archive.objects.filter(user_id=user_id)
@@ -253,7 +270,7 @@ def upload_archive(request):
                 arch.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
-            messages.warning(request, "File not valid.")
+            messages.warning(request, exp_message)
             return redirect(request.META['HTTP_REFERER'])
 
     context = {
@@ -266,8 +283,8 @@ def upload_archive(request):
 
 
 @login_required
-def delete_archive(request, document_id):
-    archive = Archive.objects.get(id=document_id, user=request.user)
+def delete_archive(request, archive_id):
+    archive = Archive.objects.get(id=archive_id, user=request.user)
     archive.delete()
     messages.success(request, "Archive deleted successfully.")
     return redirect(request.META['HTTP_REFERER'])
@@ -287,6 +304,17 @@ def search_archive(request):
         return render(request, "file_manager/search_archive.html", context=context)
     messages.success(request, "Enter your request.")
     return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def download_archive(request, archive_url):
+    response = requests.get(archive_url)
+    content_type = response.headers.get('content-type')
+    filename = archive_url.split('/')[-1]  # Отримати назву файлу з URL
+    response = HttpResponse(response.content, content_type=content_type)
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+    return response
 
 
 def pagination(request, files):

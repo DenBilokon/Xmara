@@ -46,9 +46,8 @@
                 <div class="document-title">{{ document.title|truncatechars:50 }}</div>
             </div>
             <div class="document-actions">
-                <button class="badge rounded-pill bg-light download-document-button"
-                        onclick="window.location.href='{{ document.document.url }}'">Download
-                </button>
+                <a href="{% url 'file_manager:download_document' document.document.url %}"
+                   class="btn btn-primary">Download</a>
                 <button class="badge rounded-pill bg-dark delete-document-button" data-document-id="{{ document.id }}">
                     Delete
                 </button>
@@ -129,6 +128,16 @@ $(document).ready(function() {
         $("#confirmDeleteModal").modal("hide");
     });
 });
+
+function downloadArchive(url, filename) {
+    var anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+}
 </script>
 
 <style>
