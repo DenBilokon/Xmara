@@ -21,14 +21,14 @@ $ virtualenv2 --no-site-packages env
 $ source env/bin/activate
 ```
 - Create your **.env file** using env.example:
-    - Create Postgres database to storage data and fill the neccessary fields in **.env file** ( DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT ).
-    - Create your Cloudinary account ( https://cloudinary.com/ ) in order to obtain credentials for **.env file** ( CLOUD_NAME, CLOUD_API_KAY, CLOUD_API_SECRET ). On your **Cloudinary** account **Dashabosrd** use data from variables **Cloud Name**, **API Key**, **API Secret**.
-    - Use your email account credentials to fill **.env file** ( EMAIL_PORT,EMAIL_HOST_USER, EMAIL_HOST_PASSWORD ).
-    - Create your OPEN AI account ( https://openai.com/blog/openai-api ) in order to obtain credentials for **.env file**(OPENAI_KEY). On your **Cloudinary** account **Dashabosrd** use values from **Cloud Name**, **API Key**, **API Secret**.
-    
+    - Create **Postgres** database to storage data and fill the neccessary fields in **.env file** ( DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT ).
+    - Use your email account credentials to fill the neccessary fields in **.env file** ( EMAIL_PORT,EMAIL_HOST_USER, EMAIL_HOST_PASSWORD ).
+    - Create your **Cloudinary account** ( https://cloudinary.com/ ) in order to obtain credentials for **.env file** ( CLOUD_NAME, CLOUD_API_KAY, CLOUD_API_SECRET ). On your **Cloudinary** account **Dashboard** use data from variables **Cloud Name**, **API Key**, **API Secret**.
+    - Create your **OPEN AI** account ( https://openai.com/blog/openai-api ) and find API Key in order to obtain credentials for **.env file** ( OPENAI_KEY ).
+    - Create your **Coin API** account (https://customerportal.coinapi.io/login) to obtain credentials for **.env file** (CRYPTO_API_KEY).
 - Install the dependencies.
 - Make Migrations.
-- Get ../contacts_web_app directory and run the program:
+- Move to ../contacts_web_app directory and run the program:
 
 ```sh
 (env)$ cd contacts_web_app
@@ -48,14 +48,12 @@ When running Xmara app and following link http://localhost:8000/ you have opport
   - search contacts, notes, files
   - sort contacts, notes, files
   - filter files
-  - download files
+  - download different type of files
   - upload files
   - look your likely tags in the notes
   - mark your notes as active or done
   - check when your contact has birthdays and never forget to congratulate him/her
   - change your avatar
-
-
 
 
 # Used technologies:
@@ -64,15 +62,16 @@ When running Xmara app and following link http://localhost:8000/ you have opport
 - BeautifulSoup 4
 - Sphinx
 - PostgreSQL 12.0
-- OpenWeatherMap API
 - OpenAI API
 - Cloudinary
 - Privatbank API
+- Coin API
 - Bootswatch
 - HTML5
 - CSS3
 - Docker
 - GitHub
+- Fly
 
 # Developers:
 1. Denis Bilokon

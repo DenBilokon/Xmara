@@ -102,7 +102,7 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'contacts_web_app',
+#         'NAME': 'contact_app',
 #         'USER': 'postgres',
 #         'PASSWORD': '567234',
 #         'HOST': '127.0.0.1',
