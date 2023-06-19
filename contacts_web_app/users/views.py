@@ -177,8 +177,6 @@ def upload_avatar(request):
     return render(request, 'users/user_upload_avatar.html', {'form': form, 'avatar': avatar})
 
 
-
-
 @login_required
 def profile(request):
     """
@@ -195,7 +193,3 @@ def profile(request):
     user_id = request.user.id
     avatar = Avatar.objects.filter(user_id=user_id).first()
     return render(request, 'users/profile.html', context={'user': user, 'avatar': avatar})
-
-
-
-

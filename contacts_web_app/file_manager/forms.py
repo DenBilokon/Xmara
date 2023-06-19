@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, ClearableFileInput
 
-from .models import Picture, Document, Video, Audio
+from .models import Picture, Document, Video, Audio, Archive
 
 
 class PictureForm(ModelForm):
@@ -39,4 +39,14 @@ class AudioForm(ModelForm):
             'artist': TextInput(attrs={'class': 'form-control'}),
             'title': TextInput(attrs={'class': 'form-control'}),
             'audio': ClearableFileInput(attrs={'class': 'form-control-file'}),
+        }
+
+
+class ArchiveForm(ModelForm):
+    class Meta:
+        model = Archive
+        fields = ['title', 'archive']
+        widgets = {
+            'title': TextInput(attrs={'class': 'form-control'}),
+            'archive': ClearableFileInput(attrs={'class': 'form-control-file'}),
         }

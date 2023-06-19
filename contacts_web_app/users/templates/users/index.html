@@ -31,22 +31,24 @@
     {% endif %}
 </div>
 
-{% if user.is_authenticated %}
+
 <div class="alert alert-dismissible alert-light" id="question-response">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     <strong>{{ answer_for_user }}</strong>
 </div>
 <style>
 #question-response {
-    width: 72%;
-    min-height: 7%;
+    width: 68%; /* Змініть це значення на бажану ширину вікна */
+    height: 17%;
+    background-image: url("https://i.pinimg.com/564x/67/89/14/678914c78c7161f51c3b9e985417fcad.jpg");
     background-size: 105% auto;
     background-position: center;
     background-repeat: no-repeat;
+    opacity: 0.8;
 }
 
 </style>
-{% endif %}
+
 <script>
   $(document).ready(function() {
     $('#question-form').submit(function(event) {
