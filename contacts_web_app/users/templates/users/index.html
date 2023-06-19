@@ -31,11 +31,12 @@
     {% endif %}
 </div>
 
-
+{% if user.is_authenticated %}
 <div class="alert alert-dismissible alert-light" id="question-response">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     <strong>{{ answer_for_user }}</strong>
 </div>
+{% endif %}
 <br>
 <style>
 #question-response {
