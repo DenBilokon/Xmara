@@ -22,13 +22,13 @@
 </div>
 <br>
 {% if form.errors %}
-<span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+<span class="alert alert-danger" role="alert" id="error-message">{{form.non_field_errors}}</span>
 {% endif %}
 
 {% if messages %}
 <div>
     {% for message in messages %}
-    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert" id="message">{{ message }}</div>
     {% endfor %}
 </div>
 {% endif %}
@@ -139,7 +139,24 @@ function downloadArchive(url, filename) {
     document.body.removeChild(anchor);
 }
 </script>
+<script>
+    // Функція для автоматичного приховування повідомлення після певного часу
+    function hideMessage() {
+        var errorMessage = document.getElementById("error-message");
+        var message = document.getElementById("message");
 
+        if (errorMessage) {
+            errorMessage.style.display = "none";
+        }
+
+        if (message) {
+            message.style.display = "none";
+        }
+    }
+
+    // Запуск функції приховування через 5 секунд
+    setTimeout(hideMessage, 5000);
+</script>
 <style>
 .document-item {
     display: flex;
