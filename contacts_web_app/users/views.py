@@ -21,6 +21,14 @@ date_today = date.today().strftime('%d.%m.%Y')
 
 
 def main(request):
+    """
+    The main function is the entry point for the view.
+    It takes a request object as an argument and returns a response object.
+
+
+    :param request: Pass the request object to the view
+    :return: A render function, which is not a httpresponse object
+    """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     return render(request, 'users/index.html', context={'avatar': avatar})
 
@@ -40,7 +48,6 @@ class RegisterView(View):
         :param *args: Send a non-keyworded variable length argument list to the function
         :param **kwargs: Pass keyworded, variable-length argument list to a function
         :return: A redirect to the home page if user is authenticated, otherwise it returns a super()
-        :doc-author: Xmara
         """
         if self.request.user.is_authenticated:
             return redirect(to='quotes:home')
@@ -54,7 +61,6 @@ class RegisterView(View):
         :param self: Access the attributes and methods of the class in python
         :param request: Get the request object
         :return: A render of the template_name with the form_class
-        :doc-author: Xmara
         """
         return render(request, self.template_name, {'form': self.form_class})
 
@@ -69,7 +75,6 @@ class RegisterView(View):
         :param self: Represent the instance of the object itself
         :param request: Pass the request object to the view
         :return: The render function which renders the template
-        :doc-author: Xmara
         """
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -95,21 +100,17 @@ def user_data(request):
     
     :param request: Pass the request object to the view
     :return: The user
-    :doc-author: Xmara
     """
     return render(request, "users/user.html", context={})
 
 
 def question_to_ai(request):
     """
-    The question_to_ai function is used to get a question from the user and send it to OpenAI.
-        The function then gets an answer from OpenAI, which is returned as a response_html variable.
-        This variable is passed into the context of the index page, where it will be displayed in
-        place of any previous answer.
+    The question_to_ai function is used to get a response from the OpenAI API.
+        The function takes in a request object and returns an HTML page with the user's avatar and answer.
 
-    :param request: Get the user's request
-    :return: The answer of the OpenAI to the user's question
-    :doc-author: Xmara
+    :param request: Get the user's question from the form
+    :return: The answer_for_user variable
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     openai.api_key = OPENAI_KEY
@@ -142,13 +143,10 @@ def question_to_ai(request):
 def upload_avatar(request):
     """
     The upload_avatar function allows a user to upload an avatar image.
-        The function first checks if the request method is POST, and if so, it instantiates the AvatarForm with
-        the request data and files. If form is valid, it saves the uploaded file as an avatar for that user.
-        If there was already an existing avatar for that user, then delete it before saving new one.
+        The function first checks if the request method is POST, and if so, it creates a form instance with the request.POST and request.FILES data (the latter of which contains information about uploaded files). If this form is valid, then we save it to our database using commit=False in order to delay saving the model until we're ready to avoid integrity problems (see https://docs.djangoproject.com/en/2.0/topics/forms/#the-save-method for more info). We also assign this avatar's user attribute
 
-    :param request: Get the current user
-    :return: A render function that renders the user_upload_avatar
-    :doc-author: Xmara
+    :param request: Pass the request object to the view
+    :return: A redirect to the profile page
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     form = AvatarForm()  # Instantiate the form
@@ -181,13 +179,11 @@ def upload_avatar(request):
 def profile(request):
     """
     The profile function is used to render the profile page of a user.
-    It takes in a request object and returns an HttpResponse object with the rendered template.
-    The function first gets the current user from the request, then it gets their id, and finally it uses that id to
-    get their avatar from Avatar model.
+        It takes in a request object and returns an HttpResponse object with the rendered template.
+        The function also passes in context variables for use by the template.
 
-    :param request: Get the current user
-    :return: A dictionary with the user and avatar
-    :doc-author: Xmara
+    :param request: Get the current user and their id
+    :return: A render object
     """
     user = request.user
     user_id = request.user.id
