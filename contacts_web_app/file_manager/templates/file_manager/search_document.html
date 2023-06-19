@@ -47,7 +47,7 @@
             </div>
             <div class="document-actions">
                 <a href="{% url 'file_manager:download_document' document.document.url %}"
-                   class="btn btn-primary">Download</a>
+                   class="badge rounded-pill bg-light" style="text-decoration: none;">Download</a>
                 <button class="badge rounded-pill bg-dark delete-document-button" data-document-id="{{ document.id }}">
                     Delete
                 </button>
@@ -72,7 +72,7 @@
                 Are you sure you want to delete this Document?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                <button type="button" class="btn btn-outline-dark" id="confirmDeleteButton">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel
                 </button>
 

@@ -60,7 +60,7 @@
             </div>
             <div class="archive-actions">
                 <a href="{% url 'file_manager:download_archive' archive.archive.url %}"
-                   class="btn btn-primary">Download</a>
+                   class="badge rounded-pill bg-light" style="text-decoration: none;">Download</a>
                 <button class="badge rounded-pill bg-dark delete-archive-button" data-archive-id="{{ archive.id }}">
                     Delete
                 </button>
@@ -85,7 +85,7 @@
                 <p>Are you sure you want to delete this Archive?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                <button type="button" class="btn btn-outline-dark" id="confirmDeleteButton">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel
                 </button>
 
