@@ -9,9 +9,6 @@ from news.views import add_currency_to_file, add_crypto_currency_to_file
 def start():
     """
     The start function is called by the scheduler.py file, which is run as a cron job every day.
-    
-    :return: None
-    :doc-author: Trelent
     """
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")

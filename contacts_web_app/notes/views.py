@@ -17,7 +17,6 @@ def main(request):
     
     :param request: Get the current request object
     :return: A render function
-    :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
@@ -43,7 +42,6 @@ def tag(request):
     
     :param request: Get the current request object
     :return: A redirect to the main page
-    :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
@@ -65,11 +63,13 @@ def note(request):
     The note function is responsible for creating a new note.
     It first gets all the tags that belong to the user and passes them to the template.
     Then it checks if there was a POST request, which means that someone submitted data through our form.
-    If so, we create an instance of NoteForm with this data and check if it's valid (if all fields are filled correctly). If not, we render our template again but this time with errors in form fields (they will be highlighted). Otherwise we save our new note without committing changes yet because we need to add some tags first. Then we get all chosen tags from request body and
+    If so, we create an instance of NoteForm with this data and check if it's valid (if all fields are filled
+    correctly). If not, we render our template again but this time with errors in form fields (they will be
+    highlighted). Otherwise we save our new note without committing changes yet because we need to add some tags first.
+    Then we get all chosen tags from request body and
     
     :param request: Get the data from the form
     :return: The note
-    :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     tags = Tag.objects.filter(user=request.user).all()
@@ -101,7 +101,6 @@ def detail(request, note_id):
     :param request: Get the current user
     :param note_id: Retrieve the note from the database
     :return: A httpresponseredirect object
-    :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     note = get_object_or_404(Note, pk=note_id, user=request.user)
@@ -118,7 +117,6 @@ def set_done(request, note_id):
     :param request: Get the user from the request object
     :param note_id: Find the note that we want to mark as done
     :return: A redirect to the main page
-    :doc-author: Trelent
     """
     Note.objects.filter(pk=note_id, user=request.user).update(done=True)
     return redirect(to='notes:main')
@@ -134,7 +132,6 @@ def delete_note(request, note_id):
     :param request: Get the user information from the request object
     :param note_id: Find the note to delete
     :return: A redirect to the main view
-    :doc-author: Trelent
     """
     Note.objects.get(pk=note_id, user=request.user).delete()
     return redirect(to='notes:main')
@@ -153,7 +150,6 @@ def edit_note(request, note_id):
     :param request: Get the request object
     :param note_id: Get the note object from the database
     :return: The render function
-    :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     note = get_object_or_404(Note, pk=note_id, user=request.user)
@@ -188,7 +184,6 @@ def search(request):
     
     :param request: Pass the request object to the view
     :return: A list of notes that match the query
-    :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if 'query' in request.GET:
@@ -205,11 +200,11 @@ def search(request):
 @login_required
 def sort(request):
     """
-    The sort function takes in a request object and returns the search_results.html template with notes that have been filtered by tags selected by the user.
+    The sort function takes in a request object and returns the search_results.html template with notes that have been
+    filtered by tags selected by the user.
     
     :param request: Get the request object
     :return: A list of notes that have the selected tags
-    :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'GET':
