@@ -14,7 +14,7 @@ class ContactForm(ModelForm):
                          widget=TextInput(attrs={'placeholder': 'Lastname', 'class': "form-control me-2"}))
     phone = PhoneNumberField(initial='Ukraine', region='UA',
                              widget=PhoneNumberPrefixWidget(
-                                 attrs={'placeholder': 'Phone Number', 'class': "form-control me-2"}))
+                                 attrs={'placeholder': 'Phone Number', 'class': "form-control me-2", }))
     email = EmailField(max_length=150, initial="example@email.com",
                        widget=EmailInput(attrs={'placeholder': 'Email', 'class': "form-control me-2"}))
     birthday = DateField(required=True, widget=SelectDateWidget(years=YEARS, attrs={'class': "form-control me-2"}))

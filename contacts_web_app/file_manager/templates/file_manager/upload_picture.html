@@ -3,14 +3,14 @@
 
 {% block content %}
 <div class="text-center">
-    <a href="{% url 'file_manager:gallery' %}" class="btn btn-primary" style="width: 19%">Gallery</a>
     <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 19%">Pictures</a>
     <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 19%">Video</a>
     <a href="{% url 'file_manager:upload_audio' %}" class="btn btn-primary" style="width: 19%">Audio</a>
     <a href="{% url 'file_manager:upload_document' %}" class="btn btn-primary" style="width: 19%">Documents</a>
+    <a href="{% url 'file_manager:upload_archive' %}" class="btn btn-primary" style="width: 19%">Archive</a>
 </div>
 <br>
-<h1 class="text-center">PICTURES</h1>
+<h1 class="text-center"><b>PICTURES</b></h1>
 <div class="text-center">
     {% load cloudinary %}
     <div class="form-box">
@@ -75,7 +75,7 @@
                          style="max-width: 100%; max-height: 100%;">
                 </div>
                 <div class="modal-footer" style="text-align: left; display: flex; justify-content: flex-start;">
-                    <h4 style="margin-right: auto;">{{ img.title }}</h4>
+                    <h4 style="margin-right: auto;">{{ img.title|truncatechars:50 }}</h4>
                     {% if request.user == img.user %}
                     <form action="{% url 'file_manager:delete_picture' img.id %}" method="post" class="d-inline">
                         {% csrf_token %}

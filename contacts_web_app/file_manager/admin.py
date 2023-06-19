@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Picture, Document, Video, Audio
+from .models import Picture, Document, Video, Audio, Archive
 
 
 @admin.register(Picture)
@@ -33,3 +33,11 @@ class Audio(admin.ModelAdmin):
     list_filter = ["title", "artist"]
     ordering = ("title", "artist")
     search_fields = ["title", "artist"]
+
+
+@admin.register(Archive)
+class Archive(admin.ModelAdmin):
+    list_display = ["title", "archive", "created_at"]
+    list_filter = ["title"]
+    ordering = ("title",)
+    search_fields = ["title"]

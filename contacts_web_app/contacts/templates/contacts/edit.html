@@ -1,18 +1,28 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-<h1>Update contact</h1>
 
-<form action="{% url 'contacts:edit' contact.id %}" method="post">
+<div class="text-center">
+    <a href="{% url 'contacts:main' %}" class="btn btn-primary" style="width: 24%">Home</a>
+    <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 24%">Add contact</a>
+    <a href="{% url 'contacts:sort' %}" class="btn btn-primary" style="width: 24%">Sort by name</a>
+    <a href="{% url 'contacts:birthday' %}" class="btn btn-primary" style="width: 24%">Birthday on this week</a>
+</div>
+<br>
+<center><h1><b>UPDATE YOUR CONTACT</b></h1>
+
+<form class="col-sm-6" action="{% url 'contacts:edit' contact.id %}" method="post">
     {% csrf_token %}
         {{ form }}
     <br>
     <center>
     <div class="grid">
             <button class="btn btn-outline-primary btn-block" type="submit">Update</button>
+            <a href="{% url 'contacts:main' %}" class="btn btn-secondary btn">Cancel</a>
     </div>
+
     </center>
 </form>
-
+</center>
 
 {% endblock %}

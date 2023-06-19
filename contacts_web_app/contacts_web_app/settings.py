@@ -102,7 +102,7 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'contacts_web_app',
+#         'NAME': 'contact_app',
 #         'USER': 'postgres',
 #         'PASSWORD': '567234',
 #         'HOST': '127.0.0.1',
@@ -178,10 +178,10 @@ cloudinary.config(
     api_secret=env("CLOUD_API_SECRET")
 
 )
-WEATHER_API = env('WEATHER_API')
 
 CRYPTO_API_KEY = env('CRYPTO_API_KEY')
 
-
 OPENAI_KEY = env('OPENAI_KEY')
 
+# SPOTIPY_CLIENT_ID = env('SPOTIPY_CLIENT_ID')
+# SPOTIPY_CLIENT_SECRET = env('SPOTIPY_CLIENT_SECRET')
