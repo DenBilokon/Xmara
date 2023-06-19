@@ -13,4 +13,60 @@
 <br>
 <h1 class="text-center"><b>FILE MANAGER</b></h1>
 
+
+<div class="text-center">
+    <div class="chat-form">
+        <form id="question-form" action="{% url 'file_manager:when_bored' %}" method="post">
+            {% csrf_token %}
+            <br>
+            <div class="mb-2">
+                <label for="question" style="font-weight: bold;">You don't know what to do?</label>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="btn btn-outline-dark" value="CLICK">
+            </div>
+        </form>
+        <br>
+        <div id="response-container"></div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="alert alert-dismissible alert-light" id="question-response">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>{{ bored.activity }}</strong>
+        </div>
+    </div>
+</div>
+<br>
+<style>
+#question-response {
+    width: 50%; /* Змініть це значення на бажану ширину вікна */
+    height: 50%;
+    background-image: url("https://i.pinimg.com/564x/67/89/14/678914c78c7161f51c3b9e985417fcad.jpg");
+    background-size: 150% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+}
+
+</style>
+<script>
+  $(document).ready(function() {
+    $('#question-form').submit(function(event) {
+      event.preventDefault();
+      var form = $(this);
+      var url = form.attr('action');
+      var formData = form.serialize();
+
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: formData,
+        success: function(response) {
+          $('#response-container').html(response);
+        }
+      });
+    });
+  });
+
+</script>
 {% endblock %}

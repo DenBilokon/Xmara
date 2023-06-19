@@ -116,7 +116,16 @@
     </ul>
 </div>
 <br>
+<div class="alert alert-dismissible alert-secondary">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Important note!</strong>
+    Xmara does not support direct download of <b>rar</b> files.
 
+    However, you can extract the <b>rar</b> archive locally on your computer and then upload the contents as individual files
+    to Xmara. If you have questions about uploading a specific file type to Xmara or performing certain file
+    operations, I recommend contacting Xmara's documentation or their support directly for more information.
+</div>
+<br>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -150,6 +159,8 @@ function downloadArchive(url, filename) {
     anchor.click();
     document.body.removeChild(anchor);
 }
+
+
 </script>
 
 <style>
@@ -167,6 +178,8 @@ function downloadArchive(url, filename) {
 .archive-actions {
     margin-left: 10px;
 }
+
+
 
 
 

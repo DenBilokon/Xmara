@@ -17,7 +17,13 @@ from users.models import Avatar
 @login_required
 def main_mf(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
-    return render(request, 'file_manager/index.html', context={'avatar': avatar})
+    url = "https://www.boredapi.com/api/activity/"
+    response = requests.get(url).json()
+    context = {
+        'bored': response,
+        'avatar': avatar
+    }
+    return render(request, 'file_manager/index.html', context=context)
 
 
 @login_required
