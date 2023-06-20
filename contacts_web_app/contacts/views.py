@@ -78,8 +78,8 @@ def birthday(request):
     birthday_list = []
     show = []
     for i in contacts_all:
-        if date.today() <= (datetime.strptime(i.birthday, '%Y-%m-%d').date()).replace(
-                current_year) < date.today() + timedelta(7):
+        if date.today() <= (datetime.strptime(i.birthday.strip('\t'), '%Y-%m-%d').date().replace(
+                year=current_year)) < date.today() + timedelta(7):
             birthday_list.append(i)
     return render(request, 'contacts/birthday.html',
                   context={'current_day': current_year, 'birthday_list': birthday_list, 'today': date.today(),
@@ -231,7 +231,7 @@ def file_uploader(request):
                         phone=row[2],
                         email=row[3],
                         birthday=row[4],
-                        user = request.user
+                        user=request.user
                     )
                     contacts.save()
                 except:
@@ -251,4 +251,3 @@ def file_uploader(request):
     page = paginator.get_page(page_number)
     return render(request, 'contacts/index.html',
                   context={'contacts': contacts, 'user': request.user, 'page': page, 'avatar': avatar})
-
