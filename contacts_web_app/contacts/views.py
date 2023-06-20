@@ -1,7 +1,10 @@
 import csv
+import os
+from io import TextIOWrapper
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from .models import Contacts, File
@@ -173,6 +176,9 @@ def sort(request):
                            'avatar': avatar})
 
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+
 def save_csv_to_model(file_path):
     """
     The save_csv_to_model function takes a file path as an argument and saves the data in that CSV to the Contacts model.
@@ -206,43 +212,39 @@ def file_uploader(request):
     :return: A render function that renders the index
     :doc-author: Trelent
     """
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
+
     if request.method == 'POST':
         try:
-            file = request.FILES.get('file')
-            if not file.name.endswith('.csv'):
+            csv_file = request.FILES.get('file')
+            if not csv_file.name.endswith('.csv'):
                 messages.warning(request, 'Invalid file format. Please upload a CSV file.')
                 return redirect(to='contacts:main')
+            csv_file_wrapper = TextIOWrapper(csv_file.file, encoding='utf-8')
+            reader = csv.reader(csv_file_wrapper)
+            next(reader)
+            print(reader)
+
+            for row in reader:
+                try:
+                    contacts = Contacts(
+                        firstname=row[0],
+                        lastname=row[1],
+                        phone=row[2],
+                        email=row[3],
+                        birthday=row[4]
+                    )
+                    contacts.save()
+                except:
+                    messages.warning(request, 'Wrong data in your CSV')
+                    return redirect(to='contacts:main')
+
+            messages.success(request, "File was uploaded successfully")
+            return redirect(to='contacts:main')
         except AttributeError:
             messages.warning(request, 'You forgot to choose a file. Please make sure you chose CSV file and upload it.')
             return redirect(to='contacts:main')
+    return render(request, 'contacts/index.html')
 
-        else:
-            try:
-                File.objects.create(file=file, user=request.user)
-            except:
-                messages.warning(request, 'Your format of CSV file unfitisfied !')
-                return redirect(to='contacts:main')
-            file_path = f'media/files/{file}'
-            with open(file_path, 'rb+') as destination:
-                for chunk in file.chunks():
-                    destination.write(chunk)
-            try:
-                file.user = request.user
-                save_csv_to_model(file_path)
-            except:
-                messages.warning(request, 'Your format of CSV file unfitisfied !')
-            contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-            contacts_per_page = 15
-            paginator = Paginator(contacts, contacts_per_page)
-            page_number = request.GET.get('page')
-            page = paginator.get_page(page_number)
-            messages.success(request, "File was uploaded successfully")
-            return render(request, 'contacts/index.html', context={'page': page})
-    contacts = Contacts.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-    contacts_per_page = 15
-    paginator = Paginator(contacts, contacts_per_page)
-    page_number = request.GET.get('page')
-    page = paginator.get_page(page_number)
-    return render(request, 'contacts/index.html',
-                  context={'page': page, 'avatar': avatar})
+
+
+
