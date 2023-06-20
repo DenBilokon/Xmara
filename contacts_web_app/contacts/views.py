@@ -105,7 +105,7 @@ def contacts(request):
             contacts.user = request.user
             contacts.save()
             messages.success(request, "Contact was  created successfully !")
-            return redirect(to='contacts:main')
+            return redirect(request.META['HTTP_REFERER'])
         else:
             return render(request, 'contacts/contact.html', {'form': form, 'avatar': avatar})
     return render(request, 'contacts/contact.html', {'form': ContactForm(), 'avatar': avatar})
@@ -124,7 +124,7 @@ def delete_contact(request, contact_id):
     :doc-author: Trelent
     """
     Contacts.objects.get(pk=contact_id, user=request.user).delete()
-    return redirect(to='contacts:main')
+    return redirect(request.META['HTTP_REFERER'])
 
 
 @login_required
