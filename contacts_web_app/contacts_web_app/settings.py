@@ -24,7 +24,11 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", "xmara.fly.dev"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "https://xmara.fly.dev"
+]
 
 
 # Application definition
