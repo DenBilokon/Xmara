@@ -119,13 +119,13 @@ def question_to_ai(request):
 
     question = request.POST.get('question')
     prompt = f'You are website helper. Also, you should know everything about this website from documentation - {prompt_for_ai}, ' \
-             f'answer clearly and a little defiantly, but without exaggeration and no more than 300 symbols ' \
+             f'answer clearly and a little defiantly, but without exaggeration and no more than 600 symbols ' \
              f'Only truth. Use emoticons to decorate the dialogue. So, the question is - {question}'
 
     response = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
-        max_tokens=50,
+        max_tokens=100,
         temperature=0.7,
         n=1,
         stop=None,
