@@ -40,13 +40,15 @@
 </div>
 <br>
 {% if form.errors %}
-<span class="alert alert-danger" role="alert" id="error-message">{{form.non_field_errors}}</span>
+<span class="alert alert-danger" role="alert" id="error-message">{{ form.non_field_errors }}</span>
 {% endif %}
 
 {% if messages %}
 <div>
     {% for message in messages %}
     <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert" id="message">{{ message }}</div>
+
+
     {% endfor %}
 </div>
 {% endif %}
