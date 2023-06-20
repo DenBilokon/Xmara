@@ -231,7 +231,7 @@ def file_uploader(request):
                         phone=row[2],
                         email=row[3],
                         birthday=row[4],
-                        user=request.user
+                        user=request.user,
                     )
                     contacts.save()
                 except:
