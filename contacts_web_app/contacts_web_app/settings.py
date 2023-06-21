@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "users",
     "phonenumber_field",
     "cloudinary",
+    "adminconsole"
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

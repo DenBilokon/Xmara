@@ -1,0 +1,45 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <a href="{% url 'adminconsole:home' %}" class="btn btn-primary" style="width: 33%">Users</a>
+    <a href="{% url 'adminconsole:user_data' %}" class="btn btn-primary" style="width: 33%">User data</a>
+</div>
+<br>
+<h1 class="text-center"><b>Users</b></h1>
+    <table class="table-1">
+        <thead>
+            <tr>
+                <th><a href="?sort_by=id">ID</th>
+                <th><a href="?sort_by=username">Username</a></th>
+                <th><a href="?sort_by=first_name">First Name</a></th>
+                <th><a href="?sort_by=-last_name">Last Name</a></th>
+                <th><a href="?sort_by=is_superuser">Is Superuser</th>
+                <th><a href="?sort_by=email">Email</th>
+                <th><a href="?sort_by=is_staff">Is Staff</th>
+                <th><a href="?sort_by=is_active">Is Active</th>
+                <th><a href="?sort_by=date_joined">Date Joined</th>
+                <th><a href="?sort_by=last_login">Last Login</th>
+                <th><a href="?sort_by=inactive">Inactive time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.is_superuser }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.is_staff }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.date_joined }}</td>
+                    <td>{{ user.last_login }}</td>
+                    <td>{{ user.time_since_last_login }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

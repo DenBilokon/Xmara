@@ -98,6 +98,9 @@
                     <a href="{% url 'notes:main' %}" class="btn btn-lg btn-primary">NOTES</a>
                     <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-lg btn-primary">FILE MANAGER</a>
                     <a href="{% url 'news:home' %}" class="btn btn-lg btn-primary">NEWS</a>
+                    {% if user.is_superuser %}
+                    <a href="{% url 'adminconsole:home' %}" class="btn btn-lg btn-primary">Admin Console</a>
+                    {% endif %}
                 </div>
                 <hr>
                 {% endif %}
