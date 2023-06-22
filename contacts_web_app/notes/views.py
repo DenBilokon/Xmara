@@ -194,7 +194,8 @@ def search(request):
             Q(name__icontains=query) | Q(description__icontains=query),
             user=request.user
         )
-        return render(request, 'notes/search_results.html', {'notes': notes,
+        search_notes = pagination(request, notes)
+        return render(request, 'notes/search_results.html', {'notes': search_notes,
                                                              'avatar': avatar})
     else:
         return redirect(to='notes:main')
