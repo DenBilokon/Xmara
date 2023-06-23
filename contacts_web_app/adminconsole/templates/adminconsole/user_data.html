@@ -1,0 +1,44 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<br>
+<div class="text-center">
+    <a href="{% url 'adminconsole:home' %}" class="btn btn-primary" style="width: 33%">Users</a>
+    <a href="{% url 'adminconsole:user_data' %}" class="btn btn-primary" style="width: 33%">User data</a>
+</div>
+<br>
+<h1 class="text-center"><b>Users data</b></h1>
+<table class="table-1">
+    <thead>
+    <tr>
+        <th><a href="?sort_by=id">User ID</a></th>
+        <th><a href="?sort_by=username">Username</a></th>
+        <th><a href="?sort_by=picture">Pictures</a></th>
+        <th><a href="?sort_by=video">Videos</a></th>
+        <th><a href="?sort_by=audio">Audio</a></th>
+        <th><a href="?sort_by=document">Documents</a></th>
+        <th><a href="?sort_by=archive">Archives</a></th>
+        <th><a >Total Files</a></th>
+        <th><a >Contacts</a></th>
+        <th><a >Notes</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.file_summary.pictures_count }}</td>
+        <td>{{ user.file_summary.videos_count }}</td>
+        <td>{{ user.file_summary.audio_count }}</td>
+        <td>{{ user.file_summary.documents_count }}</td>
+        <td>{{ user.file_summary.archives_count }}</td>
+        <td>{{ user.file_summary.summary_files }}</td>
+        <td>{{ user.file_summary.contacts_count }}</td>
+        <td>{{ user.file_summary.notes_count }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
