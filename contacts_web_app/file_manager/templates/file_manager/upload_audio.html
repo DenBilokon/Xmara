@@ -174,22 +174,18 @@ $(document).ready(function() {
         }
     });
 
-    audioPlayer.addEventListener('ended', function() {
-            var currentAudio = $(".audio-play-button[data-src='" + audioPlayer.src + "']");
-            var nextAudio = currentAudio.closest("li").next().find(".audio-play-button");
-            if (nextAudio.length > 0) {
-                var audioSrc = nextAudio.data("src");
-                var audioTitle = nextAudio.data("title");
-                var nextAudioUrl = nextAudio.data("next");
+    $(".audio-previous-button").on("click", function() {
+        var currentAudio = $(".audio-play-button[data-src='" + audioPlayer.src + "']");
+        var prevAudio = currentAudio.closest("li").prev().find(".audio-play-button");
+        if (prevAudio.length > 0) {
+            var audioSrc = prevAudio.data("src");
+            var audioTitle = prevAudio.data("title");
 
-                audioPlayer.src = audioSrc;
-                audioPlayerContainer.show();
-                audioPlayer.play();
-
-                // Update the URL of the next track in the audio player
-                nextAudio.data("src", nextAudioUrl);
-            }
-        });
+            audioPlayer.src = audioSrc;
+            audioPlayerContainer.show();
+            audioPlayer.play();
+        }
+    });
 
     $("#confirmDeleteButton").on("click", function() {
         deleteAudio(deleteAudioId);
