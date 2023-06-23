@@ -390,12 +390,3 @@ def crypto_currency_parse():
             crypto_dict['currency_LTC'] = round(float(currency['priceUsd']), 3)
 
     return crypto_dict
-
-
-
-
-
-
-
-
-
