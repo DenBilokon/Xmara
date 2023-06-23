@@ -50,7 +50,9 @@
 {% if messages %}
 <div>
     {% for message in messages %}
-    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert" id="message">{{ message }}</div>
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert" id="message">{{ message
+        }}
+    </div>
     {% endfor %}
 </div>
 {% endif %}
@@ -65,46 +67,52 @@
         <button class="audio-control-button audio-next-button badge rounded-pill bg-light">NEXT</button>
     </div>
 </div>
-<div>
-    <ul class="audio-list">
-        {% for audio in cloud_audio %}
-        <li>
-            <div class="audio-details">
-                <span class="audio-title">{{ audio.artist|truncatechars:50 }}</span>
-                -
-                <span class="audio-artist">{{ audio.title|truncatechars:50 }}</span>
-            </div>
-            <div class="audio-actions">
-                <button class="audio-play-button badge rounded-pill bg-light" data-src="{{ audio.audio.url }}" data-title="{{ audio.title }}">
-                    Play
-                </button>
-                <button class="badge rounded-pill bg-dark delete-audio-button" data-audio-id="{{ audio.id }}">Delete</button>
-            </div>
-        </li>
-        {% empty %}
-        <li>
-            <h2 class="text-center">No available audio.</h2>
-        </li>
-        {% endfor %}
-    </ul>
+
+<div class="audio-list">
+    {% for audio in cloud_audio %}
+    <li>
+        <div class="audio-details">
+            <span class="audio-title">{{ audio.artist|truncatechars:50 }}</span>
+            -
+            <span class="audio-artist">{{ audio.title|truncatechars:50 }}</span>
+        </div>
+        <div class="audio-actions">
+            <button class="audio-play-button badge rounded-pill bg-light"
+                    data-src="{{ audio.audio.url }}"
+                    data-title="{{ audio.title }}"
+                    data-next="{{ audio.get_next_url }}">
+                Play
+            </button>
+            <button class="badge rounded-pill bg-dark delete-audio-button" data-audio-id="{{ audio.id }}">Delete
+            </button>
+        </div>
+    </li>
+    {% empty %}
+    <li>
+        <h2 class="text-center">No available audio.</h2>
+    </li>
+    {% endfor %}
 </div>
 
+
 <!-- Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this audio?</p>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" id="confirmDeleteButton">Delete</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel</button>
-      </div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this audio?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" id="confirmDeleteButton">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Cancel
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <br>
 <div>
@@ -166,18 +174,22 @@ $(document).ready(function() {
         }
     });
 
-    $(".audio-previous-button").on("click", function() {
-        var currentAudio = $(".audio-play-button[data-src='" + audioPlayer.src + "']");
-        var prevAudio = currentAudio.closest("li").prev().find(".audio-play-button");
-        if (prevAudio.length > 0) {
-            var audioSrc = prevAudio.data("src");
-            var audioTitle = prevAudio.data("title");
+    audioPlayer.addEventListener('ended', function() {
+            var currentAudio = $(".audio-play-button[data-src='" + audioPlayer.src + "']");
+            var nextAudio = currentAudio.closest("li").next().find(".audio-play-button");
+            if (nextAudio.length > 0) {
+                var audioSrc = nextAudio.data("src");
+                var audioTitle = nextAudio.data("title");
+                var nextAudioUrl = nextAudio.data("next");
 
-            audioPlayer.src = audioSrc;
-            audioPlayerContainer.show();
-            audioPlayer.play();
-        }
-    });
+                audioPlayer.src = audioSrc;
+                audioPlayerContainer.show();
+                audioPlayer.play();
+
+                // Update the URL of the next track in the audio player
+                nextAudio.data("src", nextAudioUrl);
+            }
+        });
 
     $("#confirmDeleteButton").on("click", function() {
         deleteAudio(deleteAudioId);
@@ -192,6 +204,7 @@ $(document).ready(function() {
         $("#confirmDeleteModal").modal("hide");
     });
 });
+
 
 </script>
 <script>
@@ -211,6 +224,7 @@ $(document).ready(function() {
 
     // Запуск функції приховування через 5 секунд
     setTimeout(hideMessage, 5000);
+
 </script>
 <style>
 .audio-player-container {
@@ -252,10 +266,10 @@ $(document).ready(function() {
 .audio-control-button {
     background: none;
     border: none;
-
     cursor: pointer;
     margin: 0 5px;
 }
+
 
 
 </style>
