@@ -9,6 +9,7 @@ from .models import Tag, Note
 
 from users.models import Avatar
 
+
 def main(request):
     """
     The main function is the view for the main page of our site.
@@ -21,16 +22,16 @@ def main(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     tags = Tag.objects.filter(user=request.user).all() if request.user.is_authenticated else []
-    paginator = Paginator(notes, 9)
-    page_number = request.GET.get('page', 1)
-    try:
-        pages = paginator.page(page_number)
-    except PageNotAnInteger:
-        pages = paginator.page(1)
-    except EmptyPage:
-        pages = paginator.page(paginator.num_pages)
+    # paginator = Paginator(notes, 9)
+    # page_number = request.GET.get('page', 1)
+    # try:
+    #     pages = paginator.page(page_number)
+    # except PageNotAnInteger:
+    #     pages = paginator.page(1)
+    # except EmptyPage:
+    #     pages = paginator.page(paginator.num_pages)
+    pages = pagination(request, notes)
     return render(request, 'notes/index.html', context={'notes': pages, 'tags': tags, 'avatar': avatar})
-
 
 
 @login_required
@@ -175,6 +176,7 @@ def edit_note(request, note_id):
     return render(request, 'notes/edit_note.html', {'note': note, 'tags': tags, 'form': form,
                                                     'avatar': avatar})
 
+
 @login_required
 def search(request):
     """
@@ -192,10 +194,12 @@ def search(request):
             Q(name__icontains=query) | Q(description__icontains=query),
             user=request.user
         )
-        return render(request, 'notes/search_results.html', {'notes': notes,
+        search_notes = pagination(request, notes)
+        return render(request, 'notes/search_results.html', {'notes': search_notes,
                                                              'avatar': avatar})
     else:
         return redirect(to='notes:main')
+
 
 @login_required
 def sort(request):
@@ -214,3 +218,23 @@ def sort(request):
                                                              'avatar': avatar})
     else:
         return redirect(to='notes:main')
+
+
+def pagination(request, files):
+
+    """
+    The pagination function takes in a request and a list of files.
+    It then creates a paginator object with the number of items per page set to 9,
+    and the list of files as its argument. It then gets the current page number from
+    the request, and returns an object containing that page's information.
+
+    :param request: Get the current page number
+    :param files: Pass the files to be paginated
+    :return: A page object
+    :doc-author: Trelent
+    """
+    per_page = 9
+    paginator = Paginator(list(files), per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
