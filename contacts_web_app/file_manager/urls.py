@@ -25,5 +25,6 @@ urlpatterns = [
     path('archive/search_archive/', views.search_archive, name='search_archive'),
     path('download_image/<path:image_url>/', views.download_image, name='download_image'),
     path('download_archive/<path:archive_url>/', views.download_archive, name='download_archive'),
+    path('bored/', views.main_mf, name='when_bored'),
 
 ]

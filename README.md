@@ -72,6 +72,7 @@ When running Xmara app and following link http://localhost:8000/ you have opport
 - Docker
 - GitHub
 - Fly
+- Apscheduler
 
 # Developers:
 1. Denis Bilokon

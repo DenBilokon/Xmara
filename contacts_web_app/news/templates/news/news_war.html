@@ -24,7 +24,7 @@
 
                     <div class="card-body">
                         <a href="{% url 'news:news_war_show_one' new.id %}">
-                            <p class="card-text">{{ new.title }}</p>
+                            <p class="card-text">{{ new.title|truncatechars:50 }}</p>
                         </a>
                         <p class="datetime">{{ new.datetime }}</p>
 

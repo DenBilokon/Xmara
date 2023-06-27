@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 
 from users.views import date_today
-from contacts_web_app.settings import CRYPTO_API_KEY
 import requests
 import re
 
@@ -24,8 +23,8 @@ def home(request):
     :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
-    currency_info = read_currency_from_file()
-    crypto_currency_info = read_crypto_currency_from_file()
+    currency_info = currency_parse()
+    crypto_currency_info = crypto_currency_parse()
     return render(request, "news/index.html", context={'currency_info': currency_info,
                                                        'crypto_currency_info': crypto_currency_info,
                                                        'date': date_today,
@@ -43,9 +42,7 @@ def news_war(request):
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     short_news = tsn_war_spider()
-    currency_info = read_currency_from_file()
     return render(request, "news/news_war.html", context={'short_news': short_news,
-                                                          'currency_info': currency_info,
                                                           'date': date_today,
                                                           'avatar': avatar})
 
@@ -62,14 +59,12 @@ def news_war_show_one(request, _id):
     :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
-    currency_info = read_currency_from_file()
     short_news = tsn_war_spider()
     news_item = next((item for item in short_news if item['id'] == _id), None)
     if news_item:
         news_details = tsn_page_spider(news_item['href'], news_item['data_src'], news_item['datetime'])
         return render(request, 'news/one_news.html', context={'news_item': news_item,
                                                               'news_details': news_details,
-                                                              'currency_info': currency_info,
                                                               'date': date_today,
                                                               'avatar': avatar})
     else:
@@ -86,10 +81,8 @@ def news_prosport(request):
     :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
-    currency_info = read_currency_from_file()
     short_news = tsn_prosport_spider()
     return render(request, "news/news_prosport.html", context={'short_news': short_news,
-                                                               'currency_info': currency_info,
                                                                'date': date_today,
                                                                'avatar': avatar})
 
@@ -108,14 +101,12 @@ def news_prosport_show_one(request, _id):
     :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
-    currency_info = read_currency_from_file()
     short_news = tsn_prosport_spider()
     news_item = next((item for item in short_news if item['id'] == _id), None)
     if news_item:
         news_details = tsn_page_spider(news_item['href'], news_item['data_src'], news_item['datetime'])
         return render(request, 'news/one_prosport_news.html', context={'news_item': news_item,
                                                                        'news_details': news_details,
-                                                                       'currency_info': currency_info,
                                                                        'date': date_today,
                                                                        'avatar': avatar})
     else:
@@ -131,10 +122,8 @@ def war_statistic(request):
     :doc-author: Trelent
     """
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
-    currency_info = read_currency_from_file()
     war_stat = war_stat_parse()
     return render(request, "news/war_statistic.html", context={'war_statistic': war_stat,
-                                                               'currency_info': currency_info,
                                                                'date': date_today,
                                                                'avatar': avatar})
 
@@ -150,8 +139,8 @@ def when_bored(request):
     avatar = Avatar.objects.filter(user_id=request.user.id).first()
     url = "https://www.boredapi.com/api/activity/"
     response = requests.get(url).json()
-    currency_info = read_currency_from_file()
-    crypto_currency_info = read_crypto_currency_from_file()
+    currency_info = currency_parse()
+    crypto_currency_info = crypto_currency_parse()
     return render(request, 'news/index.html', context={'bored': response,
                                                        'currency_info': currency_info,
                                                        'crypto_currency_info': crypto_currency_info,
@@ -329,49 +318,30 @@ def currency_parse():
     url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date_today}"
     response = requests.get(url)
     currency_data = json.loads(response.text).get('exchangeRate')
-    currency_dict = {"currency_USD": currency_data[23],
-                     "currency_EUR": currency_data[8],
-                     "currency_GBP": currency_data[9],
-                     "currency_PLN": currency_data[17],
-                     "currency_CZK": currency_data[6],
-                     "currency_JPY": currency_data[13],
-                     "currency_MDL": currency_data[15],
-                     "currency_CHF": currency_data[4],
-                     "currency_CAD": currency_data[3],
-                     "currency_DKK": currency_data[7]
-                     }
+    currency_dict = {}
+    for currency in currency_data:
+        if currency['currency'] == 'USD':
+            currency_dict['currency_USD'] = currency
+        elif currency['currency'] == 'EUR':
+            currency_dict['currency_EUR'] = currency
+        elif currency['currency'] == 'GBP':
+            currency_dict['currency_GBP'] = currency
+        elif currency['currency'] == 'PLN':
+            currency_dict['currency_PLN'] = currency
+        elif currency['currency'] == 'CZK':
+            currency_dict['currency_CZK'] = currency
+        elif currency['currency'] == 'JPY':
+            currency_dict['currency_JPY'] = currency
+        elif currency['currency'] == 'MDL':
+            currency_dict['currency_MDL'] = currency
+        elif currency['currency'] == 'CHF':
+            currency_dict['currency_CHF'] = currency
+        elif currency['currency'] == 'CAD':
+            currency_dict['currency_CAD'] = currency
+        elif currency['currency'] == 'DKK':
+            currency_dict['currency_DKK'] = currency
 
     return currency_dict
-
-
-def add_currency_to_file():
-    """
-    The add_currency_to_file function takes the currency_dict dictionary and writes it to a file called 'currency_data.json'
-
-    :return: A dictionary of currencies and their values
-    :doc-author: Trelent
-    """
-    currency_dict = currency_parse()
-    file_path = "currency_data.json"
-    with open(file_path, "w") as file:
-        json.dump(currency_dict, file, indent=4)
-
-
-def read_currency_from_file():
-    """
-    The read_currency_from_file function reads the currency_data.json file and returns a dictionary of the data.
-
-    :return: A dictionary
-    :doc-author: Trelent
-    """
-    file_path = "currency_data.json"
-    try:
-        with open(file_path, "r") as file:
-            data = json.load(file)
-            return data
-    except FileNotFoundError:
-        print("File not found")
-        return None
 
 
 def crypto_currency_parse():
@@ -383,49 +353,29 @@ def crypto_currency_parse():
     :return: A dictionary
     :doc-author: Trelent
     """
-    cryptocurrencies_list = ['BTC', 'ETH', 'BNB', 'XRP', 'ADA', 'DOGE', 'SOL', 'MATIC', 'TRX', 'LTC']
+    url = 'https://api.coincap.io/v2/assets'
+    response = requests.get(url).json().get('data')
     crypto_dict = {}
-    for i in cryptocurrencies_list:
-        url = f'https://rest.coinapi.io/v1/exchangerate/{i}/USD'
-        api_key = CRYPTO_API_KEY
-        headers = {"X-CoinAPI-Key": api_key}
-        response = requests.get(url, headers=headers).json()
-        if response:
-            crypto_dict[i] = round(response.get('rate'), 4)
+    for currency in response:
+        if currency['symbol'] == 'BTC':
+            crypto_dict['currency_BTC'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'ETH':
+            crypto_dict['currency_ETH'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'BNB':
+            crypto_dict['currency_BNB'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'XRP':
+            crypto_dict['currency_XRP'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'ADA':
+            crypto_dict['currency_ADA'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'DOGE':
+            crypto_dict['currency_DOGE'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'SOL':
+            crypto_dict['currency_SOL'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'MATIC':
+            crypto_dict['currency_MATIC'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'TRX':
+            crypto_dict['currency_TRX'] = round(float(currency['priceUsd']), 3)
+        elif currency['symbol'] == 'LTC':
+            crypto_dict['currency_LTC'] = round(float(currency['priceUsd']), 3)
 
     return crypto_dict
-
-
-def add_crypto_currency_to_file():
-    """
-    The add_crypto_currency_to_file function takes the crypto_currency_dict dictionary and writes it to a file called cryptocurrency_data.json
-
-    :return: None
-    :doc-author: Trelent
-    """
-    crypto_currency_dict = crypto_currency_parse()
-    file_path = "cryptocurrency_data.json"
-    with open(file_path, "w") as file:
-        json.dump(crypto_currency_dict, file, indent=4)
-
-
-def read_crypto_currency_from_file():
-    """
-    The read_crypto_currency_from_file function reads the cryptocurrency_data.json file and returns a dictionary of
-    cryptocurrency data.
-
-    :return: A dictionary
-    :doc-author: Trelent
-    """
-    file_path = "cryptocurrency_data.json"
-    try:
-        with open(file_path, "r") as file:
-            data = json.load(file)
-            return data
-    except FileNotFoundError:
-        print("File not found")
-        return None
-
-
-
-

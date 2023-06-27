@@ -44,21 +44,26 @@
 </div>
 <br>
 {% if form.errors %}
-    <span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
-    {% endif %}
+<span class="alert alert-danger" role="alert" id="error-message">{{form.non_field_errors}}</span>
+{% endif %}
 
-    {% if messages %}
-    <div>
-        {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">{{ message }}</div>
-        {% endfor %}
-    </div>
-    {% endif %}
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert" id="message">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+<br>
 <div class="audio-player-container">
     <audio controls class="audio-player">
         <source src="" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <div class="audio-controls">
+        <button class="audio-control-button audio-previous-button badge rounded-pill bg-light">BACK</button>
+        <button class="audio-control-button audio-next-button badge rounded-pill bg-light">NEXT</button>
+    </div>
 </div>
 <div>
     <ul class="audio-list">
@@ -131,6 +136,8 @@ $(document).ready(function() {
     var audioPlayer = $(".audio-player")[0];
     var audioPlayerContainer = $(".audio-player-container");
     var deleteAudioId;
+    var audioDuration;
+
 
     $(".audio-play-button").on("click", function() {
         var audioSrc = $(this).data("src");
@@ -146,6 +153,32 @@ $(document).ready(function() {
         $("#confirmDeleteModal").modal("show");
     });
 
+    $(".audio-next-button").on("click", function() {
+        var currentAudio = $(".audio-play-button[data-src='" + audioPlayer.src + "']");
+        var nextAudio = currentAudio.closest("li").next().find(".audio-play-button");
+        if (nextAudio.length > 0) {
+            var audioSrc = nextAudio.data("src");
+            var audioTitle = nextAudio.data("title");
+
+            audioPlayer.src = audioSrc;
+            audioPlayerContainer.show();
+            audioPlayer.play();
+        }
+    });
+
+    $(".audio-previous-button").on("click", function() {
+        var currentAudio = $(".audio-play-button[data-src='" + audioPlayer.src + "']");
+        var prevAudio = currentAudio.closest("li").prev().find(".audio-play-button");
+        if (prevAudio.length > 0) {
+            var audioSrc = prevAudio.data("src");
+            var audioTitle = prevAudio.data("title");
+
+            audioPlayer.src = audioSrc;
+            audioPlayerContainer.show();
+            audioPlayer.play();
+        }
+    });
+
     $("#confirmDeleteButton").on("click", function() {
         deleteAudio(deleteAudioId);
     });
@@ -159,6 +192,25 @@ $(document).ready(function() {
         $("#confirmDeleteModal").modal("hide");
     });
 });
+
+</script>
+<script>
+    // Функція для автоматичного приховування повідомлення після певного часу
+    function hideMessage() {
+        var errorMessage = document.getElementById("error-message");
+        var message = document.getElementById("message");
+
+        if (errorMessage) {
+            errorMessage.style.display = "none";
+        }
+
+        if (message) {
+            message.style.display = "none";
+        }
+    }
+
+    // Запуск функції приховування через 5 секунд
+    setTimeout(hideMessage, 5000);
 </script>
 <style>
 .audio-player-container {
@@ -190,6 +242,22 @@ $(document).ready(function() {
 .delete-audio-button {
     margin-left: 10px;
 }
+
+.audio-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.audio-control-button {
+    background: none;
+    border: none;
+
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+
 </style>
 
 {% endblock %}
