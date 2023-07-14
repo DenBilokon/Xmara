@@ -62,8 +62,8 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         {{ user.username }}
-                        {% if avatar %}
-                        <img src="{{ avatar.image.url }}" alt="User Avatar" height="40" style="border-radius: 50%;">
+                        {% if avatar_url %}
+                        <img src="{{ avatar_url }}" alt="Avatar" height="40" style="border-radius: 50%;">
                         {% else %}
                         <img src="https://i.pinimg.com/564x/a5/82/9a/a5829ac0d2b9d70943c41c6f48e5acea.jpg"
                              alt="Placeholder" height="40" style="border-radius: 50%;">
