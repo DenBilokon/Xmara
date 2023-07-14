@@ -11,8 +11,6 @@ from cloudinary.exceptions import Error as CloudinaryError
 from .models import Picture, Document, Video, Audio, Archive
 from .forms import PictureForm, DocumentForm, VideoForm, AudioForm, ArchiveForm
 
-from users.models import Avatar
-
 
 @login_required
 def main_mf(request):
@@ -24,12 +22,10 @@ def main_mf(request):
     :param request: Get the user's avatar from the database
     :return: A render with the context of avatar
     """
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     url = "https://www.boredapi.com/api/activity/"
     response = requests.get(url).json()
     context = {
         'bored': response,
-        'avatar': avatar
     }
     return render(request, 'file_manager/index.html', context=context)
 
@@ -44,7 +40,6 @@ def upload_picture(request):
     :return: The render function
     """
     exp_message = "File not valid, you can upload the following types of files: 'jpeg', 'png', 'jpg', 'svg', 'gif'"
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_images = Picture.objects.filter(user_id=user_id)
     page_obj = pagination(request, cloud_images)
@@ -65,7 +60,6 @@ def upload_picture(request):
     context = {
         'cloud_images': page_obj,
         'image_form': image_form,
-        'avatar': avatar
     }
     return render(request, 'file_manager/upload_picture.html', context=context)
 
@@ -120,7 +114,6 @@ def search_picture(request):
     :param request: Get the request object
     :return: The search_picture
     """
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Picture.objects.filter(Q(title__icontains=query))
@@ -128,7 +121,6 @@ def search_picture(request):
         context = {
             "query": query,
             "cloud_images": files_search,
-            'avatar': avatar
         }
         return render(request, "file_manager/search_picture.html", context=context)
     messages.success(request, "Enter your request.")
@@ -145,7 +137,6 @@ def upload_video(request):
     :return: A render of the upload_video
     """
     exp_message = "File not valid, you can upload the following types of files: 'avi', 'mp4', 'mov', 'mkv'"
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_video = Video.objects.filter(user_id=user_id)
     page_obj = pagination(request, cloud_video)
@@ -165,7 +156,6 @@ def upload_video(request):
     context = {
         'cloud_video': page_obj,
         'video_form': video_form,
-        'avatar': avatar
     }
     return render(request, 'file_manager/upload_video.html', context=context)
 
@@ -197,7 +187,6 @@ def search_video(request):
     :param request: Get the request object from the view
     :return: The following error:
     """
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Video.objects.filter(Q(title__icontains=query))
@@ -205,7 +194,6 @@ def search_video(request):
         context = {
             "query": query,
             "cloud_video": files_search,
-            'avatar': avatar
         }
         return render(request, "file_manager/search_video.html", context=context)
     messages.success(request, "Enter your request.")
@@ -223,7 +211,6 @@ def upload_document(request):
     """
     exp_message = "File not valid, you can upload the following types of files: 'doc', 'docx', 'txt', 'pdf', 'xlsx', " \
                   "'pptx', 'py', 'csv', 'css', 'html', 'js'"
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_document = Document.objects.filter(user_id=user_id)
     page_obj = pagination(request, cloud_document)
@@ -243,7 +230,6 @@ def upload_document(request):
     context = {
         'cloud_document': page_obj,
         'document_form': document_form,
-        'avatar': avatar
 
     }
     return render(request, 'file_manager/upload_document.html', context=context)
@@ -276,7 +262,6 @@ def search_document(request):
     :param request: Get the request object
     :return: The search_document
     """
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Document.objects.filter(Q(title__icontains=query))
@@ -284,7 +269,6 @@ def search_document(request):
         context = {
             "query": query,
             "cloud_document": files_search,
-            'avatar': avatar
         }
         return render(request, "file_manager/search_document.html", context=context)
     messages.success(request, "Enter your request.")
@@ -321,7 +305,6 @@ def upload_audio(request):
     :return: The file_manager/upload_audio
     """
     exp_message = "File not valid, you can upload the following types of files: 'avi', 'mp4', 'mov', 'mkv'"
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_audio = Audio.objects.filter(user_id=user_id)
     page_obj = pagination(request, cloud_audio)
@@ -341,7 +324,6 @@ def upload_audio(request):
     context = {
         'cloud_audio': page_obj,
         'audio_form': audio_form,
-        'avatar': avatar
     }
     return render(request, 'file_manager/upload_audio.html', context=context)
 
@@ -371,7 +353,6 @@ def search_audio(request):
     :param request: Get the request object from the view
     :return: The result of the search for audio files
     """
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Audio.objects.filter(Q(title__icontains=query) | Q(artist__icontains=query))
@@ -379,7 +360,6 @@ def search_audio(request):
         context = {
             "query": query,
             "cloud_audio": files_search,
-            'avatar': avatar
         }
         return render(request, "file_manager/search_audio.html", context=context)
     messages.success(request, "Enter your request.")
@@ -397,7 +377,6 @@ def upload_archive(request):
     :return: The archive upload page
     """
     exp_message = "File not valid, you can upload the following types of files: 'zip', 'gz', 'tar', '7z'"
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     user_id = request.user.id
     cloud_archive = Archive.objects.filter(user_id=user_id)
     page_obj = pagination(request, cloud_archive)
@@ -417,7 +396,6 @@ def upload_archive(request):
     context = {
         'cloud_archive': page_obj,
         'archive_form': archive_form,
-        'avatar': avatar
 
     }
     return render(request, 'file_manager/upload_archive.html', context=context)
@@ -441,7 +419,6 @@ def delete_archive(request, archive_id):
 
 
 def search_archive(request):
-    avatar = Avatar.objects.filter(user_id=request.user.id).first()
     query = request.GET.get("q")
     if query:
         files = Archive.objects.filter(Q(title__icontains=query))
@@ -449,7 +426,6 @@ def search_archive(request):
         context = {
             "query": query,
             "cloud_archive": files_search,
-            'avatar': avatar
         }
         return render(request, "file_manager/search_archive.html", context=context)
     messages.success(request, "Enter your request.")
