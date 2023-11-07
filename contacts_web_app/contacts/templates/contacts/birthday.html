@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <style>
 
 td {font-weight:bold;}
@@ -46,6 +46,10 @@ td {font-weight:bold;}
 {% else %}
 <h1>Nobody has birthday on this week</h1>
 {% endif %}
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
 {% endblock %}
 
 

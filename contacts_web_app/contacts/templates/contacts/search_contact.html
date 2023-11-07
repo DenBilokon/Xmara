@@ -1,6 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <style>
     td {font-weight:bold;}
 
@@ -45,6 +46,11 @@
 </table>
 {% else %}
 <h1>Contacts with "{{ searched }}" not found</h1>
+{% endif %}
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
 {% endif %}
 {% endblock %}
 

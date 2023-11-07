@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <style>
 th{
 text-align: center;
@@ -144,4 +144,9 @@ td{
     // Запуск функції приховування через 5 секунд
     setTimeout(hideMessage, 5000);
 </script>
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

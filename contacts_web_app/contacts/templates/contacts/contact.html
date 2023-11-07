@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <div class="text-center">
     <a href="{% url 'contacts:main' %}" class="btn btn-primary" style="width: 24%">Home</a>
     <a href="{% url 'contacts:contacts' %}" class="btn btn-primary" style="width: 24%">Add contact</a>
@@ -47,5 +47,10 @@
 </form>
 </center>
 <br><br><br><br>
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}
 

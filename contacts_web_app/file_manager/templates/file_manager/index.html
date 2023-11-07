@@ -2,7 +2,7 @@
 
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <div class="text-center">
     <a href="{% url 'file_manager:upload_picture' %}" class="btn btn-primary" style="width: 19%">Pictures</a>
     <a href="{% url 'file_manager:upload_video' %}" class="btn btn-primary" style="width: 19%">Video</a>

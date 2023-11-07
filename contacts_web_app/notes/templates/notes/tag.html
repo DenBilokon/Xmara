@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <div class="form-box shadow-lg bg-body-tertiary rounded-5">
     <h1 class="text-center"><b>Create Tag</b></h1>
 
@@ -18,5 +18,9 @@
         </div>
     </form>
 </div>
-
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

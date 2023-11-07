@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <div class="row rounded-5">
     <h1 class="text-center"><b>Search Results</b></h1>
 
@@ -56,4 +56,9 @@
     </ul>
 </div>
 <br>
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

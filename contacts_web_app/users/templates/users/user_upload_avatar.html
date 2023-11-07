@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <br>
 <h1 class="text-center">Upload avatar</h1>
 <div class="text-center">
@@ -26,5 +26,8 @@
     {% endfor %}
 </div>
 {% endif %}
-
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+{% endif %}
 {% endblock %}

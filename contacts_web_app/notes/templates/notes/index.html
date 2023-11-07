@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 {% block content %}
+{% if user.is_authenticated %}
 <h1 class="text-center"><b>NOTES</b></h1>
 <div class="row">
     <div class="col-md-12">
@@ -87,4 +88,9 @@
 </div>
 <br>
 <!--{% include "notes/pagination.html" with page=notes %}-->
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

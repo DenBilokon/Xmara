@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static %}
+{% if user.is_authenticated %}
 <br>
 <div class="text-center">
     <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
@@ -182,5 +183,9 @@
 
 
 </script>
-
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

@@ -163,8 +163,13 @@ def upload_avatar(request):
 
                 # Validate if the uploaded file is an image
                 uploaded_file = form.cleaned_data['image']
+
                 if not uploaded_file.content_type.startswith('image'):
                     raise ValidationError("Invalid file format. Please upload an image.")
+
+                if uploaded_file.size > 512*1024:
+                    messages.warning(request, "The uploaded image file is too large. Must be to 500Kb")
+                    return redirect(request.META['HTTP_REFERER'])
 
                 avatar.save()
                 if previous_avatar:

@@ -1,7 +1,7 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <div xmlns="http://www.w3.org/1999/html">
 
     <br>
@@ -35,5 +35,9 @@
         </div>
     </div>
 </div>
-
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

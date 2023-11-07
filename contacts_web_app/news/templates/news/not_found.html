@@ -1,6 +1,7 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <br>
 <div class="text-center">
     <a href="{% url 'news:home' %}" class="btn btn-primary" style="width: 24%">Home</a>
@@ -12,5 +13,9 @@
 <div class="not-found-container">
     <h1 class="not-found-heading">404 NOT FOUND</h1>
 </div>
-
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

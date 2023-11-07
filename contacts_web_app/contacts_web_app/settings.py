@@ -180,7 +180,7 @@ APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
 
 cloudinary.config(
     cloud_name=env("CLOUD_NAME"),
-    api_key=env("CLOUD_API_KAY"),
+    api_key=env("CLOUD_API_KEY"),
     api_secret=env("CLOUD_API_SECRET")
 
 )
@@ -188,6 +188,8 @@ cloudinary.config(
 CRYPTO_API_KEY = env('CRYPTO_API_KEY')
 
 OPENAI_KEY = env('OPENAI_KEY')
+
+MAX_VIDEO_SIZE = env('MAX_VIDEO_SIZE')
 
 # SPOTIPY_CLIENT_ID = env('SPOTIPY_CLIENT_ID')
 # SPOTIPY_CLIENT_SECRET = env('SPOTIPY_CLIENT_SECRET')

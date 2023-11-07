@@ -1,6 +1,7 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
+{% if user.is_superuser %}
 <br>
 <div class="text-center">
     <a href="{% url 'adminconsole:home' %}" class="btn btn-primary" style="width: 33%">Users</a>
@@ -40,5 +41,9 @@
     {% endfor %}
     </tbody>
 </table>
-
+{% else %}
+    <div style="text-align: center;">
+        <h2>Sign up or login to your account!</h2>
+    </div>
+{% endif %}
 {% endblock %}

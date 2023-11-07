@@ -8,8 +8,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from cloudinary.exceptions import Error as CloudinaryError
 
-from .models import Picture, Document, Video, Audio, Archive
-from .forms import PictureForm, DocumentForm, VideoForm, AudioForm, ArchiveForm
+from file_manager.models import Picture, Document, Video, Audio, Archive
+from file_manager.forms import PictureForm, DocumentForm, VideoForm, AudioForm, ArchiveForm
+
 
 
 @login_required
@@ -51,6 +52,11 @@ def upload_picture(request):
             if form.is_valid():
                 pic = form.save(commit=False)
                 pic.user = request.user
+                picture_file = form.cleaned_data['image']
+                max_file_size = 1024 * 1024
+                if picture_file.size > max_file_size:
+                    messages.warning(request, "The uploaded image file is too large. Must be to 1Mb")
+                    return redirect(request.META['HTTP_REFERER'])
                 pic.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
@@ -144,15 +150,21 @@ def upload_video(request):
     if request.method == 'POST':
         form = VideoForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                video = form.save(commit=False)
-                video.user = request.user
-                video.save()
-                return redirect(request.META['HTTP_REFERER'])
-            except CloudinaryError:
-                messages.warning(request, exp_message)
-                return redirect(request.META['HTTP_REFERER'])
+            video_file = form.cleaned_data['video']
+            max_size = 10 * 1024 * 1024
 
+            if video_file.size <= max_size:
+                try:
+                    video = form.save(commit=False)
+                    video.user = request.user
+                    video.save()
+                    return redirect(request.META['HTTP_REFERER'])
+                except CloudinaryError:
+                    messages.warning(request, exp_message)
+                    return redirect(request.META['HTTP_REFERER'])
+            else:
+                messages.warning(request, "The uploaded video file is too large. Must be to 10Mb")
+                return redirect(request.META['HTTP_REFERER'])
     context = {
         'cloud_video': page_obj,
         'video_form': video_form,
@@ -221,6 +233,11 @@ def upload_document(request):
             if form.is_valid():
                 doc = form.save(commit=False)
                 doc.user = request.user
+                max_file_size = 1024 * 1024
+                doc_file = form.cleaned_data['document']
+                if doc_file.size > max_file_size:
+                    messages.warning(request, "The uploaded document file is too large. Must be to 1Mb")
+                    return redirect(request.META['HTTP_REFERER'])
                 doc.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
@@ -315,6 +332,11 @@ def upload_audio(request):
             if form.is_valid():
                 aud = form.save(commit=False)
                 aud.user = request.user
+                max_file_size = 5 * 1024 * 1024
+                audio_file = form.cleaned_data['audio']
+                if audio_file.size > max_file_size:
+                    messages.warning(request, "The uploaded audio file is too large. Must be to 5Mb")
+                    return redirect(request.META['HTTP_REFERER'])
                 aud.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
@@ -387,6 +409,11 @@ def upload_archive(request):
             if form.is_valid():
                 arch = form.save(commit=False)
                 arch.user = request.user
+                archive_file = form.cleaned_data['archive']
+                max_file_size = 1024 * 1024
+                if archive_file.size > max_file_size:
+                    messages.warning(request, "The uploaded audio file is too large.")
+                    return redirect(request.META['HTTP_REFERER'])
                 arch.save()
                 return redirect(request.META['HTTP_REFERER'])
         except CloudinaryError:
